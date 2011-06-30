@@ -54,7 +54,6 @@ food_providers.each do |provider|
     
       stub.save
       puts stub.to_json
-      ARGF.read
     end
   end
 end
