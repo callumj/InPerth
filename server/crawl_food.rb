@@ -54,6 +54,8 @@ food_providers.each do |provider|
     
       stub.save
       puts stub.to_json
+    else
+      puts "post excluded because date (#{entry.date_published.to_i}) is less than the most recent post data in db (#{recent_date.to_i})"
     end
   end
 end
