@@ -15,7 +15,7 @@ class Provider
     if first_stub != nil
       return first_stub.created_at
     else
-      return Time.now-1.week
+      return Time.now-5.week
     end
   end
 end
