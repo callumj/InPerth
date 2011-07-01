@@ -42,6 +42,7 @@ food_providers.each do |provider|
       #model insert
       stub = Stub.new
       stub.provider = provider
+      stub.classifiers = provider.classifiers
       stub.title = entry.title
       stub.tags = keyword_ary
       stub.uri = entry.urls[0] if entry.urls.size > 0

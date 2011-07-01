@@ -9,4 +9,5 @@ class Stub
   key :description, String
   key :tags, Array
   key :created_at, Time
+  key :classifiers, Array
 end
