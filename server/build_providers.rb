@@ -1,4 +1,5 @@
 load "#{File.dirname(__FILE__)}/init.rb"
+Bundler.require(:crawl)
 
 file = "#{File.dirname(__FILE__)}/data/blogs.txt"
 
