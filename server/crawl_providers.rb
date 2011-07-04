@@ -1,9 +1,9 @@
 load "#{File.dirname(__FILE__)}/init.rb"
 
-food_providers = Provider.where(:classifiers => 'food').all
+all_providers = Provider.where(:active => true).all
 stop_words = get_stop_words("#{File.dirname(__FILE__)}/data/stopwords.txt")
 
-food_providers.each do |provider|  
+all_providers.each do |provider|  
   puts "Crawling #{provider.title}"
   
   feed = FeedNormalizer::FeedNormalizer.parse open(provider.uri)
@@ -56,7 +56,7 @@ food_providers.each do |provider|
       stub.save
       puts stub.to_json
     else
-      puts "post excluded because date (#{entry.date_published.to_i}) is less than the most recent post data in db (#{recent_date.to_i})"
+      puts "\tpost excluded because date (#{entry.date_published.to_i}) is less than the most recent post data in db (#{recent_date.to_i})"
     end
   end
 end

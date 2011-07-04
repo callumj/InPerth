@@ -8,6 +8,7 @@ class Provider
   key :type, String
   key :classifiers, Array
   key :pipelines, Array
+  key :active, Boolean
   
   
   def most_recent_date
