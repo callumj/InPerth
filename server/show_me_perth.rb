@@ -67,7 +67,7 @@ urls.each do |url|
         end
       end
     
-      ins = Stub.new(:title => title, :uri => link, :description => desc, :tags => tags, :classifiers => provider.classifiers, :created_at => time_obj)
+      ins = Stub.new(:title => title, :uri => link, :description => desc, :tags => tags, :classifiers => provider.classifiers, :created_at => time_obj.in_time_zone)
       ins.provider = provider
       ins.save
       puts "Saved #{title}"

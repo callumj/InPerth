@@ -35,14 +35,17 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.2)
+    tzinfo (0.3.28)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bson_ext
   feed-normalizer
   mongo_mapper
   nokogiri
   sinatra
   thin
+  tzinfo

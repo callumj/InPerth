@@ -9,3 +9,7 @@ Dir["#{File.dirname(__FILE__)}/models/**/*.rb"].each { |f| load(f) }
 
 #load helpers
 Dir["#{File.dirname(__FILE__)}/helpers/**/*.rb"].each { |f| load(f) }
+
+#set timezone
+
+Time.zone = "Perth"
