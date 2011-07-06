@@ -31,7 +31,7 @@ urls.each do |url|
     title = CGI.unescapeHTML(event_div.xpath(".//h4/a").inner_html.strip)
     
     existing_entry = Stub.where(:title => title, :provider_id => provider.id).first
-    
+    puts existing_entry
     if existing_entry == nil
     
       link = "#{ROOT_URL}#{event_div.xpath(".//a[@class = \"thumb-link\"]").attr("href")}"
@@ -63,7 +63,8 @@ urls.each do |url|
     
       ins = Stub.new(:title => title, :uri => link, :description => desc, :tags => tags, :classifiers => provider.classifiers, :created_at => time_obj)
       ins.provider = provider
-      puts "Saved #{title}" if (ins.save)
+      ins.save
+      puts "Saved #{title}"
     end
   end
   
