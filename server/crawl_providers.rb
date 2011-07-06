@@ -1,7 +1,7 @@
 load "#{File.dirname(__FILE__)}/init.rb"
 Bundler.require(:default)
 
-all_providers = Provider.where(:active => true).all
+all_providers = Provider.where(:active => true, :type => "rss").all
 stop_words = get_stop_words("#{File.dirname(__FILE__)}/data/stopwords.txt")
 
 all_providers.each do |provider|  
