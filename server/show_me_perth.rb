@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'cgi'
+require 'net/http'
 
 load "#{File.dirname(__FILE__)}/init.rb"
 
@@ -22,8 +23,14 @@ if provider == nil
 end
 
 urls.each do |url|
-  puts open(url)
-  doc = Nokogiri::HTML(open(url))
+
+  parse_url = URI.parse(url)
+  req = Net::HTTP::Get.new(parse_url.path)
+  res = Net::HTTP.start(parse_url.host, parse_url.port) {|http|
+    http.request(req)
+  }
+  
+  doc = Nokogiri::HTML(res.body)
   
   event_listings = doc.css("div.teaser-node")
   event_listings.each do |event_div|
