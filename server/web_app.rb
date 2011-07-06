@@ -5,8 +5,8 @@ load "#{File.dirname(__FILE__)}/init.rb"
 get '/stub/:tag.:format' do
   classifier = params[:tag]
   
-  search_date = 2.weeks.ago
-  search_date = Time.at(params[:since].to_i) if params[:since] != nil
+  search_date = 2.weeks.ago.in_time_zone
+  search_date = Time.at(params[:since].to_i).in_time_zone if params[:since] != nil
   
   stubs = []
   
