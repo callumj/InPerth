@@ -16,7 +16,7 @@ class Stub
   end
   
   def as_xml(options={})
-    {:key => self.id, :title => self.title, :uri => self.uri, :desc => self.description, :classifiers => self.classifiers, :tags => self.tags, :time => self.created_at.to_s, :provider => {:id => self.provider.id, :title => self.provider.title}}
+    {:key => self.id, :title => self.title, :uri => self.uri, :desc => self.description, :classifiers => self.classifiers, :tags => self.tags, :time => self.created_at.in_time_zone.to_s, :provider => {:id => self.provider.id, :title => self.provider.title}}
   end
   
 end
