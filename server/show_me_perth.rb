@@ -25,15 +25,14 @@ urls.each do |url|
   doc = Nokogiri::HTML(open(url))
   
   event_listings = doc.css("div.teaser-node")
-  
+  puts doc
   event_listings.each do |event_div|
     #get basic info
     title = CGI.unescapeHTML(event_div.xpath(".//h4/a").inner_html.strip)
     
     existing_entry = Stub.where(:title => title, :provider_id => provider.id).first
-    puts existing_entry
+
     if existing_entry == nil
-    
       link = "#{ROOT_URL}#{event_div.xpath(".//a[@class = \"thumb-link\"]").attr("href")}"
     
       #build the date
