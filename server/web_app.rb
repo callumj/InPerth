@@ -6,7 +6,7 @@ get '/stub/:tag.:format' do
   classifier = params[:tag]
   
   search_date = 2.weeks.ago
-  search_date = Time.at(params[:since]) if params[:since] != nil
+  search_date = Time.at(params[:since].to_i) if params[:since] != nil
   
   stubs = []
   
