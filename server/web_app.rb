@@ -11,9 +11,9 @@ get '/stub/:tag.:format' do
   stubs = []
   
   if "all".eql?(classifier)
-    stubs = Stub.where(:created_at.gte => search_date).sort(:created_at.desc).all
+    stubs = Stub.where(:created_at.gt => search_date).sort(:created_at.desc).all
   else
-    stubs = Stub.where(:classifiers => classifier, :created_at.gte => search_date).sort(:created_at.desc).all
+    stubs = Stub.where(:classifiers => classifier, :created_at.gt => search_date).sort(:created_at.desc).all
   end
   doc = {:time => Time.now.to_i, :count => stubs.count,:data => stubs}
   if ("json".eql?(params[:format]))
