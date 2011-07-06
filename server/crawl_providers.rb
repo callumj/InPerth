@@ -46,7 +46,7 @@ all_providers.each do |provider|
       stub.classifiers = provider.classifiers
       stub.title = entry.title
       stub.tags = keyword_ary
-      stub.uri = entry.urls[0] if entry.urls.size > 0
+      stub.uri = entry.url
       stub.created_at = entry.date_published
       if body.size > 200
         stub.description = body[0,200]
