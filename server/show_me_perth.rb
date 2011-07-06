@@ -22,7 +22,7 @@ if provider == nil
 end
 
 urls.each do |url|
-  puts url
+  puts open(url)
   doc = Nokogiri::HTML(open(url))
   
   event_listings = doc.css("div.teaser-node")
