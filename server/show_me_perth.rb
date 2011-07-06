@@ -25,7 +25,7 @@ end
 urls.each do |url|
 
   parse_url = URI.parse(url)
-  req = Net::HTTP::Get.new(parse_url.path)
+  req = Net::HTTP::Get.new(parse_url.request_uri)
   res = Net::HTTP.start(parse_url.host, parse_url.port) {|http|
     http.request(req)
   }
