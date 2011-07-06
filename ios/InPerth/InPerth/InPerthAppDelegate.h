@@ -7,13 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import "JSONKit.h"
+
+#import "StubManager.h"
 
 @interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    NSString *persistentStorePath;
+    NSManagedObjectContext *managedObjectContext;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
+#pragma mark Remote server fetch
+-(void)getLatestDataFromServer;
+
+#pragma mark Core Data
+-(NSManagedObjectContext *)managedObjectContext;
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator;
+-(NSString *)persistentStorePath;
 @end

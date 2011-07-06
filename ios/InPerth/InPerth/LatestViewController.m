@@ -6,10 +6,10 @@
 //  Copyright 2011 mullac.org. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "LatestViewController.h"
 
 
-@implementation FirstViewController
+@implementation LatestViewController
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

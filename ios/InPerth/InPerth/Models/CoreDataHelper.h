@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreData/CoreData.h>
 
 @interface CoreDataHelper : NSObject {
     
 }
-
++ (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
++ (NSManagedObjectContext *)managedObjectContext;
++ (NSString *)persistentStorePath;
 @end

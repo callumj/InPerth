@@ -12,11 +12,15 @@
 
 
 @synthesize window=_window;
-
 @synthesize tabBarController=_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //init CD store
+    NSManagedObjectContext *con = [self managedObjectContext];
+    
+    [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
+    
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
@@ -26,32 +30,18 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -83,5 +73,77 @@
 {
 }
 */
+
+#pragma mark Remote server fetch
+-(void)getLatestDataFromServer
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //check if we have already have a complete set, and just want the server to give us new data
+    StubManager *manager = [[StubManager alloc] initWithNewContext];
+    
+    Stub *mostRecent = [manager getMostRecentStub];
+    
+    //fetch from URL
+    NSURL *url = nil;
+    if (mostRecent == nil)
+        url = [NSURL URLWithString:@"http://perth.mullac.org/stub/all.json"];
+    else
+    {
+        NSTimeInterval time = [[mostRecent Date] timeIntervalSince1970];
+        time = time - [[NSTimeZone localTimeZone] secondsFromGMT];
+        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/stub/all.json?since=%d", time];
+        url = [NSURL URLWithString:paramsString];
+    }
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    if (data != nil)
+    {
+        
+        
+        JSONDecoder *decoder = [JSONDecoder decoder];
+        NSDictionary *jsonData = [decoder objectWithData:data];
+        NSArray *databaseContents = [jsonData objectForKey:@"data"];
+        if (databaseContents != nil && [databaseContents count] > 0)
+        {
+            for (NSDictionary *stubData in databaseContents)
+            {
+                [manager commitStubFromDictionary:stubData];
+            }
+        }
+    }
+    
+    [pool release];
+}
+
+
+#pragma mark Core Data
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (persistentStoreCoordinator == nil) {
+        NSURL *storeUrl = [NSURL fileURLWithPath:persistentStorePath];
+        persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[NSManagedObjectModel mergedModelFromBundles:nil]];
+        NSError *error = nil;
+        NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error];
+        NSAssert3(persistentStore != nil, @"Unhandled error adding persistent store in %s at line %d: %@", __FUNCTION__, __LINE__, [error localizedDescription]);
+    }
+    return persistentStoreCoordinator;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (managedObjectContext == nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+    }
+    return managedObjectContext;
+}
+
+- (NSString *)persistentStorePath {
+    if (persistentStorePath == nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths lastObject];
+        persistentStorePath = [[documentsDirectory stringByAppendingPathComponent:@"Model.sqlite"] retain];
+    }
+    return persistentStorePath;
+}
 
 @end

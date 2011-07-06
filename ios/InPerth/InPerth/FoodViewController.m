@@ -6,10 +6,10 @@
 //  Copyright 2011 mullac.org. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "FoodViewController.h"
 
 
-@implementation SecondViewController
+@implementation FoodViewController
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

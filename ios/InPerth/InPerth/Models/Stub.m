@@ -15,8 +15,8 @@
 @dynamic URI;
 @dynamic Description;
 @dynamic Tags;
+@dynamic Classifier;
 @dynamic Date;
 @dynamic ContentProvider;
-
 
 @end

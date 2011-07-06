@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * URI;
 @property (nonatomic, retain) NSString * Description;
 @property (nonatomic, retain) NSString * Tags;
+@property (nonatomic, retain) NSString * Classifier;
 @property (nonatomic, retain) NSDate * Date;
 @property (nonatomic, retain) NSManagedObject * ContentProvider;
 

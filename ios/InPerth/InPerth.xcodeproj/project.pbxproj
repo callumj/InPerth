@@ -14,10 +14,20 @@
 		B0060C0A13C1BBCE002669E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C0913C1BBCE002669E0 /* main.m */; };
 		B0060C0D13C1BBCE002669E0 /* InPerthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C0C13C1BBCE002669E0 /* InPerthAppDelegate.m */; };
 		B0060C1013C1BBCE002669E0 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C0E13C1BBCE002669E0 /* MainWindow.xib */; };
-		B0060C1313C1BBCE002669E0 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C1213C1BBCE002669E0 /* FirstViewController.m */; };
-		B0060C1613C1BBCE002669E0 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C1513C1BBCE002669E0 /* SecondViewController.m */; };
-		B0060C1913C1BBCE002669E0 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1713C1BBCE002669E0 /* FirstView.xib */; };
-		B0060C1C13C1BBCE002669E0 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1A13C1BBCE002669E0 /* SecondView.xib */; };
+		B0060C1313C1BBCE002669E0 /* LatestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C1213C1BBCE002669E0 /* LatestViewController.m */; };
+		B0060C1613C1BBCE002669E0 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C1513C1BBCE002669E0 /* FoodViewController.m */; };
+		B0060C1913C1BBCE002669E0 /* LatestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1713C1BBCE002669E0 /* LatestView.xib */; };
+		B0060C1C13C1BBCE002669E0 /* FoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1A13C1BBCE002669E0 /* FoodView.xib */; };
+		B030C8FD13C1C2FA00E8AB65 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FB13C1C2FA00E8AB65 /* Model.xcdatamodeld */; };
+		B030C90013C1C57D00E8AB65 /* Stub.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FF13C1C57D00E8AB65 /* Stub.m */; };
+		B030C90313C1C57D00E8AB65 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C90213C1C57D00E8AB65 /* Provider.m */; };
+		B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B030C90413C1C5C600E8AB65 /* CoreData.framework */; };
+		B0DE347813C4712C009991ED /* StubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE347713C4712C009991ED /* StubManager.m */; };
+		B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE347E13C47652009991ED /* CoreDataHelper.m */; };
+		B0DE348213C484B5009991ED /* ProviderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE348113C484B5009991ED /* ProviderManager.m */; };
+		B0F012DB13C460B80091630F /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F012D913C460B80091630F /* EventsViewController.m */; };
+		B0F012DC13C460B80091630F /* EventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F012DA13C460B80091630F /* EventsView.xib */; };
+		B0F012E213C4640C0091630F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F012E113C4640C0091630F /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +42,29 @@
 		B0060C0B13C1BBCE002669E0 /* InPerthAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InPerthAppDelegate.h; sourceTree = "<group>"; };
 		B0060C0C13C1BBCE002669E0 /* InPerthAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InPerthAppDelegate.m; sourceTree = "<group>"; };
 		B0060C0F13C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		B0060C1113C1BBCE002669E0 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		B0060C1213C1BBCE002669E0 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		B0060C1413C1BBCE002669E0 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		B0060C1513C1BBCE002669E0 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		B0060C1813C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		B0060C1B13C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		B0060C1113C1BBCE002669E0 /* LatestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LatestViewController.h; sourceTree = "<group>"; };
+		B0060C1213C1BBCE002669E0 /* LatestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LatestViewController.m; sourceTree = "<group>"; };
+		B0060C1413C1BBCE002669E0 /* FoodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodViewController.h; sourceTree = "<group>"; };
+		B0060C1513C1BBCE002669E0 /* FoodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodViewController.m; sourceTree = "<group>"; };
+		B0060C1813C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LatestView.xib; sourceTree = "<group>"; };
+		B0060C1B13C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FoodView.xib; sourceTree = "<group>"; };
+		B030C8FC13C1C2FA00E8AB65 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B030C8FE13C1C57D00E8AB65 /* Stub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stub.h; path = InPerth/Models/Stub.h; sourceTree = "<group>"; };
+		B030C8FF13C1C57D00E8AB65 /* Stub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stub.m; path = InPerth/Models/Stub.m; sourceTree = "<group>"; };
+		B030C90113C1C57D00E8AB65 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = InPerth/Models/Provider.h; sourceTree = "<group>"; };
+		B030C90213C1C57D00E8AB65 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = InPerth/Models/Provider.m; sourceTree = "<group>"; };
+		B030C90413C1C5C600E8AB65 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B0DE347613C4712C009991ED /* StubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StubManager.h; path = InPerth/Models/StubManager.h; sourceTree = "<group>"; };
+		B0DE347713C4712C009991ED /* StubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StubManager.m; path = InPerth/Models/StubManager.m; sourceTree = "<group>"; };
+		B0DE347D13C47652009991ED /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataHelper.h; path = InPerth/Models/CoreDataHelper.h; sourceTree = "<group>"; };
+		B0DE347E13C47652009991ED /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataHelper.m; path = InPerth/Models/CoreDataHelper.m; sourceTree = "<group>"; };
+		B0DE348013C484B5009991ED /* ProviderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProviderManager.h; path = InPerth/Models/ProviderManager.h; sourceTree = "<group>"; };
+		B0DE348113C484B5009991ED /* ProviderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProviderManager.m; path = InPerth/Models/ProviderManager.m; sourceTree = "<group>"; };
+		B0F012D813C460B80091630F /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
+		B0F012D913C460B80091630F /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		B0F012DA13C460B80091630F /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsView.xib; sourceTree = "<group>"; };
+		B0F012E013C4640C0091630F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		B0F012E113C4640C0091630F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */,
 				B0060BFD13C1BBCE002669E0 /* UIKit.framework in Frameworks */,
 				B0060BFF13C1BBCE002669E0 /* Foundation.framework in Frameworks */,
 				B0060C0113C1BBCE002669E0 /* CoreGraphics.framework in Frameworks */,
@@ -74,6 +102,7 @@
 		B0060BFB13C1BBCE002669E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B030C90413C1C5C600E8AB65 /* CoreData.framework */,
 				B0060BFC13C1BBCE002669E0 /* UIKit.framework */,
 				B0060BFE13C1BBCE002669E0 /* Foundation.framework */,
 				B0060C0013C1BBCE002669E0 /* CoreGraphics.framework */,
@@ -84,13 +113,17 @@
 		B0060C0213C1BBCE002669E0 /* InPerth */ = {
 			isa = PBXGroup;
 			children = (
+				B0F012DE13C463EB0091630F /* ThirdParty */,
+				B030C8FA13C1C2C500E8AB65 /* Models */,
 				B0060C2213C1BBE6002669E0 /* Resources */,
 				B0060C0B13C1BBCE002669E0 /* InPerthAppDelegate.h */,
 				B0060C0C13C1BBCE002669E0 /* InPerthAppDelegate.m */,
-				B0060C1113C1BBCE002669E0 /* FirstViewController.h */,
-				B0060C1213C1BBCE002669E0 /* FirstViewController.m */,
-				B0060C1413C1BBCE002669E0 /* SecondViewController.h */,
-				B0060C1513C1BBCE002669E0 /* SecondViewController.m */,
+				B0060C1113C1BBCE002669E0 /* LatestViewController.h */,
+				B0060C1213C1BBCE002669E0 /* LatestViewController.m */,
+				B0060C1413C1BBCE002669E0 /* FoodViewController.h */,
+				B0060C1513C1BBCE002669E0 /* FoodViewController.m */,
+				B0F012D813C460B80091630F /* EventsViewController.h */,
+				B0F012D913C460B80091630F /* EventsViewController.m */,
 				B0060C0313C1BBCE002669E0 /* Supporting Files */,
 			);
 			path = InPerth;
@@ -118,11 +151,48 @@
 		B0060C2313C1BBF6002669E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B0F012DA13C460B80091630F /* EventsView.xib */,
 				B0060C0E13C1BBCE002669E0 /* MainWindow.xib */,
-				B0060C1713C1BBCE002669E0 /* FirstView.xib */,
-				B0060C1A13C1BBCE002669E0 /* SecondView.xib */,
+				B0060C1713C1BBCE002669E0 /* LatestView.xib */,
+				B0060C1A13C1BBCE002669E0 /* FoodView.xib */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		B030C8FA13C1C2C500E8AB65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B030C8FB13C1C2FA00E8AB65 /* Model.xcdatamodeld */,
+				B030C90113C1C57D00E8AB65 /* Provider.h */,
+				B030C90213C1C57D00E8AB65 /* Provider.m */,
+				B030C8FE13C1C57D00E8AB65 /* Stub.h */,
+				B030C8FF13C1C57D00E8AB65 /* Stub.m */,
+				B0DE347613C4712C009991ED /* StubManager.h */,
+				B0DE347713C4712C009991ED /* StubManager.m */,
+				B0DE347D13C47652009991ED /* CoreDataHelper.h */,
+				B0DE347E13C47652009991ED /* CoreDataHelper.m */,
+				B0DE348013C484B5009991ED /* ProviderManager.h */,
+				B0DE348113C484B5009991ED /* ProviderManager.m */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B0F012DE13C463EB0091630F /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				B0F012DF13C463F40091630F /* JSONKit */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		B0F012DF13C463F40091630F /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				B0F012E013C4640C0091630F /* JSONKit.h */,
+				B0F012E113C4640C0091630F /* JSONKit.m */,
+			);
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,8 +247,9 @@
 			files = (
 				B0060C0713C1BBCE002669E0 /* InfoPlist.strings in Resources */,
 				B0060C1013C1BBCE002669E0 /* MainWindow.xib in Resources */,
-				B0060C1913C1BBCE002669E0 /* FirstView.xib in Resources */,
-				B0060C1C13C1BBCE002669E0 /* SecondView.xib in Resources */,
+				B0060C1913C1BBCE002669E0 /* LatestView.xib in Resources */,
+				B0060C1C13C1BBCE002669E0 /* FoodView.xib in Resources */,
+				B0F012DC13C460B80091630F /* EventsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,8 +262,16 @@
 			files = (
 				B0060C0A13C1BBCE002669E0 /* main.m in Sources */,
 				B0060C0D13C1BBCE002669E0 /* InPerthAppDelegate.m in Sources */,
-				B0060C1313C1BBCE002669E0 /* FirstViewController.m in Sources */,
-				B0060C1613C1BBCE002669E0 /* SecondViewController.m in Sources */,
+				B0060C1313C1BBCE002669E0 /* LatestViewController.m in Sources */,
+				B0060C1613C1BBCE002669E0 /* FoodViewController.m in Sources */,
+				B030C8FD13C1C2FA00E8AB65 /* Model.xcdatamodeld in Sources */,
+				B030C90013C1C57D00E8AB65 /* Stub.m in Sources */,
+				B030C90313C1C57D00E8AB65 /* Provider.m in Sources */,
+				B0F012DB13C460B80091630F /* EventsViewController.m in Sources */,
+				B0F012E213C4640C0091630F /* JSONKit.m in Sources */,
+				B0DE347813C4712C009991ED /* StubManager.m in Sources */,
+				B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */,
+				B0DE348213C484B5009991ED /* ProviderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,20 +294,20 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		B0060C1713C1BBCE002669E0 /* FirstView.xib */ = {
+		B0060C1713C1BBCE002669E0 /* LatestView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B0060C1813C1BBCE002669E0 /* en */,
 			);
-			name = FirstView.xib;
+			name = LatestView.xib;
 			sourceTree = "<group>";
 		};
-		B0060C1A13C1BBCE002669E0 /* SecondView.xib */ = {
+		B0060C1A13C1BBCE002669E0 /* FoodView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B0060C1B13C1BBCE002669E0 /* en */,
 			);
-			name = SecondView.xib;
+			name = FoodView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -313,8 +392,23 @@
 				B0060C2113C1BBCE002669E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B030C8FB13C1C2FA00E8AB65 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B030C8FC13C1C2FA00E8AB65 /* Model.xcdatamodel */,
+			);
+			currentVersion = B030C8FC13C1C2FA00E8AB65 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = InPerth/Models/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B0060BEF13C1BBCE002669E0 /* Project object */;
 }
