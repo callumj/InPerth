@@ -21,11 +21,11 @@ if provider == nil
   provider.save
 end
 
+puts url
 urls.each do |url|
   doc = Nokogiri::HTML(open(url))
   
   event_listings = doc.css("div.teaser-node")
-  puts doc
   event_listings.each do |event_div|
     #get basic info
     title = CGI.unescapeHTML(event_div.xpath(".//h4/a").inner_html.strip)
