@@ -15,10 +15,7 @@
 @synthesize tabBarController=_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    //init CD store
-    NSManagedObjectContext *con = [self managedObjectContext];
-    
+{    
     [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
     
     // Override point for customization after application launch.
@@ -113,6 +110,24 @@
         }
     }
     
+    Stub *mostRecentAfterRun = [manager getMostRecentStub];
+    
+    //perform compare
+    BOOL isDiff = NO;
+    if (mostRecent != nil && mostRecentAfterRun != nil)
+    {
+        NSTimeInterval diff = [[mostRecentAfterRun Date] timeIntervalSinceDate:[mostRecent Date]];
+        if (diff != 0)
+            isDiff = YES;
+    }
+    else
+    {
+        isDiff = YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDataRefreshCompleteNotification object:[NSNumber numberWithBool:isDiff]];
+    
+    [manager release];
     [pool release];
 }
 

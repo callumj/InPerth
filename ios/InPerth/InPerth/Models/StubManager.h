@@ -34,6 +34,9 @@
 
 -(Stub *)getStubForKey:(NSString *)key;
 -(Stub *)getMostRecentStub;
+
 -(NSArray *)getStubsForClassifier:(NSString *)classifier;
+-(NSArray *)getStubsForClassifier:(NSString *)classifier withLimit:(int)limit;
 -(NSArray *)getStubsForClassifier:(NSString *)classifier sinceDate:(NSDate *)date;
+-(NSArray *)getStubsWithLimit:(int)limit;
 @end

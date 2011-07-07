@@ -13,6 +13,8 @@
 
 #import "StubManager.h"
 
+#define kDataRefreshCompleteNotification @"DataRefreshCompleteNotification"
+
 @interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
