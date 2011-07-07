@@ -60,18 +60,17 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
+    NSString *cellID = [NSString stringWithFormat:@"%@%@", kStubCellsIndentifier, [stub ServerKey]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kStubCellsIndentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    if (cell != nil)
-        return cell;
-    
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kStubCellsIndentifier];
+    if (cell == nil)
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID] autorelease];    
     
     [cell.textLabel setText:[stub Title]];
     [cell.detailTextLabel setText:[stub Description]];
     
-    return [cell autorelease];
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

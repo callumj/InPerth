@@ -62,6 +62,11 @@
 #pragma mark object management operations
 -(Stub *)createStubWithTitle:(NSString *)title serverKey:(NSString *)key uri:(NSString *)uri description:(NSString *)description tags:(NSString *)tags classifier:(NSString *)classifier date:(NSDate *)date contentProvider:(Provider *)provider
 {
+    //perform a sanity check
+    Stub *existingStub = [self getStubForKey:key];
+    if (existingStub != nil)
+        return existingStub;
+    
     Stub *newStub = (Stub *)[NSEntityDescription insertNewObjectForEntityForName:@"Stub" inManagedObjectContext:dataContext];
     
     [newStub setTitle:title];
