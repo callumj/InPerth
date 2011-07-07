@@ -13,7 +13,10 @@ all_providers.each do |provider|
   recent_date = provider.most_recent_date
   
   entries.each do |entry|
-    if entry.date_published.to_i > recent_date.to_i
+    
+    existing_entry = Stub.where(:title => entry.title).first
+    
+    if existing_entry == nil && entry.date_published.to_i > recent_date.to_i
       #remove HTML
       doc = Nokogiri::HTML(entry.content)
       body = doc.xpath("//text()").remove.inner_text
