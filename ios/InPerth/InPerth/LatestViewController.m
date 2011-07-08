@@ -50,25 +50,29 @@
     // e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc
 {
     [tableViewOutlet release];
     [super dealloc];
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
     NSString *cellID = [NSString stringWithFormat:@"%@%@", kStubCellsIndentifier, [stub ServerKey]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    StubCell *cell = (StubCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (cell == nil)
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID] autorelease];    
+        cell = [StubCell loadFromBundle];
     
-    [cell.textLabel setText:[stub Title]];
-    [cell.detailTextLabel setText:[stub Description]];
+    [cell.titleLabel setText:[stub Title]];
+    [cell.detailLabel setText:[stub Description]];
+    UIImageView* vwimg = [ [ UIImageView alloc] initWithFrame: cell.bounds];
+    UIImage* img = [ UIImage imageNamed: @"Stub.png"];
+    vwimg.image = img;
+    cell.backgroundView = vwimg;
     
     return cell;
 }
@@ -76,6 +80,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [latestStubs count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55.0;
 }
 
 -(void)delegateHasFinishedUpdate:(NSNotification *)note

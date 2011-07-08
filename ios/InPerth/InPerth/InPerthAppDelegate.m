@@ -74,6 +74,7 @@
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     //check if we have already have a complete set, and just want the server to give us new data
     StubManager *manager = [[StubManager alloc] initWithNewContext];
@@ -87,8 +88,9 @@
     else
     {
         NSTimeInterval time = [[mostRecent Date] timeIntervalSince1970];
-        time = time - [[NSTimeZone localTimeZone] secondsFromGMT];
-        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/stub/all.json?since=%d", time];
+        time -= [[NSTimeZone localTimeZone] secondsFromGMT];
+        NSNumber *objNumber = [NSNumber numberWithDouble:time];
+        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/stub/all.json?since=%@", objNumber];
         url = [NSURL URLWithString:paramsString];
     }
     
@@ -129,6 +131,7 @@
     
     [manager release];
     [pool release];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 

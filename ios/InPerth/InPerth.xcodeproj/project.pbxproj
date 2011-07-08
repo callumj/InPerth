@@ -22,6 +22,10 @@
 		B030C90013C1C57D00E8AB65 /* Stub.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FF13C1C57D00E8AB65 /* Stub.m */; };
 		B030C90313C1C57D00E8AB65 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C90213C1C57D00E8AB65 /* Provider.m */; };
 		B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B030C90413C1C5C600E8AB65 /* CoreData.framework */; };
+		B046066213C764D500132794 /* Stub@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B046066013C764D500132794 /* Stub@2x.png */; };
+		B046066313C764D500132794 /* Stub.png in Resources */ = {isa = PBXBuildFile; fileRef = B046066113C764D500132794 /* Stub.png */; };
+		B06610CE13C751900062B512 /* StubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B06610CD13C751900062B512 /* StubCell.m */; };
+		B06610D013C753CF0062B512 /* StubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06610CF13C753CF0062B512 /* StubCell.xib */; };
 		B0DE347813C4712C009991ED /* StubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE347713C4712C009991ED /* StubManager.m */; };
 		B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE347E13C47652009991ED /* CoreDataHelper.m */; };
 		B0DE348213C484B5009991ED /* ProviderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE348113C484B5009991ED /* ProviderManager.m */; };
@@ -54,6 +58,11 @@
 		B030C90113C1C57D00E8AB65 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = InPerth/Models/Provider.h; sourceTree = "<group>"; };
 		B030C90213C1C57D00E8AB65 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = InPerth/Models/Provider.m; sourceTree = "<group>"; };
 		B030C90413C1C5C600E8AB65 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B046066013C764D500132794 /* Stub@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stub@2x.png"; sourceTree = "<group>"; };
+		B046066113C764D500132794 /* Stub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stub.png; sourceTree = "<group>"; };
+		B06610CC13C751900062B512 /* StubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StubCell.h; sourceTree = "<group>"; };
+		B06610CD13C751900062B512 /* StubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StubCell.m; sourceTree = "<group>"; };
+		B06610CF13C753CF0062B512 /* StubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StubCell.xib; sourceTree = "<group>"; };
 		B0DE347613C4712C009991ED /* StubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StubManager.h; path = InPerth/Models/StubManager.h; sourceTree = "<group>"; };
 		B0DE347713C4712C009991ED /* StubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StubManager.m; path = InPerth/Models/StubManager.m; sourceTree = "<group>"; };
 		B0DE347D13C47652009991ED /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataHelper.h; path = InPerth/Models/CoreDataHelper.h; sourceTree = "<group>"; };
@@ -116,14 +125,7 @@
 				B0F012DE13C463EB0091630F /* ThirdParty */,
 				B030C8FA13C1C2C500E8AB65 /* Models */,
 				B0060C2213C1BBE6002669E0 /* Resources */,
-				B0060C0B13C1BBCE002669E0 /* InPerthAppDelegate.h */,
-				B0060C0C13C1BBCE002669E0 /* InPerthAppDelegate.m */,
-				B0060C1113C1BBCE002669E0 /* LatestViewController.h */,
-				B0060C1213C1BBCE002669E0 /* LatestViewController.m */,
-				B0060C1413C1BBCE002669E0 /* FoodViewController.h */,
-				B0060C1513C1BBCE002669E0 /* FoodViewController.m */,
-				B0F012D813C460B80091630F /* EventsViewController.h */,
-				B0F012D913C460B80091630F /* EventsViewController.m */,
+				B06610C913C751140062B512 /* Classes */,
 				B0060C0313C1BBCE002669E0 /* Supporting Files */,
 			);
 			path = InPerth;
@@ -143,6 +145,7 @@
 		B0060C2213C1BBE6002669E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B046065E13C764B800132794 /* Images */,
 				B0060C2313C1BBF6002669E0 /* Views */,
 			);
 			name = Resources;
@@ -155,6 +158,7 @@
 				B0060C0E13C1BBCE002669E0 /* MainWindow.xib */,
 				B0060C1713C1BBCE002669E0 /* LatestView.xib */,
 				B0060C1A13C1BBCE002669E0 /* FoodView.xib */,
+				B06610CF13C753CF0062B512 /* StubCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -176,6 +180,40 @@
 			);
 			name = Models;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		B046065E13C764B800132794 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B046066013C764D500132794 /* Stub@2x.png */,
+				B046066113C764D500132794 /* Stub.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		B06610C913C751140062B512 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B06610CB13C751270062B512 /* Cells */,
+				B0060C0B13C1BBCE002669E0 /* InPerthAppDelegate.h */,
+				B0060C0C13C1BBCE002669E0 /* InPerthAppDelegate.m */,
+				B0060C1113C1BBCE002669E0 /* LatestViewController.h */,
+				B0060C1213C1BBCE002669E0 /* LatestViewController.m */,
+				B0060C1413C1BBCE002669E0 /* FoodViewController.h */,
+				B0060C1513C1BBCE002669E0 /* FoodViewController.m */,
+				B0F012D813C460B80091630F /* EventsViewController.h */,
+				B0F012D913C460B80091630F /* EventsViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		B06610CB13C751270062B512 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B06610CC13C751900062B512 /* StubCell.h */,
+				B06610CD13C751900062B512 /* StubCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		B0F012DE13C463EB0091630F /* ThirdParty */ = {
@@ -250,6 +288,9 @@
 				B0060C1913C1BBCE002669E0 /* LatestView.xib in Resources */,
 				B0060C1C13C1BBCE002669E0 /* FoodView.xib in Resources */,
 				B0F012DC13C460B80091630F /* EventsView.xib in Resources */,
+				B06610D013C753CF0062B512 /* StubCell.xib in Resources */,
+				B046066213C764D500132794 /* Stub@2x.png in Resources */,
+				B046066313C764D500132794 /* Stub.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +313,7 @@
 				B0DE347813C4712C009991ED /* StubManager.m in Sources */,
 				B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */,
 				B0DE348213C484B5009991ED /* ProviderManager.m in Sources */,
+				B06610CE13C751900062B512 /* StubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

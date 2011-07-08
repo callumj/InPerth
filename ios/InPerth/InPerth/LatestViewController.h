@@ -10,6 +10,7 @@
 #import "StubManager.h"
 #import "Stub.h"
 #import "InPerthAppDelegate.h"
+#import "StubCell.h"
 
 #define kStubCellsIndentifier @"StubCellsIndentifier"
 
