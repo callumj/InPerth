@@ -208,6 +208,28 @@
     [dateSort release];
     [request release];
     
+    return [results autorelease];
+}
+
+-(NSArray *)getStubsWithLimit:(int)limit olderThanDate:(NSDate *)date
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Stub" inManagedObjectContext:dataContext]; 
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Date < %@", date];
+    NSSortDescriptor *dateSort = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:NO];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
+    [request setFetchLimit:limit];
+    
+    
+    NSError *error;
+    NSArray *results = [[dataContext executeFetchRequest:request error:&error] copy]; 
+    
+    [dateSort release];
+    [request release];
+    
     return [results autorelease];  
 }
 

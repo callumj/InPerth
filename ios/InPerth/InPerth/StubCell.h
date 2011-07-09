@@ -14,10 +14,12 @@
     UILabel *titleLabel;
     UILabel *detailLabel;
     UILabel *dateLabel;
+    UILabel *providerLabel;
 }
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *detailLabel;
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *providerLabel;
 
 +(StubCell *)loadFromBundle;
 @end

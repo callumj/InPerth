@@ -13,6 +13,7 @@
 @synthesize titleLabel;
 @synthesize detailLabel;
 @synthesize dateLabel;
+@synthesize providerLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,6 +36,7 @@
     [titleLabel release];
     [detailLabel release];
     [dateLabel release];
+    [providerLabel release];
     [super dealloc];
 }
 

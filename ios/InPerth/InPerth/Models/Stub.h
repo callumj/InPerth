@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "Provider.h"
 
 @interface Stub : NSManagedObject {
 @private
@@ -20,6 +20,6 @@
 @property (nonatomic, retain) NSString * Tags;
 @property (nonatomic, retain) NSString * Classifier;
 @property (nonatomic, retain) NSDate * Date;
-@property (nonatomic, retain) NSManagedObject * ContentProvider;
+@property (nonatomic, retain) Provider * ContentProvider;
 
 @end

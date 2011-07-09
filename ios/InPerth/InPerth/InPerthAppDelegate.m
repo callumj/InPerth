@@ -98,8 +98,6 @@
     
     if (data != nil)
     {
-        
-        
         JSONDecoder *decoder = [JSONDecoder decoder];
         NSDictionary *jsonData = [decoder objectWithData:data];
         NSArray *databaseContents = [jsonData objectForKey:@"data"];

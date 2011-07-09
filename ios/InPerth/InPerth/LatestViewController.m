@@ -19,8 +19,28 @@
     stubManager = [[[StubManager alloc] initWithNewContext] retain];
     latestStubs = [[[NSMutableArray alloc] initWithArray:[stubManager getStubsWithLimit:20]] retain];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kDataRefreshCompleteNotification object:nil];
+    if ([latestStubs count] > 0)
+    {
+        newestStubDate = [[(Stub *)[latestStubs objectAtIndex:0] Date] retain];
+        oldestStubDate = [[(Stub *)[latestStubs objectAtIndex:([latestStubs count] - 1)] Date] retain];
+    }    
     
+    hourFormatter = [[[NSDateFormatter alloc] init] retain];
+    [hourFormatter setDateFormat:@"h:mm a"];
+    
+    fullFormatter = [[[NSDateFormatter alloc] init] retain];
+    [fullFormatter setDateFormat:@"E h:mm a"];
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *todayComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:today];
+    [todayComponents setHour:0];
+    [todayComponents setMinute:0];
+    
+    startOfDay = [[gregorian dateFromComponents:todayComponents] retain];
+    [gregorian release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kDataRefreshCompleteNotification object:nil];
     [super viewDidLoad];
 }
 
@@ -69,10 +89,20 @@
     
     [cell.titleLabel setText:[stub Title]];
     [cell.detailLabel setText:[stub Description]];
+    [cell.providerLabel setText:[[stub ContentProvider] Title]];
+    if ([startOfDay compare:[stub Date]] == NSOrderedDescending)
+        [cell.dateLabel setText:[fullFormatter stringFromDate:[stub Date]]];
+    else
+        [cell.dateLabel setText:[hourFormatter stringFromDate:[stub Date]]];
     UIImageView* vwimg = [ [ UIImageView alloc] initWithFrame: cell.bounds];
     UIImage* img = [ UIImage imageNamed: @"Stub.png"];
     vwimg.image = img;
     cell.backgroundView = vwimg;
+    double diff = ((double)indexPath.row / (double)[latestStubs count]);
+    if (diff >= 0.6)
+    {
+        [self fetchOlderStubs];
+    }
     
     return cell;
 }
@@ -98,6 +128,34 @@
             [latestStubs addObjectsFromArray:[stubManager getStubsWithLimit:20]];
             [tableViewOutlet reloadData];
         }
+    }
+}
+
+-(void)fetchOlderStubs
+{
+    if ([latestStubs count] >= 60)
+        return;
+    
+    NSArray *olderStubs = [stubManager getStubsWithLimit:20 olderThanDate:oldestStubDate];
+    NSLog(@"Fetching for date %@", oldestStubDate);
+    if ([olderStubs count] > 0)
+    {
+        [tableViewOutlet beginUpdates];
+        int curDataSize = [latestStubs count];
+        NSMutableArray *newPaths = [NSMutableArray array];
+        for (int index = 0; index < [olderStubs count]; index++)
+        {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:(curDataSize + index) inSection:0];
+            [newPaths addObject:path];
+        }
+        [tableViewOutlet insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationBottom];
+        [latestStubs addObjectsFromArray:olderStubs];
+        
+        [oldestStubDate release];
+        oldestStubDate = nil;
+        oldestStubDate = [[(Stub *)[latestStubs objectAtIndex:([latestStubs count] - 1)] Date] retain];
+        
+        [tableViewOutlet endUpdates];
     }
 }
 

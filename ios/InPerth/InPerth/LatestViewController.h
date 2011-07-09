@@ -18,11 +18,19 @@
 
     UITableView *tableViewOutlet;
     NSMutableArray *latestStubs;
+    NSDate *newestStubDate;
+    NSDate *oldestStubDate;
+    
+    NSDateFormatter *hourFormatter;
+    NSDateFormatter *fullFormatter;
+    
+    NSDate *startOfDay;
     
     StubManager *stubManager;
 }
 @property (nonatomic, retain) IBOutlet UITableView *tableViewOutlet;
 
 -(void)delegateHasFinishedUpdate:(NSNotification *)note;
+-(void)fetchOlderStubs;
 
 @end
