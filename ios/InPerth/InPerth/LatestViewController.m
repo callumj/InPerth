@@ -101,7 +101,7 @@
     double diff = ((double)indexPath.row / (double)[latestStubs count]);
     if (diff >= 0.6)
     {
-        [self fetchOlderStubs];
+        [self performSelectorOnMainThread:@selector(fetchOlderStubs) withObject:nil waitUntilDone:NO];
     }
     
     return cell;
@@ -115,6 +115,21 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 55.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
+    
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    WebViewController *webController = [[WebViewController alloc] init];
+    [webController setUrlToNavigateTo:[stub URI]];
+    [webController setToolbarTitle:[stub Title]];
+    [delegate.navigationController pushViewController:webController animated:YES];
+    [webController release];
+    UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO];
+    
 }
 
 -(void)delegateHasFinishedUpdate:(NSNotification *)note
@@ -131,6 +146,11 @@
     }
 }
 
+-(void)getOlderDataInTimer:(NSTimer *)timer
+{
+    [self fetchOlderStubs];
+}
+
 -(void)fetchOlderStubs
 {
     if ([latestStubs count] >= 60)
@@ -140,7 +160,7 @@
     NSLog(@"Fetching for date %@", oldestStubDate);
     if ([olderStubs count] > 0)
     {
-        [tableViewOutlet beginUpdates];
+        /*[tableViewOutlet beginUpdates];
         int curDataSize = [latestStubs count];
         NSMutableArray *newPaths = [NSMutableArray array];
         for (int index = 0; index < [olderStubs count]; index++)
@@ -148,14 +168,14 @@
             NSIndexPath *path = [NSIndexPath indexPathForRow:(curDataSize + index) inSection:0];
             [newPaths addObject:path];
         }
-        [tableViewOutlet insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationBottom];
+        [tableViewOutlet insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];*/
         [latestStubs addObjectsFromArray:olderStubs];
         
         [oldestStubDate release];
         oldestStubDate = nil;
         oldestStubDate = [[(Stub *)[latestStubs objectAtIndex:([latestStubs count] - 1)] Date] retain];
         
-        [tableViewOutlet endUpdates];
+        [tableViewOutlet reloadData];
     }
 }
 

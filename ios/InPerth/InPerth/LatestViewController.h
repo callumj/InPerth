@@ -11,6 +11,7 @@
 #import "Stub.h"
 #import "InPerthAppDelegate.h"
 #import "StubCell.h"
+#import "WebViewController.h"
 
 #define kStubCellsIndentifier @"StubCellsIndentifier"
 
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableViewOutlet;
 
 -(void)delegateHasFinishedUpdate:(NSNotification *)note;
+-(void)getOlderDataInTimer:(NSTimer *)timer;
 -(void)fetchOlderStubs;
 
 @end

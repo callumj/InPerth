@@ -18,6 +18,8 @@
 		B0060C1613C1BBCE002669E0 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0060C1513C1BBCE002669E0 /* FoodViewController.m */; };
 		B0060C1913C1BBCE002669E0 /* LatestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1713C1BBCE002669E0 /* LatestView.xib */; };
 		B0060C1C13C1BBCE002669E0 /* FoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1A13C1BBCE002669E0 /* FoodView.xib */; };
+		B010FA1613C819B000E50741 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B010FA1513C819B000E50741 /* WebView.xib */; };
+		B010FA1A13C81A4E00E50741 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B010FA1913C81A4E00E50741 /* WebViewController.m */; };
 		B030C8FD13C1C2FA00E8AB65 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FB13C1C2FA00E8AB65 /* Model.xcdatamodeld */; };
 		B030C90013C1C57D00E8AB65 /* Stub.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FF13C1C57D00E8AB65 /* Stub.m */; };
 		B030C90313C1C57D00E8AB65 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C90213C1C57D00E8AB65 /* Provider.m */; };
@@ -52,6 +54,9 @@
 		B0060C1513C1BBCE002669E0 /* FoodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodViewController.m; sourceTree = "<group>"; };
 		B0060C1813C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LatestView.xib; sourceTree = "<group>"; };
 		B0060C1B13C1BBCE002669E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FoodView.xib; sourceTree = "<group>"; };
+		B010FA1513C819B000E50741 /* WebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
+		B010FA1813C81A4E00E50741 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		B010FA1913C81A4E00E50741 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B030C8FC13C1C2FA00E8AB65 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B030C8FE13C1C57D00E8AB65 /* Stub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stub.h; path = InPerth/Models/Stub.h; sourceTree = "<group>"; };
 		B030C8FF13C1C57D00E8AB65 /* Stub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stub.m; path = InPerth/Models/Stub.m; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 				B0060C1713C1BBCE002669E0 /* LatestView.xib */,
 				B0060C1A13C1BBCE002669E0 /* FoodView.xib */,
 				B06610CF13C753CF0062B512 /* StubCell.xib */,
+				B010FA1513C819B000E50741 /* WebView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 				B0060C1513C1BBCE002669E0 /* FoodViewController.m */,
 				B0F012D813C460B80091630F /* EventsViewController.h */,
 				B0F012D913C460B80091630F /* EventsViewController.m */,
+				B010FA1813C81A4E00E50741 /* WebViewController.h */,
+				B010FA1913C81A4E00E50741 /* WebViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -291,6 +299,7 @@
 				B06610D013C753CF0062B512 /* StubCell.xib in Resources */,
 				B046066213C764D500132794 /* Stub@2x.png in Resources */,
 				B046066313C764D500132794 /* Stub.png in Resources */,
+				B010FA1613C819B000E50741 /* WebView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +323,7 @@
 				B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */,
 				B0DE348213C484B5009991ED /* ProviderManager.m in Sources */,
 				B06610CE13C751900062B512 /* StubCell.m in Sources */,
+				B010FA1A13C81A4E00E50741 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
