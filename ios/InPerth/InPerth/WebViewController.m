@@ -47,6 +47,7 @@
     NSURLRequest *urlReq = [NSURLRequest requestWithURL:urlObj];
     [self.webViewOutlet loadRequest:urlReq];
     [self.webViewOutlet setScalesPageToFit:YES];
+    [self.webViewOutlet setDelegate:self];
     [self.currentToolbar setTitle:self.toolbarTitle];
 }
 
@@ -68,5 +69,15 @@
 - (IBAction)backButtonTouched:(id)sender {
     InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 @end

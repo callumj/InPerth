@@ -99,7 +99,7 @@
     vwimg.image = img;
     cell.backgroundView = vwimg;
     double diff = ((double)indexPath.row / (double)[latestStubs count]);
-    if (diff >= 0.6)
+    if (diff >= 0.9)
     {
         [self performSelectorOnMainThread:@selector(fetchOlderStubs) withObject:nil waitUntilDone:NO];
     }

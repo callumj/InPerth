@@ -41,6 +41,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    if (!fetchInProgress)
+    {
+        [self getLatestDataFromServer];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -77,6 +81,7 @@
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer
 {
+    fetchInProgress = YES;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     //check if we have already have a complete set, and just want the server to give us new data
@@ -133,6 +138,7 @@
     [manager release];
     [pool release];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    fetchInProgress = NO;
 }
 
 

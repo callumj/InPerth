@@ -21,6 +21,8 @@
     NSString *persistentStorePath;
     NSManagedObjectContext *managedObjectContext;
     UINavigationController *navigationController;
+    
+    BOOL fetchInProgress;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
