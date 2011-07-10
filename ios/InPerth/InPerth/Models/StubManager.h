@@ -37,6 +37,7 @@
 
 -(NSArray *)getStubsForClassifier:(NSString *)classifier;
 -(NSArray *)getStubsForClassifier:(NSString *)classifier withLimit:(int)limit;
+-(NSArray *)getStubsForClassifier:(NSString *)classifier withLimit:(int)limit olderThanDate:(NSDate *)date;
 -(NSArray *)getStubsForClassifier:(NSString *)classifier sinceDate:(NSDate *)date;
 -(NSArray *)getStubsWithLimit:(int)limit;
 -(NSArray *)getStubsWithLimit:(int)limit olderThanDate:(NSDate *)date;

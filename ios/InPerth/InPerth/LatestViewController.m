@@ -80,9 +80,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
-    NSString *cellID = [NSString stringWithFormat:@"%@%@", kStubCellsIndentifier, [stub ServerKey]];
     
-    StubCell *cell = (StubCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    StubCell *cell = nil;
     
     if (cell == nil)
         cell = [StubCell loadFromBundle];

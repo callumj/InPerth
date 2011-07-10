@@ -233,6 +233,52 @@
     return [results autorelease];  
 }
 
+-(NSArray *)getStubsForClassifier:(NSString *)classifier withLimit:(int)limit
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Stub" inManagedObjectContext:dataContext]; 
+    
+    NSSortDescriptor *dateSort = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Classifier == %@", classifier];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:entity];
+    [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
+    [request setFetchLimit:limit];
+    [request setPredicate:predicate];
+    
+    
+    NSError *error;
+    NSArray *results = [[dataContext executeFetchRequest:request error:&error] copy]; 
+    
+    [dateSort release];
+    [request release];
+    
+    return [results autorelease]; 
+}
+
+-(NSArray *)getStubsForClassifier:(NSString *)classifier withLimit:(int)limit olderThanDate:(NSDate *)date
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Stub" inManagedObjectContext:dataContext]; 
+    
+    NSSortDescriptor *dateSort = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Classifier == %@ AND Date < %@", classifier, date];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:entity];
+    [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
+    [request setFetchLimit:limit];
+    [request setPredicate:predicate];
+    
+    
+    NSError *error;
+    NSArray *results = [[dataContext executeFetchRequest:request error:&error] copy]; 
+    
+    [dateSort release];
+    [request release];
+    
+    return [results autorelease];   
+}
+
 -(void)dealloc
 {
     [dataContext release];

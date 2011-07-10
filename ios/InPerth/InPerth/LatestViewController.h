@@ -13,8 +13,6 @@
 #import "StubCell.h"
 #import "WebViewController.h"
 
-#define kStubCellsIndentifier @"StubCellsIndentifier"
-
 @interface LatestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 
     UITableView *tableViewOutlet;
