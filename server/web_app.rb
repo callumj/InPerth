@@ -1,3 +1,4 @@
+require 'thin'
 require "sinatra"
 
 load "#{File.dirname(__FILE__)}/init.rb"
@@ -16,6 +17,18 @@ get '/stub/:tag.:format' do
     stubs = Stub.where(:classifiers => classifier, :created_at.gt => search_date).sort(:created_at.desc).all
   end
   doc = {:time => Time.now.to_i, :count => stubs.count,:data => stubs}
+  if ("json".eql?(params[:format]))
+    content_type "application/json"
+    doc.to_json
+  else
+    "ERROR"
+  end
+end
+
+get '/meta/:name.:format' do
+  meta_obj = Meta.where(:name => params[:name]).first
+  
+  doc = {:time => Time.now.to_i, :data => meta_obj}
   if ("json".eql?(params[:format]))
     content_type "application/json"
     doc.to_json
