@@ -63,5 +63,7 @@ for day_weather in future_weather do
   day = day + 1
 end
 
-x = Meta.new(:name => "weather", :meta => weather_results)
+x = Meta.where(:name => "weather").first
+x = Meta.new(:name => "weather") if x == nil
+x.meta = weather_results
 x.save
