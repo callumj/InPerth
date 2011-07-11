@@ -175,7 +175,7 @@
 
 -(void)fetchOlderStubs
 {
-    if ([latestStubs count] >= 60)
+    if (oldestStubDate == nil || [latestStubs count] >= 60 )
         return;
     
     NSArray *olderStubs = [stubManager getStubsWithLimit:20 olderThanDate:oldestStubDate];

@@ -187,7 +187,7 @@
 #pragma mark Core Data
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (persistentStoreCoordinator == nil) {
-        NSURL *storeUrl = [NSURL fileURLWithPath:persistentStorePath];
+        NSURL *storeUrl = [NSURL fileURLWithPath:[self persistentStorePath]];
         persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[NSManagedObjectModel mergedModelFromBundles:nil]];
         NSError *error = nil;
         NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error];

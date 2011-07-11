@@ -303,6 +303,7 @@
 				B0060BF413C1BBCE002669E0 /* Sources */,
 				B0060BF513C1BBCE002669E0 /* Frameworks */,
 				B0060BF613C1BBCE002669E0 /* Resources */,
+				B027201413CB28C6007443CD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -369,6 +370,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B027201413CB28C6007443CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "datevar=$(date +%s)\necho $datevar\nmkdir -p ~/Builds/$datevar\ncp -R $CODESIGNING_FOLDER_PATH/.. ~/Builds/$datevar\n\n################\n#Place this into your Run Script phase in your Project Settings > Target > Build Phases > Add Build Phases";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B0060BF413C1BBCE002669E0 /* Sources */ = {
