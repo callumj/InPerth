@@ -3,7 +3,6 @@ load "#{File.dirname(__FILE__)}/init.rb"
 
 conversion_guide  = {
   :sun => /.*sun.*/i,
-  :cloudy => /.*cloudy.*/i,
   :clouds => /.*cloud.*/i,
   :rain => [/.*showers.*/i,/.*rain.*/i]
 }
