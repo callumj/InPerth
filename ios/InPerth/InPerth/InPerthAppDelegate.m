@@ -14,9 +14,16 @@
 @synthesize window=_window;
 @synthesize tabBarController=_tabBarController;
 @synthesize navigationController;
+@synthesize documentsPath;
+@synthesize metaData;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    self.metaData = [[NSMutableDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/metadata.plist", self.documentsPath]];
+    if (self.metaData == nil)
+        self.metaData = [[NSMutableDictionary alloc] init];
     [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
     
     // Override point for customization after application launch.
@@ -82,6 +89,13 @@
 -(void)getLatestDataFromServer
 {
     fetchInProgress = YES;
+    [self getLatestStubDataFromServer];
+    [self getLatestWeatherDataFromServer];
+    fetchInProgress = NO;
+}
+
+-(void)getLatestStubDataFromServer
+{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     //check if we have already have a complete set, and just want the server to give us new data
@@ -133,12 +147,40 @@
         isDiff = YES;
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kDataRefreshCompleteNotification object:[NSNumber numberWithBool:isDiff]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kStubDataRefreshCompleteNotification object:[NSNumber numberWithBool:isDiff]];
     
     [manager release];
     [pool release];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    fetchInProgress = NO;
+}
+
+-(void)getLatestWeatherDataFromServer
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSURL *url = [NSURL URLWithString:@"http://perth.mullac.org/meta/weather.json"];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    if (data != nil)
+    {
+        JSONDecoder *decoder = [JSONDecoder decoder];
+        NSDictionary *jsonData = [decoder objectWithData:data];
+        NSDictionary *innerData = [jsonData objectForKey:@"data"];
+        if (innerData != nil)
+        {
+            NSDictionary *weatherData = [innerData objectForKey:@"meta"];
+            if (weatherData != nil)
+            {
+                [self.metaData addEntriesFromDictionary:[NSDictionary dictionaryWithObject:weatherData forKey:@"weather"]];
+            }
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kWeatherDataRefreshCompleteNotification object:nil];
+    [self.metaData writeToFile:[NSString stringWithFormat:@"%@/metadata.plist", self.documentsPath] atomically:YES];
+    [pool release];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 

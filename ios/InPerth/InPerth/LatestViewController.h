@@ -12,6 +12,7 @@
 #import "InPerthAppDelegate.h"
 #import "StubCell.h"
 #import "WebViewController.h"
+#import "WeatherViewController.h"
 
 @interface LatestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 
@@ -26,6 +27,8 @@
     NSDate *startOfDay;
     
     StubManager *stubManager;
+    WeatherViewController *weatherView;
+    
 }
 @property (nonatomic, retain) IBOutlet UITableView *tableViewOutlet;
 

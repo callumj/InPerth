@@ -13,7 +13,8 @@
 
 #import "StubManager.h"
 
-#define kDataRefreshCompleteNotification @"DataRefreshCompleteNotification"
+#define kStubDataRefreshCompleteNotification @"StubDataRefreshCompleteNotification"
+#define kWeatherDataRefreshCompleteNotification @"WeatherDataRefreshCompleteNotification"
 
 @interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
@@ -21,16 +22,19 @@
     NSString *persistentStorePath;
     NSManagedObjectContext *managedObjectContext;
     UINavigationController *navigationController;
-    
     BOOL fetchInProgress;
 }
 
+@property (nonatomic, retain) NSMutableDictionary *metaData;
+@property (nonatomic, retain) NSString *documentsPath;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer;
+-(void)getLatestStubDataFromServer;
+-(void)getLatestWeatherDataFromServer;
 
 #pragma mark Core Data
 -(NSManagedObjectContext *)managedObjectContext;

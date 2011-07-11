@@ -39,7 +39,7 @@
     startOfDay = [[gregorian dateFromComponents:todayComponents] retain];
     [gregorian release];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kDataRefreshCompleteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kStubDataRefreshCompleteNotification object:nil];
     [super viewDidLoad];
 }
 

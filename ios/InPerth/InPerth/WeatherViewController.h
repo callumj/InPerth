@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InPerthAppDelegate.h"
 
-
-@interface WeatherView : UIViewController {
+@interface WeatherViewController : UIViewController {
     
+    UIImageView *weatherImage;
+    UILabel *temperatureText;
 }
+@property (nonatomic, retain) IBOutlet UIImageView *weatherImage;
+@property (nonatomic, retain) IBOutlet UILabel *temperatureText;
 
+-(void)refreshWeatherStatus:(NSNotification *)note;
+-(void)setWeatherTypeForString:(NSString *)type;
 @end

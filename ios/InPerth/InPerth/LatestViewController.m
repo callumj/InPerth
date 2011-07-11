@@ -40,7 +40,13 @@
     startOfDay = [[gregorian dateFromComponents:todayComponents] retain];
     [gregorian release];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kDataRefreshCompleteNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kStubDataRefreshCompleteNotification object:nil];
+    
+    weatherView = [[[WeatherViewController alloc] init] retain];
+    [self.view insertSubview:weatherView.view atIndex:0];
+    
+    [self.tableViewOutlet setBackgroundColor:[UIColor clearColor]];
+    
     [super viewDidLoad];
 }
 
@@ -79,55 +85,72 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
-    
-    StubCell *cell = nil;
-    
-    if (cell == nil)
-        cell = [StubCell loadFromBundle];
-    
-    [cell.titleLabel setText:[stub Title]];
-    [cell.detailLabel setText:[stub Description]];
-    [cell.providerLabel setText:[[stub ContentProvider] Title]];
-    if ([startOfDay compare:[stub Date]] == NSOrderedDescending)
-        [cell.dateLabel setText:[fullFormatter stringFromDate:[stub Date]]];
-    else
-        [cell.dateLabel setText:[hourFormatter stringFromDate:[stub Date]]];
-    UIImageView* vwimg = [ [ UIImageView alloc] initWithFrame: cell.bounds];
-    UIImage* img = [ UIImage imageNamed: @"Stub.png"];
-    vwimg.image = img;
-    cell.backgroundView = vwimg;
-    double diff = ((double)indexPath.row / (double)[latestStubs count]);
-    if (diff >= 0.9)
+    if ([indexPath row] == 0)
     {
-        [self performSelectorOnMainThread:@selector(fetchOlderStubs) withObject:nil waitUntilDone:NO];
+        UITableViewCell *blankCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"blank"];
+        [blankCell setBackgroundColor:[UIColor clearColor]];
+        return blankCell;
     }
-    
-    return cell;
+    else
+    {
+        Stub *stub = [latestStubs objectAtIndex:([indexPath row] - 1)];
+        
+        StubCell *cell = nil;
+        
+        if (cell == nil)
+            cell = [StubCell loadFromBundle];
+        
+        [cell.titleLabel setText:[stub Title]];
+        [cell.detailLabel setText:[stub Description]];
+        [cell.providerLabel setText:[[stub ContentProvider] Title]];
+        if ([startOfDay compare:[stub Date]] == NSOrderedDescending)
+            [cell.dateLabel setText:[fullFormatter stringFromDate:[stub Date]]];
+        else
+            [cell.dateLabel setText:[hourFormatter stringFromDate:[stub Date]]];
+        UIImageView* vwimg = [ [ UIImageView alloc] initWithFrame: cell.bounds];
+        UIImage* img = [ UIImage imageNamed: @"Stub.png"];
+        vwimg.image = img;
+        cell.backgroundView = vwimg;
+        double diff = ((double)indexPath.row / (double)[latestStubs count]);
+        if (diff >= 0.9)
+        {
+            [self performSelectorOnMainThread:@selector(fetchOlderStubs) withObject:nil waitUntilDone:NO];
+        }
+        
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [latestStubs count];
+    return [latestStubs count] + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([indexPath row] == 0)
+    {
+        return 60;
+    }
+    
     return 55.0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Stub *stub = [latestStubs objectAtIndex:[indexPath row]];
-    
-    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
-    WebViewController *webController = [[WebViewController alloc] init];
-    [webController setUrlToNavigateTo:[stub URI]];
-    [webController setToolbarTitle:[stub Title]];
-    [delegate.navigationController pushViewController:webController animated:YES];
-    [webController release];
-    UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];
-    [cell setSelected:NO];
+    if ([indexPath row] > 0)
+    {
+        Stub *stub = [latestStubs objectAtIndex:([indexPath row] - 1)];
+        
+        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        WebViewController *webController = [[WebViewController alloc] init];
+        [webController setUrlToNavigateTo:[stub URI]];
+        [webController setToolbarTitle:[stub Title]];
+        [delegate.navigationController pushViewController:webController animated:YES];
+        [webController release];
+        UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];
+        [cell setSelected:NO];
+    }
     
 }
 
