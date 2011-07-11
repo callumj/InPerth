@@ -52,9 +52,9 @@ all_providers.each do |provider|
       stub.uri = entry.url
       stub.created_at = entry.date_published.in_time_zone
       if body.size > 200
-        stub.description = body[0,200]
+        stub.description = body[0,200].strip
       else
-        stub.description = body
+        stub.description = body.strip
       end
     
       stub.save
