@@ -46,6 +46,8 @@
     [self.view insertSubview:weatherView.view atIndex:0];
     
     [self.tableViewOutlet setBackgroundColor:[UIColor clearColor]];
+    [self.tableViewOutlet setSeparatorColor:[UIColor clearColor]];
+    [self.tableViewOutlet setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     [super viewDidLoad];
 }

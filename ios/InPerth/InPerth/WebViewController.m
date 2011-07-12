@@ -51,6 +51,11 @@
     [self.currentToolbar setTitle:self.toolbarTitle];
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)viewDidUnload
 {
     [self setWebViewOutlet:nil];

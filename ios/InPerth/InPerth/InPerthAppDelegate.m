@@ -48,10 +48,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    if (!fetchInProgress)
-    {
-        [self getLatestDataFromServer];
-    }
+    [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -88,10 +85,13 @@
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer
 {
-    fetchInProgress = YES;
-    [self getLatestStubDataFromServer];
-    [self getLatestWeatherDataFromServer];
-    fetchInProgress = NO;
+    if (!fetchInProgress)
+    {
+        fetchInProgress = YES;
+        [self getLatestStubDataFromServer];
+        [self getLatestWeatherDataFromServer];
+        fetchInProgress = NO;
+    }
 }
 
 -(void)getLatestStubDataFromServer

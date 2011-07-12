@@ -12,7 +12,10 @@
 @interface WeatherViewController : UIViewController {
     
     UIImageView *weatherImage;
+    NSMutableString *previousType;
     UILabel *temperatureText;
+    
+    NSMutableArray *activeWeatherIcons;
 }
 @property (nonatomic, retain) IBOutlet UIImageView *weatherImage;
 @property (nonatomic, retain) IBOutlet UILabel *temperatureText;

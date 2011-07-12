@@ -40,6 +40,10 @@
     [gregorian release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delegateHasFinishedUpdate:) name:kStubDataRefreshCompleteNotification object:nil];
+    
+    [self.tableViewOutlet setSeparatorColor:[UIColor clearColor]];
+    [self.tableViewOutlet setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     [super viewDidLoad];
 }
 
