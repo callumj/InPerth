@@ -61,9 +61,10 @@ all_providers.each do |provider|
         end
     
         stub.save
-        puts stub.to_json
-      else
-        puts "\tpost excluded because date (#{entry.date_published.to_i}) is less than the most recent post data in db (#{recent_date.to_i})"
+        #puts stub.to_json
+        
+        #run pipelines
+        Pipeline.process(provider.pipelines, :stub => stub, :rss_item => entry)
       end
     end
   end
