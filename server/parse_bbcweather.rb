@@ -86,6 +86,8 @@ all_items.each do |item|
   day = day + 1
 end
 
+puts "#{Time.now.to_s}: Processed weather from BBC."
+
 x = Meta.where(:name => "weather").first
 x = Meta.new(:name => "weather") if x == nil
 x.meta = weather_results

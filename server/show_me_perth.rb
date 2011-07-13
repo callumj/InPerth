@@ -80,3 +80,5 @@ urls.each do |url|
     urls << "#{ROOT_URL}#{CGI.unescapeHTML(next_page_a.attr("href").to_s)}"
   end
 end
+
+puts "#{Time.now.to_s}: Processed Show Me Perth data."

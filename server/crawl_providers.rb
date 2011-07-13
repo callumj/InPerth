@@ -68,3 +68,5 @@ all_providers.each do |provider|
     end
   end
 end
+
+puts "#{Time.now.to_s}: Processed providers."
