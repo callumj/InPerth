@@ -25,11 +25,15 @@ class Pipeline
     
     #call each block
     types.each do |sym|
-      inst = BlockWrapper.new
-      inst.bin = Hash.new.merge(pass_ins)
-      inst.bin[:previous] = previous_results
-      inst.instance_eval(&@processors[sym][:block])
-      previous_results[sym] = inst.result
+      begin
+        inst = BlockWrapper.new
+        inst.bin = Hash.new.merge(pass_ins)
+        inst.bin[:previous] = previous_results
+        inst.instance_eval(&@processors[sym][:block])
+        previous_results[sym] = inst.result
+      rescue
+        puts "Failing executing #{sym.to_s} pipeline"
+      end
     end
   end
   

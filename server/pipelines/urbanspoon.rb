@@ -4,8 +4,7 @@ require 'net/http'
 MAX_REDIRECTION = 10
 
 pipeline "urbanspoon", 1, do
-  if (bin[:stub] != nil)
-    
+  if (bin[:stub] != nil)    
     urbanspoon_url = ""
     if (bin[:rss_item] != nil)
       san_content =CGI.unescape(bin[:rss_item].content)
@@ -61,7 +60,7 @@ pipeline "urbanspoon", 1, do
       street_address = doc.css("span.street-address").inner_text.strip
       suburb = doc.css("span.locality").inner_text.strip
       place_url_obj = doc.css("a.url")
-      place_url = ""
+      place_url = nil
       if place_url_obj != nil && !(place_url_obj.empty?)
         place_url = place_url_obj.attribute("href").to_s.strip
       end
@@ -87,11 +86,15 @@ pipeline "urbanspoon", 1, do
         entry.suburb = suburb
         entry.lat = lat
         entry.long = long
+        entry.site_uri = place_url
         entry.type = "food"
         
         entry.save
       end
-    
+      
+      #add content based meta data
+      bin[:stub].tags.each {|tag| entry.tags << tag unless entry.tags.include?(tag)}
+      entry.save
       puts "Writing #{entry.title}"
     
       bin[:stub].place = entry if bin[:stub].place == nil
