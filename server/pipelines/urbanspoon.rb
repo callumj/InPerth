@@ -1,6 +1,8 @@
 require 'cgi'
 require 'net/http'
 
+MAX_REDIRECTION = 10
+
 pipeline "urbanspoon", 1, do
   if (bin[:stub] != nil)
     
@@ -16,12 +18,26 @@ pipeline "urbanspoon", 1, do
     else
       #need to grab urbanspoon url from the actual post page
       puts "\tDelving into page to grab urbanspoon link"
-      url_obj = URI.parse(bin[:stub].uri)
-      req = Net::HTTP::Get.new(url_obj.request_uri, {"User-Agent" =>
-              "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.10) Gecko/20100915 Ubuntu/10.04 (lucid) Firefox/3.6.10"})
-      res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
-      doc = Nokogiri::HTML(res.body)
-      
+      find_url = bin[:stub].uri
+      body = nil
+      redirect_count = 0
+      until (redirect_count > MAX_REDIRECTION || body != nil)
+        url_obj = URI.parse(find_url)
+        req = Net::HTTP::Get.new(url_obj.request_uri, {"User-Agent" =>
+                "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.10) Gecko/20100915 Ubuntu/10.04 (lucid) Firefox/3.6.10"})
+        res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
+        if (res.header["location"] != nil)
+          find_url = res.header["location"]
+          puts "\tFollowing redirection"
+        else
+          body = res.body
+          break
+        end
+        
+        redirect_count
+      end
+      doc = Nokogiri::HTML(body)
+
       body = doc.xpath("//body").to_s
       san_content =CGI.unescape(body)
       find = san_content.match(/(http:\/\/www.urbanspoon.com\/r(\/[A-Za-z0-9_-]+)+)/)
