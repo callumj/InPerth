@@ -35,5 +35,6 @@
 -(void)delegateHasFinishedUpdate:(NSNotification *)note;
 -(void)getOlderDataInTimer:(NSTimer *)timer;
 -(void)fetchOlderStubs;
+-(void)reloadStubsFromSource;
 
 @end

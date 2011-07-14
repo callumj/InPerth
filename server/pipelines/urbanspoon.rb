@@ -1,15 +1,34 @@
 require 'cgi'
+require 'net/http'
 
 pipeline "urbanspoon", 1, do
-  if (bin[:stub] != nil && bin[:rss_item] != nil)
-    san_content =CGI.unescape(bin[:rss_item].content)
+  if (bin[:stub] != nil)
     
-    find = san_content.match(/(http:\/\/www.urbanspoon.com(\/[A-Za-z0-9_-]+)+)/)
     urbanspoon_url = ""
+    if (bin[:rss_item] != nil)
+      san_content =CGI.unescape(bin[:rss_item].content)
+    
+      find = san_content.match(/(http:\/\/www.urbanspoon.com(\/[A-Za-z0-9_-]+)+)/)
+    end
+    
     if (find != nil && find.length >= 2)
       urbanspoon_url = find[1]
     else
-      #need to delve deeper into page to locate urbanspoon URI
+      #need to grab urbanspoon url from the actual post page
+      puts "\tDelving into page to grab urbanspoon link"
+      url_obj = URI.parse(bin[:stub].uri)
+      req = Net::HTTP::Get.new(url_obj.request_uri, {"User-Agent" =>
+              "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.10) Gecko/20100915 Ubuntu/10.04 (lucid) Firefox/3.6.10"})
+      res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
+      doc = Nokogiri::HTML(res.body)
+      
+      body = doc.xpath("//body").to_s
+      san_content =CGI.unescape(body)
+      find = san_content.match(/(http:\/\/www.urbanspoon.com\/r(\/[A-Za-z0-9_-]+)+)/)
+      
+      if (find != nil && find.length >= 2)
+        urbanspoon_url = find[1]
+      end
     end
     
     #grab details about place

@@ -22,7 +22,7 @@
 
 + (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
-    InPerthAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
     [managedObjectContext setPersistentStoreCoordinator:[delegate persistentStoreCoordinator]];
     return [managedObjectContext autorelease];
 }

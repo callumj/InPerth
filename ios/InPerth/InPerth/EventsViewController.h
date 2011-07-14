@@ -29,5 +29,6 @@
 -(void)fetchOlderStubs;
 -(void)getOlderDataInTimer:(NSTimer *)timer;
 -(void)delegateHasFinishedUpdate:(NSNotification *)note;
+-(void)reloadStubsFromSource;
 
 @end

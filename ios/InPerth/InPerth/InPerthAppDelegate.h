@@ -30,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic) BOOL mustAnimateWeather;
 
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer;

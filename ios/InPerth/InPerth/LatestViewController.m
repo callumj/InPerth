@@ -91,7 +91,8 @@
     {
         UITableViewCell *blankCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"blank"];
         [blankCell setBackgroundColor:[UIColor clearColor]];
-        return blankCell;
+        [blankCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return [blankCell autorelease];
     }
     else
     {
@@ -163,11 +164,27 @@
     {
         if ([status boolValue])
         {
-            [latestStubs removeAllObjects];
-            [latestStubs addObjectsFromArray:[stubManager getStubsWithLimit:20]];
-            [tableViewOutlet reloadData];
+            //we are performing important CD operations that need to be accessible from the main thread
+            [self performSelectorOnMainThread:@selector(reloadStubsFromSource) withObject:nil waitUntilDone:YES];
         }
     }
+}
+
+-(void)reloadStubsFromSource
+{
+    //this could be called in a background thread
+    NSArray *newObjs = [stubManager getStubsWithLimit:20];
+    [latestStubs removeAllObjects];
+    [latestStubs addObjectsFromArray:newObjs];
+    
+    if ([latestStubs count] > 0)
+    {
+        newestStubDate = [[(Stub *)[latestStubs objectAtIndex:0] Date] retain];
+        oldestStubDate = [[(Stub *)[latestStubs objectAtIndex:([latestStubs count] - 1)] Date] retain];
+    } 
+    
+    [tableViewOutlet reloadData];
+    
 }
 
 -(void)getOlderDataInTimer:(NSTimer *)timer

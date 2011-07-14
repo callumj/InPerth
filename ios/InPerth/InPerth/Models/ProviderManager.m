@@ -15,7 +15,7 @@
     self = [super init];
     if (self != nil)
     {
-        InPerthAppDelegate *delegate = [[UIApplication sharedApplication] delegate]; 
+        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate]; 
         dataContext = [[delegate managedObjectContext] retain];
         instanceCache = [[[NSMutableDictionary alloc] init] retain];
     }
@@ -112,5 +112,6 @@
 {
     [dataContext release];
     [instanceCache release];
+    [super dealloc];
 }
 @end

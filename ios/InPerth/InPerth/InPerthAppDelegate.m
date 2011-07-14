@@ -16,9 +16,11 @@
 @synthesize navigationController;
 @synthesize documentsPath;
 @synthesize metaData;
+@synthesize mustAnimateWeather;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.mustAnimateWeather = YES;
     self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
     self.metaData = [[NSMutableDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/metadata.plist", self.documentsPath]];
@@ -48,6 +50,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    self.mustAnimateWeather = YES;
     [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
 }
 

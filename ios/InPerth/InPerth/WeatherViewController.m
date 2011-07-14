@@ -85,36 +85,64 @@
 
 -(void)setWeatherTypeForString:(NSString *)type
 {
-    if ([previousType isEqualToString:type])
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([previousType isEqualToString:type] && ![delegate mustAnimateWeather])
         return;
     
-    for (UIView *view in activeWeatherIcons)
+    if (![previousType isEqualToString:type])
     {
-        [view removeFromSuperview];
+        for (UIView *view in activeWeatherIcons)
+        {
+            [view removeFromSuperview];
+        }
+        
+        [activeWeatherIcons removeAllObjects];
     }
-    
-    [activeWeatherIcons removeAllObjects];
     
     if ([type isEqualToString:@"clouds"])
     {
-        UIImageView *sun = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Sun.png"]];
-        CGRect sunFrame = sun.frame;
-        sunFrame.origin.y += 2;
-        [sun setFrame:sunFrame];
-        [self.view addSubview:sun];
-        [activeWeatherIcons addObject:sun];
-        
-        UIImageView *clouds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Clouds.png"]];
-        CGRect cloudsFrame = clouds.frame;
-        cloudsFrame.origin.x = ((320 / 2) - (cloudsFrame.size.width / 2));
-        [clouds setFrame:cloudsFrame];
-        [self.view addSubview:clouds];
-        [activeWeatherIcons addObject:clouds];
+        UIImageView *sun = nil;
+        UIImageView *clouds = nil;
+        CGRect cloudsFrame;
+        if ([previousType isEqualToString:type])
+        {
+            for (UIView *view in activeWeatherIcons)
+            {
+                if ([view tag] == kCloudImageViewTag)
+                {
+                    clouds = (UIImageView *)view;
+                    cloudsFrame = clouds.frame;
+                }
+            }
+        }
+        else
+        {
+            sun = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Sun.png"]];
+            [sun setTag:kSunImageViewTag];
+            CGRect sunFrame = sun.frame;
+            sunFrame.origin.y += 2;
+            [sun setFrame:sunFrame];
+            [self.view addSubview:sun];
+            [sun release];
+            [activeWeatherIcons addObject:sun];
+            
+            clouds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Clouds.png"]];
+            [clouds setTag:kCloudImageViewTag];
+            cloudsFrame = clouds.frame;
+            cloudsFrame.origin.x = ((320 / 5) - (cloudsFrame.size.width / 5));
+            [clouds setFrame:cloudsFrame];
+            [self.view addSubview:clouds];
+            [clouds release];
+            [activeWeatherIcons addObject:clouds];
+        }
         
         [UIView beginAnimations:@"moveCloud" context:nil];
         [UIView setAnimationDuration:2.0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        cloudsFrame.origin.x = 20;
+        if (cloudsFrame.origin.x == 20.0)
+           cloudsFrame.origin.x = ((320 / 5) - (cloudsFrame.size.width / 5));
+        else
+            cloudsFrame.origin.x = 20;
         [clouds setFrame:cloudsFrame];
         [UIView commitAnimations];
         
@@ -123,15 +151,16 @@
     {
         UIImageView *clouds = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Rain.png"]];
         CGRect cloudsFrame = clouds.frame;
-        cloudsFrame.origin.x -= 10;
+        cloudsFrame.origin.x = ((320 / 4) - (cloudsFrame.size.width / 4));
         [clouds setFrame:cloudsFrame];
         [self.view addSubview:clouds];
+        [clouds release];
         [activeWeatherIcons addObject:clouds];
         
         [UIView beginAnimations:@"moveCloud" context:nil];
-        [UIView setAnimationDuration:3.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        cloudsFrame.origin.x += 20;
+        [UIView setAnimationDuration:2.0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        cloudsFrame.origin.x = 20;
         [clouds setFrame:cloudsFrame];
         [UIView commitAnimations];
     }
@@ -139,12 +168,14 @@
     {
         UIImageView *sun = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Sun.png"]];
         CGRect sunFrame = sun.frame;
-        sunFrame.origin.y += 2;
+        sunFrame.origin.x += 10;
         [sun setFrame:sunFrame];
         [self.view addSubview:sun];
+        [sun release];
         [activeWeatherIcons addObject:sun];
     }
     
+    [delegate setMustAnimateWeather:NO];
     [previousType setString:type];
 }
 

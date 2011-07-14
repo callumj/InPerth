@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "InPerthAppDelegate.h"
 
+#define kSunImageViewTag 23442
+#define kCloudImageViewTag 98667
+
 @interface WeatherViewController : UIViewController {
     
     UIImageView *weatherImage;
