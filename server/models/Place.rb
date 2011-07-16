@@ -37,7 +37,15 @@ class Place
     all_keys = self.class.keys.keys
     ret_hash = Hash.new
     
-    all_keys.each {|key| ret_hash[key] = self[key] unless key.empty?}
+    all_keys.each do |key| 
+      unless key.empty?
+        if self[key].respond_to?(:in_time_zone)
+          ret_hash[key] = self[key].in_time_zone.to_s
+        else
+          ret_hash[key] = self[key]
+        end
+      end
+    end
     
     ret_hash["stubs"] = []
     self.stubs.each {|stub| ret_hash["stubs"] << stub._id}
