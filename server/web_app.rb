@@ -34,9 +34,9 @@ get '/place/:tag.:format' do
   places = []
   
   if "all".eql?(classifier)
-    places = Place.where(:created_at.gt => search_date).sort(:created_at.desc).all
+    places = Place.where(:updated_at.gt => search_date).sort(:updated_at.desc).all
   else
-    places = Place.where(:type => classifier, :created_at.gt => search_date).sort(:created_at.desc).all
+    places = Place.where(:type => classifier, :updated_at.gt => search_date).sort(:updated_at.desc).all
   end
   doc = {:time => Time.now.to_i, :count => places.count,:data => places}
   if ("json".eql?(params[:format]))
