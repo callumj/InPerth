@@ -52,12 +52,15 @@ if weather_results[:day0][:type] == :na
   #fetch previous weather
   prev = Meta.where(:name => "weather").first
   if (prev != nil)
-    puts "\tReverting, weather type is N/A"
-    weather_results[:day0][:type] = prev.meta[:day0][:type]
+    puts "\tReverting, weather type is N/A. Using #{prev.meta[:day0]["type"]}"
+    weather_results[:day0][:type] = prev.meta[:day0]["type"]
   else
     weather_results[:day0][:type] = :sun
   end
 end
+
+#sanity check
+weather_results[:day0][:type] = :sun if weather_results[:day0][:type] == nil
 
 
 #fetch next 3 days
