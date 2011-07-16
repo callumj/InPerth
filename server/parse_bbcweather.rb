@@ -8,7 +8,8 @@ URL_NEXT = "http://newsrss.bbc.co.uk/weather/forecast/92/Next3DaysRSS.xml"
 conversion_guide  = {
   :sun => /.*sun.*/i,
   :clouds => /.*cloud.*/i,
-  :rain => [/.*shower.*/i,/.*rain.*/i]
+  :rain => [/.*shower.*/i,/.*rain.*/i,/.*driz.*/i],
+  :na => /.*N\/A.*/i
 }
 
 weather_results = {}
@@ -45,6 +46,17 @@ temp_container.gsub!(/[^A-Za-z0-9_,\s:]/,"")
 temp_extract = temp_container.match(/^Temperature: ([0-9]+)C/)
 if (temp_extract.length >= 1)
   weather_results[:day0] = {:type => actual_type, :temp => temp_extract[1]}
+end
+
+if weather_results[:day0][:type] == :na
+  #fetch previous weather
+  prev = Meta.where(:name => "weather").first
+  if (prev != nil)
+    puts "\tReverting, weather type is N/A"
+    weather_results[:day0][:type] = prev.meta[:day0][:type]
+  else
+    weather_results[:day0][:type] = :sun
+  end
 end
 
 
