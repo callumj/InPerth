@@ -10,7 +10,6 @@ pipeline "enjoyperth", 1 do
   if (bin[:stub] != nil && bin[:stub].place == nil)
     san_content = ""
 
-    puts "\tDelving into page to grab content"
     find_url = bin[:stub].uri
     body = nil
     redirect_count = 0

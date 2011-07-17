@@ -4,7 +4,7 @@ require 'net/http'
 MAX_REDIRECTION = 10
 
 pipeline "urbanspoon", 1, do
-  if (bin[:stub] != nil)    
+  if (bin[:stub] != nil && (bin[:stub].place == nil || (bin[:stub].place != nil && bin[:stub].place.urbanspoon_uri == nil)))    
     urbanspoon_url = ""
     if (bin[:rss_item] != nil)
       san_content =CGI.unescape(bin[:rss_item].content)

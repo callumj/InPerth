@@ -31,8 +31,8 @@ class Pipeline
         inst.bin[:previous] = previous_results
         inst.instance_eval(&@processors[sym][:block])
         previous_results[sym] = inst.result
-      rescue
-        puts "Failing executing #{sym.to_s} pipeline"
+      rescue Exception => e  
+        puts "Failing executing #{sym.to_s} pipeline. #{e.message}"
       end
     end
   end
