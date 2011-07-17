@@ -26,6 +26,7 @@ class Pipeline
     #call each block
     types.each do |sym|
       begin
+        puts "+Starting #{sym.to_s}"
         inst = BlockWrapper.new
         inst.bin = Hash.new.merge(pass_ins)
         inst.bin[:previous] = previous_results

@@ -4,7 +4,7 @@ require "json"
 
 GOOGLE_API_KEY = "AIzaSyAZhGvwfAhLysave_1NXQAeozjrlDRBVd8"
 
-pipeline "googlemaps", 1, do
+pipeline "googlemaps", 10, do
   if (bin[:stub] != nil && bin[:stub].place != nil && bin[:stub].place.google_uri == nil)
     if (bin[:stub].place.lat != nil && bin[:stub].place.long != nil)
       #extend the listing based on Google data
@@ -31,7 +31,7 @@ pipeline "googlemaps", 1, do
               hit_count = hit_count + 1 if target_place_name.include?(word)
             end
             puts (hit_count.to_f / word_count.to_f)
-            if ((hit_count.to_f / word_count.to_f) >= 0.75)
+            if ((hit_count.to_f / word_count.to_f) >= 0.7)
               #got a hit
               detail_url = "https://maps.googleapis.com/maps/api/place/details/json?reference=#{result["reference"]}&sensor=true&key=#{GOOGLE_API_KEY}"
 
