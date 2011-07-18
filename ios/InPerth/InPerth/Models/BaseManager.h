@@ -7,10 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import "CoreDataHelper.h"
 
+@class InPerthAppDelegate;
+@class CoreDataHelper;
 
 @interface BaseManager : NSObject {
-    
+    NSMutableDictionary *instanceCache;
+    NSManagedObjectContext *dataContext;
+    NSDateFormatter *dateFormatter;
 }
+
+-(id)initWithExistingContext:(NSManagedObjectContext *)context;
+-(id)initWithNewContext;
 
 @end

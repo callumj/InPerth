@@ -10,40 +10,6 @@
 
 
 @implementation ProviderManager
--(id)init
-{
-    self = [super init];
-    if (self != nil)
-    {
-        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate]; 
-        dataContext = [[delegate managedObjectContext] retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-    }
-    
-    return self;
-}
-
--(id)initWithExistingContext:(NSManagedObjectContext *)context
-{
-    self = [super init];
-    if (self != nil)
-    {
-        dataContext = [context retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-    }
-    return self;
-}
-
--(id)initWithNewContext
-{
-    self = [super init];
-    if (self != nil)
-    {
-        dataContext = [[CoreDataHelper managedObjectContext] retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-    }
-    return self;
-}
 
 #pragma mark object management operations
 -(Provider *)createProviderWithTitle:(NSString *)title serverKey:(NSString *)key

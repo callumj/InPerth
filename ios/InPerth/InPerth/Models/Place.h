@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface Place : NSManagedObject {
 @private
 }
@@ -28,6 +27,7 @@
 @property (nonatomic, retain) NSString * SiteURI;
 @property (nonatomic, retain) NSNumber * Latitude;
 @property (nonatomic, retain) NSNumber * Longitude;
-@property (nonatomic, retain) NSManagedObject * Tags;
+@property (nonatomic, retain) NSString * Tags;
+@property (nonatomic, retain) NSSet* Stubs;
 
 @end

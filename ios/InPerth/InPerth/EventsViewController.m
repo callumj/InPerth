@@ -47,6 +47,19 @@
     [super viewDidLoad];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    /* DANGEROUS
+     [latestStubs removeAllObjects];
+     [latestStubs addObjectsFromArray:[stubManager getStubsForClassifier:@"event" withLimit:20]];
+     
+     if ([latestStubs count] > 0)
+     {
+     newestStubDate = [[(Stub *)[latestStubs objectAtIndex:0] Date] retain];
+     oldestStubDate = [[(Stub *)[latestStubs objectAtIndex:([latestStubs count] - 1)] Date] retain];
+     } */
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -130,6 +143,12 @@
     WebViewController *webController = [[WebViewController alloc] init];
     [webController setUrlToNavigateTo:[stub URI]];
     [webController setToolbarTitle:[stub Title]];
+    PlaceManager *pManager = [[PlaceManager alloc] initWithNewContext];
+    Place *related = [pManager getPlaceForStubKey:[stub ServerKey]];
+    if (related != nil)
+    {
+        [webController setDetailTitle:[NSString stringWithFormat:@"at %@ - %@", [related Title], [related Suburb]]];
+    }
     [delegate.navigationController pushViewController:webController animated:YES];
     [webController release];
     UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];

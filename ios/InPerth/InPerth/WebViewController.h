@@ -13,11 +13,15 @@
     
     UIWebView *webViewOutlet;
     UINavigationItem *currentToolbar;
+    UILabel *titleLabel;
+    UILabel *subLabel;
 }
 @property (nonatomic, retain) IBOutlet UIWebView *webViewOutlet;
 @property (nonatomic, retain) NSString *urlToNavigateTo;
 @property (nonatomic, retain) NSString *toolbarTitle;
-@property (nonatomic, retain) IBOutlet UINavigationItem *currentToolbar;
+@property (nonatomic, retain) NSString *detailTitle;
+@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel *subLabel;
 
 - (IBAction)backButtonTouched:(id)sender;
 @end

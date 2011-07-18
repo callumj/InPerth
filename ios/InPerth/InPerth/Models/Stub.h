@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Provider.h"
+#import "Place.h"
 
 @interface Stub : NSManagedObject {
 @private
@@ -21,5 +22,6 @@
 @property (nonatomic, retain) NSString * Classifier;
 @property (nonatomic, retain) NSDate * Date;
 @property (nonatomic, retain) Provider * ContentProvider;
+@property (nonatomic, retain) Place * Place;
 
 @end

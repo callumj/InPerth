@@ -26,6 +26,6 @@
 @dynamic Latitude;
 @dynamic Longitude;
 @dynamic Tags;
-
+@dynamic Stubs;
 
 @end

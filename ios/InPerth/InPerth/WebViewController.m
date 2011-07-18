@@ -13,7 +13,9 @@
 @synthesize webViewOutlet;
 @synthesize urlToNavigateTo;
 @synthesize toolbarTitle;
-@synthesize currentToolbar;
+@synthesize titleLabel;
+@synthesize subLabel;
+@synthesize detailTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +30,8 @@
 {
     [webViewOutlet release];
     [currentToolbar release];
+    [titleLabel release];
+    [subLabel release];
     [super dealloc];
 }
 
@@ -41,6 +45,22 @@
 
 #pragma mark - View lifecycle
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.titleLabel setText:self.toolbarTitle];
+    if (self.detailTitle != nil && [self.detailTitle length] > 0)
+    {
+        [self.subLabel setText:self.detailTitle];
+    }
+    else
+    {
+        CGRect curFrame = [self.titleLabel frame];
+        curFrame.origin.y += 5;
+        [self.titleLabel setFrame:curFrame];
+        [self.subLabel setHidden:YES];
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     NSURL *urlObj = [NSURL URLWithString:urlToNavigateTo];
@@ -48,7 +68,6 @@
     [self.webViewOutlet loadRequest:urlReq];
     [self.webViewOutlet setScalesPageToFit:YES];
     [self.webViewOutlet setDelegate:self];
-    [self.currentToolbar setTitle:self.toolbarTitle];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -59,7 +78,8 @@
 - (void)viewDidUnload
 {
     [self setWebViewOutlet:nil];
-    [self setCurrentToolbar:nil];
+    [self setTitleLabel:nil];
+    [self setSubLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

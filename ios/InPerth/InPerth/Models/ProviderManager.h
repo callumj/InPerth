@@ -11,14 +11,10 @@
 #import "InPerthAppDelegate.h"
 #import "CoreDataHelper.h"
 #import "Provider.h"
+#import "BaseManager.h"
 
-@interface ProviderManager : NSObject {
-    NSMutableDictionary *instanceCache;
-    NSManagedObjectContext *dataContext;
+@interface ProviderManager : BaseManager {
 }
-
--(id)initWithExistingContext:(NSManagedObjectContext *)context;
--(id)initWithNewContext;
 
 -(Provider *)createProviderWithTitle:(NSString *)title serverKey:(NSString *)key;
 -(Provider *)fetchOrCreateProviderWithKey:(NSString *)key title:(NSString *)title;

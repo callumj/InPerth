@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Stub.h"
-#import "StubManager.h"
+#include "StubManager.h"
 #import "StubCell.h"
 #import "WebViewController.h"
 

@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "InPerthAppDelegate.h"
+
+@class InPerthAppDelegate;
 
 @interface CoreDataHelper : NSObject {
     

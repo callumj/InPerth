@@ -26,7 +26,7 @@
     self.metaData = [[NSMutableDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/metadata.plist", self.documentsPath]];
     if (self.metaData == nil)
         self.metaData = [[NSMutableDictionary alloc] init];
-    [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
+    [self runUpdateTimer:nil];
     
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
@@ -85,14 +85,22 @@
 }
 */
 
+-(void)runUpdateTimer:(NSTimer *)timer
+{
+    NSLog(@"Updated timer invoked");
+    [self performSelectorInBackground:@selector(getLatestDataFromServer) withObject:nil];
+    [NSTimer scheduledTimerWithTimeInterval:kServerUpdateTimer target:self selector:@selector(runUpdateTimer:) userInfo:nil repeats:NO];
+}
+
 #pragma mark Remote server fetch
 -(void)getLatestDataFromServer
 {
     if (!fetchInProgress)
     {
         fetchInProgress = YES;
-        [self getLatestStubDataFromServer];
         [self getLatestWeatherDataFromServer];
+        [self getLatestStubDataFromServer];
+        [self getLatestPlaceDataFromServer];
         fetchInProgress = NO;
     }
 }
@@ -157,6 +165,66 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
+-(void)getLatestPlaceDataFromServer
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //check if we have already have a complete set, and just want the server to give us new data
+    PlaceManager *manager = [[PlaceManager alloc] initWithNewContext];
+    
+    Place *mostRecent = [manager getMostRecentUpdatedPlace];
+    
+    //fetch from URL
+    NSURL *url = nil;
+    if (mostRecent == nil)
+        url = [NSURL URLWithString:@"http://perth.mullac.org/place/all.json"];
+    else
+    {
+        NSTimeInterval time = [[mostRecent LastUpdated] timeIntervalSince1970];
+        time -= [[NSTimeZone localTimeZone] secondsFromGMT];
+        NSNumber *objNumber = [NSNumber numberWithDouble:time];
+        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/place/all.json?since=%@", objNumber];
+        url = [NSURL URLWithString:paramsString];
+    }
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    if (data != nil)
+    {
+        JSONDecoder *decoder = [JSONDecoder decoder];
+        NSDictionary *jsonData = [decoder objectWithData:data];
+        NSArray *databaseContents = [jsonData objectForKey:@"data"];
+        if (databaseContents != nil && [databaseContents count] > 0)
+        {
+            for (NSDictionary *stubData in databaseContents)
+            {
+                [manager commitStubFromDictionary:stubData];
+            }
+        }
+    }
+    
+    Place *mostRecentAfterRun = [manager getMostRecentUpdatedPlace];
+    
+    //perform compare
+    BOOL isDiff = NO;
+    if (mostRecent != nil && mostRecentAfterRun != nil)
+    {
+        NSTimeInterval diff = [[mostRecentAfterRun LastUpdated] timeIntervalSinceDate:[mostRecent LastUpdated]];
+        if (diff != 0)
+            isDiff = YES;
+    }
+    else
+    {
+        isDiff = YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlaceDataRefreshCompleteNotification object:[NSNumber numberWithBool:isDiff]];
+    
+    [manager release];
+    [pool release];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 -(void)getLatestWeatherDataFromServer
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -193,8 +261,19 @@
         NSURL *storeUrl = [NSURL fileURLWithPath:[self persistentStorePath]];
         persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[NSManagedObjectModel mergedModelFromBundles:nil]];
         NSError *error = nil;
-        NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error];
-        NSAssert3(persistentStore != nil, @"Unhandled error adding persistent store in %s at line %d: %@", __FUNCTION__, __LINE__, [error localizedDescription]);
+        
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+        
+        NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error];
+        if (persistentStore == nil)
+        {
+            [persistentStoreCoordinator release];
+            persistentStoreCoordinator = nil;
+            [[NSFileManager defaultManager] removeItemAtPath:storeUrl.path error:&error];
+            return [self persistentStoreCoordinator];
+        }
     }
     return persistentStoreCoordinator;
 }

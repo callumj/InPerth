@@ -12,9 +12,13 @@
 #import "JSONKit.h"
 
 #import "StubManager.h"
+#import "PlaceManager.h"
 
 #define kStubDataRefreshCompleteNotification @"StubDataRefreshCompleteNotification"
 #define kWeatherDataRefreshCompleteNotification @"WeatherDataRefreshCompleteNotification"
+#define kPlaceDataRefreshCompleteNotification @"PlaceDataRefreshCompleteNotification"
+
+#define kServerUpdateTimer 5 * 60
 
 @interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
@@ -33,8 +37,10 @@
 @property (nonatomic) BOOL mustAnimateWeather;
 
 #pragma mark Remote server fetch
+-(void)runUpdateTimer:(NSTimer *)timer;
 -(void)getLatestDataFromServer;
 -(void)getLatestStubDataFromServer;
+-(void)getLatestPlaceDataFromServer;
 -(void)getLatestWeatherDataFromServer;
 
 #pragma mark Core Data

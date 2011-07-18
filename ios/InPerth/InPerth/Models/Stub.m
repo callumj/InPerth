@@ -18,5 +18,6 @@
 @dynamic Classifier;
 @dynamic Date;
 @dynamic ContentProvider;
+@dynamic Place;
 
 @end

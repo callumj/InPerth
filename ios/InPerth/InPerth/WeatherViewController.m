@@ -160,7 +160,7 @@
         [UIView beginAnimations:@"moveCloud" context:nil];
         [UIView setAnimationDuration:2.0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        cloudsFrame.origin.x = 20;
+        cloudsFrame.origin.x = 12;
         [clouds setFrame:cloudsFrame];
         [UIView commitAnimations];
     }
@@ -168,6 +168,7 @@
     {
         UIImageView *sun = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Ani_Sun.png"]];
         CGRect sunFrame = sun.frame;
+        sunFrame.origin.y += 2;
         sunFrame.origin.x += 10;
         [sun setFrame:sunFrame];
         [self.view addSubview:sun];

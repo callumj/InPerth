@@ -17,12 +17,6 @@
     self = [super init];
     if (self != nil)
     {
-        InPerthAppDelegate *delegate = [[UIApplication sharedApplication] delegate]; 
-        dataContext = [[delegate managedObjectContext] retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-        dateFormatter = [[[NSDateFormatter alloc] init] retain];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-        //[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Perth"]];
         self.existingProviderManager = nil;
     }
     
@@ -31,32 +25,24 @@
 
 -(id)initWithExistingContext:(NSManagedObjectContext *)context
 {
-    self = [super init];
+    self = [super initWithExistingContext:context];
     if (self != nil)
     {
-        dataContext = [context retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-        dateFormatter = [[[NSDateFormatter alloc] init] retain];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-        //[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Perth"]];
         self.existingProviderManager = nil;
     }
+    
     return self;
 }
 
 -(id)initWithNewContext
 {
-    self = [super init];
+    self = [super initWithNewContext];
     if (self != nil)
     {
-        dataContext = [[CoreDataHelper managedObjectContext] retain];
-        instanceCache = [[[NSMutableDictionary alloc] init] retain];
-        dateFormatter = [[[NSDateFormatter alloc] init] retain];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-        //[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Perth"]];
         self.existingProviderManager = nil;
     }
-    return self;
+    
+    return self; 
 }
 
 #pragma mark object management operations
@@ -281,9 +267,7 @@
 
 -(void)dealloc
 {
-    [dataContext release];
-    [instanceCache release];
-    [dateFormatter release];
+    [super dealloc];
     [existingProviderManager release];
 }
 @end
