@@ -15,6 +15,7 @@
 @synthesize toolbarTitle;
 @synthesize titleLabel;
 @synthesize subLabel;
+@synthesize infoButton;
 @synthesize detailTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,6 +33,7 @@
     [currentToolbar release];
     [titleLabel release];
     [subLabel release];
+    [infoButton release];
     [super dealloc];
 }
 
@@ -80,6 +82,7 @@
     [self setWebViewOutlet:nil];
     [self setTitleLabel:nil];
     [self setSubLabel:nil];
+    [self setInfoButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -89,6 +92,12 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (IBAction)infoButtonTouched:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Place info", @"Email", @"Tweet", nil];
+    
+    [actionSheet showInView:self.view];
 }
 
 - (IBAction)backButtonTouched:(id)sender {
