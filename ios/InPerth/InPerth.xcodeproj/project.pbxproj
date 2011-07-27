@@ -464,7 +464,10 @@
 				B027167213D47DC00046686A /* Icon.png in Resources */,
 				B05BBA4813D5C318009FD032 /* Info.png in Resources */,
 				B05BBA4913D5C318009FD032 /* Info@2x.png in Resources */,
+<<<<<<< HEAD
 				B0E6369613E0734C00F09B41 /* Entitlements.entitlements in Resources */,
+=======
+>>>>>>> 197a43c5409b0fe88dbf567a23cb167cb4061688
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
