@@ -97,7 +97,7 @@ end
 
 stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(50).all
 
-WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "YPmmxkq+NWoVLuqFRm+Lbqx4vw/Vcg45o5h9UnkJXoeUedBqCzj9fnzDyKepQ7k6lOnDH3mvLUWdk702kthZpA==")
+WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
 container = WAZ::Blobs::Container.find('offline-cache')
 
 stubs_waiting.each do |stub|
@@ -116,7 +116,7 @@ stubs_waiting.each do |stub|
     FileUtils.rm_rf(arch)
   
     #store info
-    stub.info = offline_archive.path
+    stub.info = blob.path
     stub.save
   rescue Exception => e  
     puts e.message  
