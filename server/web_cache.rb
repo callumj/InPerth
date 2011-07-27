@@ -73,7 +73,7 @@ def archive_mobile_page(args={})
     url = data[:files][key]
     url.strip!
     real_url = url
-    if (page_url != nil && !(url.start_with?("http"))
+    if (page_url != nil && !(url.start_with?("http")))
       real_url = page_url + url 
     end
         
