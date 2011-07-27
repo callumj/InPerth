@@ -98,24 +98,27 @@ end
 stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(10).all
 
 WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "YPmmxkq+NWoVLuqFRm+Lbqx4vw/Vcg45o5h9UnkJXoeUedBqCzj9fnzDyKepQ7k6lOnDH3mvLUWdk702kthZpA==")
-container = WAZ::Blobs::Container.create('offline-cache')
+container = WAZ::Blobs::Container.find('offline-cache')
 
 stubs_waiting.each do |stub|
   puts "#{stub.title}"
+  begin
+    arch = archive_mobile_page(:url => stub.uri)
   
-  arch = archive_mobile_page(:url => stub.uri)
+    #read it
+    file = File.open(arch)
+    raw = file.gets
   
-  #read it
-  file = File.open(arch)
-  raw = file.gets
+    #upload to Azure
+    blob = container.store("#{stub._id}.zip", raw, 'application/zip',)
   
-  #upload to Azure
-  blob = container.store("#{stub._id}.zip", raw, 'application/zip',)
+    #remove archive
+    FileUtils.rm_rf(arch)
   
-  #remove archive
-  FileUtils.rm_rf(arch)
-  
-  #store info
-  stub.info = offline_archive.path
-  stub.save
+    #store info
+    stub.info = offline_archive.path
+    stub.save
+  rescue
+    puts "\tUnable to fetch"
+  end
 end
