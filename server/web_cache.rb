@@ -4,6 +4,8 @@ require 'digest/sha1'
 require 'fileutils'
 require 'waz-storage'
 
+load "#{File.dirname(__FILE__)}/init.rb"
+
 MAX_REDIRECTION = 10
 def extract_modify_page(args = {})
   return nil unless args[:url] != nil
