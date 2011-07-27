@@ -42,6 +42,7 @@
 -(void)getLatestStubDataFromServer;
 -(void)getLatestPlaceDataFromServer;
 -(void)getLatestWeatherDataFromServer;
+-(NSData *)getDataFromServer:(NSString *) path;
 
 #pragma mark Core Data
 -(NSManagedObjectContext *)managedObjectContext;

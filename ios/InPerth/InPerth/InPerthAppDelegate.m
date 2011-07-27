@@ -115,19 +115,18 @@
     Stub *mostRecent = [manager getMostRecentStub];
     
     //fetch from URL
-    NSURL *url = nil;
+    NSString *path = nil;
     if (mostRecent == nil)
-        url = [NSURL URLWithString:@"http://perth.mullac.org/stub/all.json"];
+        path = @"/stub/all.json";
     else
     {
         NSTimeInterval time = [[mostRecent Date] timeIntervalSince1970];
         time -= [[NSTimeZone localTimeZone] secondsFromGMT];
         NSNumber *objNumber = [NSNumber numberWithDouble:time];
-        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/stub/all.json?since=%@", objNumber];
-        url = [NSURL URLWithString:paramsString];
+        path = [NSString stringWithFormat:@"/stub/all.json?since=%@", objNumber];
     }
     
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSData *data = [self getDataFromServer:path];
     
     if (data != nil)
     {
@@ -176,18 +175,18 @@
     
     //fetch from URL
     NSURL *url = nil;
+    NSString *path;
     if (mostRecent == nil)
-        url = [NSURL URLWithString:@"http://perth.mullac.org/place/all.json"];
+        path = @"/place/all.json";
     else
     {
         NSTimeInterval time = [[mostRecent LastUpdated] timeIntervalSince1970];
         time -= [[NSTimeZone localTimeZone] secondsFromGMT];
         NSNumber *objNumber = [NSNumber numberWithDouble:time];
-        NSString *paramsString = [NSString stringWithFormat:@"http://perth.mullac.org/place/all.json?since=%@", objNumber];
-        url = [NSURL URLWithString:paramsString];
+        path = [NSString stringWithFormat:@"/place/all.json?since=%@", objNumber];
     }
     
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSData *data = [self getDataFromServer:path];
     
     if (data != nil)
     {
@@ -229,9 +228,8 @@
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://perth.mullac.org/meta/weather.json"];
     
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSData *data = [self getDataFromServer:@"meta/weather.json"];
     
     if (data != nil)
     {
@@ -293,6 +291,22 @@
         persistentStorePath = [[documentsDirectory stringByAppendingPathComponent:@"Model.sqlite"] retain];
     }
     return persistentStorePath;
+}
+
+-(NSData *)getDataFromServer:(NSString *) path
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://sinatra-test.cloudapp.net:8080/%@", path]];
+    NSLog(@"Making request to %@", [url absoluteString]);
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    if (data == nil)
+    {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://perth.mullac.org/%@", path]];
+        NSLog(@"Primary server unavailable, making request to %@", [url absoluteString]);
+        data = [NSData dataWithContentsOfURL:url];
+    }
+    
+    return data;
 }
 
 @end

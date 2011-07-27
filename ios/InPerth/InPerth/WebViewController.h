@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface WebViewController : UIViewController <UIWebViewDelegate> {
+@interface WebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
     
     UIWebView *webViewOutlet;
     UINavigationItem *currentToolbar;
     UILabel *titleLabel;
     UILabel *subLabel;
+    UIButton *infoButton;
 }
 @property (nonatomic, retain) IBOutlet UIWebView *webViewOutlet;
 @property (nonatomic, retain) NSString *urlToNavigateTo;
@@ -22,6 +23,8 @@
 @property (nonatomic, retain) NSString *detailTitle;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *subLabel;
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
 
+- (IBAction)infoButtonTouched:(id)sender;
 - (IBAction)backButtonTouched:(id)sender;
 @end
