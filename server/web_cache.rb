@@ -2,7 +2,7 @@ require 'net/http'
 require 'nokogiri'
 require 'digest/sha1'
 require 'fileutils'
-require 'waz-storage'
+require 'waz-blobs'
 
 load "#{File.dirname(__FILE__)}/init.rb"
 
