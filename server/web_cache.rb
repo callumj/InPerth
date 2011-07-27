@@ -21,6 +21,8 @@ def extract_modify_page(args = {})
     url_obj = URI.parse(find_url)
     addr = url_obj.path
     addr = url_obj.request_uri if url_obj.respond_to?(:request_uri)
+    puts addr
+    puts url_obj
     req = Net::HTTP::Get.new(addr, {"User-Agent" => args[:user_agent]})
     res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
     if (res.header["location"] != nil)
@@ -123,6 +125,5 @@ stubs_waiting.each do |stub|
     stub.save
   rescue Exception => e  
     puts e.message  
-    puts e.backtrace.inspect  
   end
 end
