@@ -114,7 +114,7 @@ stubs_waiting.each do |stub|
     FileUtils.rm_rf(arch)
   
     #store info
-    stub.info = blob.url
+    stub.offline_archive = blob.url
     stub.save
   rescue Exception => e  
     puts e.message  
