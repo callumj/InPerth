@@ -118,7 +118,8 @@ stubs_waiting.each do |stub|
     #store info
     stub.info = offline_archive.path
     stub.save
-  rescue
-    puts "\tUnable to fetch"
+  rescue Exception => e  
+    puts e.message  
+    puts e.backtrace.inspect  
   end
 end
