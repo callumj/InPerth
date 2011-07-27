@@ -19,7 +19,9 @@ def extract_modify_page(args = {})
   redirect_count = 0
   until (redirect_count > MAX_REDIRECTION || body != nil)
     url_obj = URI.parse(find_url)
-    req = Net::HTTP::Get.new(url_obj.request_uri, {"User-Agent" => args[:user_agent]})
+    addr = url_obj.path
+    addr = url_obj.request_uri if url_obj.respond_to?(:request_uri)
+    req = Net::HTTP::Get.new(addr, {"User-Agent" => args[:user_agent]})
     res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
     if (res.header["location"] != nil)
       find_url = res.header["location"]
@@ -71,14 +73,17 @@ def archive_mobile_page(args={})
     url = data[:files][key]
     url.strip!
     real_url = page_url + url
-  
-    Net::HTTP.start(real_url.host) { |http|
-      req = Net::HTTP::Get.new(real_url.request_uri, {"User-Agent" => "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"})
-      res = Net::HTTP.start(real_url.host, real_url.port) {|http| http.request(req) }
-      open("#{dir_loc}/#{key}", "wb") { |file|
-        file.write(res.body)
-       }
-    }
+    
+    begin
+      Net::HTTP.start(real_url.host) { |http|
+        req = Net::HTTP::Get.new(real_url.request_uri, {"User-Agent" => "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"})
+        res = Net::HTTP.start(real_url.host, real_url.port) {|http| http.request(req) }
+        open("#{dir_loc}/#{key}", "wb") { |file|
+          file.write(res.body)
+         }
+      }
+    rescue
+    end
   end
 
   #write the actual page
