@@ -100,7 +100,7 @@ def archive_mobile_page(args={})
   "#{args[:tmp_dir]}/#{Digest::SHA1.hexdigest(data[:final_url])}.zip"
 end
 
-stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(300).all
+stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(50).all
 
 WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
 container = WAZ::Blobs::Container.find('offline-cache')
