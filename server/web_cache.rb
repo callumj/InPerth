@@ -2,9 +2,9 @@ require 'net/http'
 require 'nokogiri'
 require 'digest/sha1'
 require 'fileutils'
+require 'waz-storage'
 
 MAX_REDIRECTION = 10
-
 def extract_modify_page(args = {})
   return nil unless args[:url] != nil
   args[:user_agent] = "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"
@@ -93,3 +93,27 @@ def archive_mobile_page(args={})
   "#{args[:tmp_dir]}/#{Digest::SHA1.hexdigest(data[:final_url])}.zip"
 end
 
+stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(10).all
+
+WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "YPmmxkq+NWoVLuqFRm+Lbqx4vw/Vcg45o5h9UnkJXoeUedBqCzj9fnzDyKepQ7k6lOnDH3mvLUWdk702kthZpA==")
+container = WAZ::Blobs::Container.create('offline-cache')
+
+stubs_waiting.each do |stub|
+  puts "#{stub.title}"
+  
+  arch = archive_mobile_page(:url => stub.uri)
+  
+  #read it
+  file = File.open(arch)
+  raw = file.gets
+  
+  #upload to Azure
+  blob = container.store("#{stub._id}.zip", raw, 'application/zip',)
+  
+  #remove archive
+  FileUtils.rm_rf(arch)
+  
+  #store info
+  stub.info = offline_archive.path
+  stub.save
+end
