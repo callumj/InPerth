@@ -104,19 +104,17 @@ stubs_waiting.each do |stub|
   puts "#{stub.title}"
   begin
     arch = archive_mobile_page(:url => stub.uri)
-  
-    #read it
-    file = File.open(arch)
-    raw = file.gets
-  
+    
+    file = open(arch)
+    
     #upload to Azure
-    blob = container.store("#{stub._id}.zip", raw, 'application/zip',)
+    blob = container.store("#{stub._id}.zip", file, 'application/zip')
   
     #remove archive
     FileUtils.rm_rf(arch)
   
     #store info
-    stub.info = blob.path
+    stub.info = blob.url
     stub.save
   rescue Exception => e  
     puts e.message  
