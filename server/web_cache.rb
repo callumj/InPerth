@@ -70,14 +70,13 @@ def archive_mobile_page(args={})
 
   #grab all files into directory
   data[:files].keys.each do |key|
-    url = data[:files][key]
-    url.strip!
-    real_url = url
-    if (page_url != nil && !(url.start_with?("http")))
-      real_url = page_url + url 
-    end
-        
     begin
+      url = data[:files][key]
+      url.strip!
+      real_url = url
+      if (page_url != nil && !(url.start_with?("http")))
+        real_url = page_url + url 
+      end
       Net::HTTP.start(real_url.host) { |http|
         req = Net::HTTP::Get.new(real_url.request_uri, {"User-Agent" => "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"})
         res = Net::HTTP.start(real_url.host, real_url.port) {|http| http.request(req) }
@@ -86,6 +85,7 @@ def archive_mobile_page(args={})
          }
       }
     rescue
+      puts "\tCannot fetch resources"
     end
   end
 
