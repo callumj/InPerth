@@ -67,6 +67,13 @@
 		B0DE347F13C47652009991ED /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE347E13C47652009991ED /* CoreDataHelper.m */; };
 		B0DE348213C484B5009991ED /* ProviderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DE348113C484B5009991ED /* ProviderManager.m */; };
 		B0E6369613E0734C00F09B41 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B0E6369513E0734C00F09B41 /* Entitlements.entitlements */; };
+		B0E6591F13E117740010435B /* libarc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E6591E13E117740010435B /* libarc.a */; };
+		B0E6592D13E118A90010435B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E6592313E118A90010435B /* ioapi.c */; };
+		B0E6592E13E118A90010435B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E6592513E118A90010435B /* mztools.c */; };
+		B0E6592F13E118A90010435B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E6592713E118A90010435B /* unzip.c */; };
+		B0E6593013E118A90010435B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E6592913E118A90010435B /* zip.c */; };
+		B0E6593113E118A90010435B /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0E6592C13E118A90010435B /* ZipArchive.mm */; };
+		B0E6593313E118D00010435B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E6593213E118D00010435B /* libz.1.2.3.dylib */; };
 		B0F012DB13C460B80091630F /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F012D913C460B80091630F /* EventsViewController.m */; };
 		B0F012DC13C460B80091630F /* EventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F012DA13C460B80091630F /* EventsView.xib */; };
 		B0F012E213C4640C0091630F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F012E113C4640C0091630F /* JSONKit.m */; };
@@ -150,6 +157,22 @@
 		B0DE348013C484B5009991ED /* ProviderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProviderManager.h; path = InPerth/Models/ProviderManager.h; sourceTree = "<group>"; };
 		B0DE348113C484B5009991ED /* ProviderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProviderManager.m; path = InPerth/Models/ProviderManager.m; sourceTree = "<group>"; };
 		B0E6369513E0734C00F09B41 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = SOURCE_ROOT; };
+		B0E6591B13E117740010435B /* archive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = archive.h; sourceTree = "<group>"; };
+		B0E6591C13E117740010435B /* archive_entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = archive_entry.h; sourceTree = "<group>"; };
+		B0E6591D13E117740010435B /* bzlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bzlib.h; sourceTree = "<group>"; };
+		B0E6591E13E117740010435B /* libarc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libarc.a; sourceTree = "<group>"; };
+		B0E6592213E118A90010435B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		B0E6592313E118A90010435B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		B0E6592413E118A90010435B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		B0E6592513E118A90010435B /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		B0E6592613E118A90010435B /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		B0E6592713E118A90010435B /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		B0E6592813E118A90010435B /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		B0E6592913E118A90010435B /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		B0E6592A13E118A90010435B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		B0E6592B13E118A90010435B /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		B0E6592C13E118A90010435B /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		B0E6593213E118D00010435B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		B0F012D813C460B80091630F /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		B0F012D913C460B80091630F /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		B0F012DA13C460B80091630F /* EventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsView.xib; sourceTree = "<group>"; };
@@ -162,10 +185,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E6593313E118D00010435B /* libz.1.2.3.dylib in Frameworks */,
 				B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */,
 				B0060BFD13C1BBCE002669E0 /* UIKit.framework in Frameworks */,
 				B0060BFF13C1BBCE002669E0 /* Foundation.framework in Frameworks */,
 				B0060C0113C1BBCE002669E0 /* CoreGraphics.framework in Frameworks */,
+				B0E6591F13E117740010435B /* libarc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +200,7 @@
 		B0060BED13C1BBCE002669E0 = {
 			isa = PBXGroup;
 			children = (
+				B0E6593213E118D00010435B /* libz.1.2.3.dylib */,
 				B027167113D47DC00046686A /* Icon.png */,
 				B027166F13D47DB80046686A /* Icon@2x.png */,
 				B0060C0213C1BBCE002669E0 /* InPerth */,
@@ -356,9 +382,48 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
+		B0E6591A13E117740010435B /* LibArchive */ = {
+			isa = PBXGroup;
+			children = (
+				B0E6591B13E117740010435B /* archive.h */,
+				B0E6591C13E117740010435B /* archive_entry.h */,
+				B0E6591D13E117740010435B /* bzlib.h */,
+				B0E6591E13E117740010435B /* libarc.a */,
+			);
+			path = LibArchive;
+			sourceTree = "<group>";
+		};
+		B0E6592013E118A90010435B /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				B0E6592113E118A90010435B /* minizip */,
+				B0E6592B13E118A90010435B /* ZipArchive.h */,
+				B0E6592C13E118A90010435B /* ZipArchive.mm */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		B0E6592113E118A90010435B /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				B0E6592213E118A90010435B /* crypt.h */,
+				B0E6592313E118A90010435B /* ioapi.c */,
+				B0E6592413E118A90010435B /* ioapi.h */,
+				B0E6592513E118A90010435B /* mztools.c */,
+				B0E6592613E118A90010435B /* mztools.h */,
+				B0E6592713E118A90010435B /* unzip.c */,
+				B0E6592813E118A90010435B /* unzip.h */,
+				B0E6592913E118A90010435B /* zip.c */,
+				B0E6592A13E118A90010435B /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
 		B0F012DE13C463EB0091630F /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B0E6592013E118A90010435B /* ZipArchive */,
+				B0E6591A13E117740010435B /* LibArchive */,
 				B0F012DF13C463F40091630F /* JSONKit */,
 			);
 			name = ThirdParty;
@@ -464,10 +529,7 @@
 				B027167213D47DC00046686A /* Icon.png in Resources */,
 				B05BBA4813D5C318009FD032 /* Info.png in Resources */,
 				B05BBA4913D5C318009FD032 /* Info@2x.png in Resources */,
-<<<<<<< HEAD
 				B0E6369613E0734C00F09B41 /* Entitlements.entitlements in Resources */,
-=======
->>>>>>> 197a43c5409b0fe88dbf567a23cb167cb4061688
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +574,11 @@
 				B0D5925913D1560B00F33C17 /* Place.m in Sources */,
 				B0D5926013D15EA300F33C17 /* BaseManager.m in Sources */,
 				B0D5926913D1800300F33C17 /* PlaceManager.m in Sources */,
+				B0E6592D13E118A90010435B /* ioapi.c in Sources */,
+				B0E6592E13E118A90010435B /* mztools.c in Sources */,
+				B0E6592F13E118A90010435B /* unzip.c in Sources */,
+				B0E6593013E118A90010435B /* zip.c in Sources */,
+				B0E6593113E118A90010435B /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +663,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "InPerth/InPerth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/InPerth/LibArchive\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -611,6 +682,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "InPerth/InPerth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/InPerth/LibArchive\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -644,6 +719,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "InPerth/InPerth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/InPerth/LibArchive\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4D05C42D-9D1E-48A6-9F57-36F94A8D3032";
 				VALIDATE_PRODUCT = YES;

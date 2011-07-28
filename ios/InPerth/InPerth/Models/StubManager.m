@@ -99,6 +99,7 @@
     NSArray *tags = [jsonData objectForKey:@"tags"];
     NSString *tag_join = [tags componentsJoinedByString:@", "];
     NSArray *classifiers = [jsonData objectForKey:@"classifiers"];
+    
     NSString *classifier = nil;
     if ([classifiers count] > 0)
         classifier = [classifiers objectAtIndex:0];
@@ -108,6 +109,9 @@
     Provider *prov = [self.existingProviderManager fetchOrCreateProviderWithKey:[provInfo objectForKey:@"id"] title:[provInfo objectForKey:@"title"]];
     
     Stub *obj = [self createStubWithTitle:[jsonData objectForKey:@"title"] serverKey:[jsonData objectForKey:@"key"] uri:[jsonData objectForKey:@"uri"] description:[jsonData objectForKey:@"desc"] tags:tag_join classifier:classifier date:date contentProvider:prov];
+    
+    if (![[jsonData objectForKey:@"offline_archive"] isKindOfClass:[NSNull class]])
+        [obj setOfflineArchive:[jsonData objectForKey:@"offline_archive"]];
     
     [self saveStub:obj];
 }
@@ -186,6 +190,30 @@
     [request setEntity:entity];
     [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
     [request setFetchLimit:limit];
+    
+    
+    NSError *error;
+    NSArray *results = [[dataContext executeFetchRequest:request error:&error] copy]; 
+    
+    [dateSort release];
+    [request release];
+    
+    return [results autorelease];
+}
+
+-(NSArray *)getStubsPendingOfflineDownloadWithLimit:(int)limit
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Stub" inManagedObjectContext:dataContext]; 
+    
+    NSSortDescriptor *dateSort = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:NO];
+    
+    NSPredicate *query = [NSPredicate predicateWithFormat:@"OfflineArchive != nil AND (OfflineDownloaded == NO || OfflineDownloaded == nil)"];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
+    [request setFetchLimit:limit];
+    [request setPredicate:query];
     
     
     NSError *error;

@@ -15,6 +15,7 @@
 @synthesize tabBarController=_tabBarController;
 @synthesize navigationController;
 @synthesize documentsPath;
+@synthesize offlineCacheDir;
 @synthesize metaData;
 @synthesize mustAnimateWeather;
 
@@ -22,6 +23,8 @@
 {
     self.mustAnimateWeather = YES;
     self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    offlineDownloadInProgress = NO;
     
     self.metaData = [[NSMutableDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/metadata.plist", self.documentsPath]];
     if (self.metaData == nil)
@@ -33,6 +36,16 @@
     self.window.rootViewController = self.navigationController;
     [self.navigationController pushViewController:self.tabBarController animated:YES];
     [self.window makeKeyAndVisible];
+    
+    //create required offline cache
+    
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    self.offlineCacheDir = [NSString stringWithFormat:@"%@/offline_cache", self.documentsPath];
+    BOOL isDir;
+    if(![fileManager fileExistsAtPath:self.offlineCacheDir isDirectory:&isDir])
+        if(![fileManager createDirectoryAtPath:self.offlineCacheDir withIntermediateDirectories:YES attributes:nil error:NULL])
+            self.offlineCacheDir = nil;
+    
     return YES;
 }
 
@@ -101,6 +114,7 @@
         [self getLatestWeatherDataFromServer];
         [self getLatestStubDataFromServer];
         [self getLatestPlaceDataFromServer];
+        [self performSelectorInBackground:@selector(processOfflineArchives) withObject:nil];
         fetchInProgress = NO;
     }
 }
@@ -291,6 +305,41 @@
         persistentStorePath = [[documentsDirectory stringByAppendingPathComponent:@"Model.sqlite"] retain];
     }
     return persistentStorePath;
+}
+
+-(void)processOfflineArchives
+{
+    if (!offlineDownloadInProgress)
+    {
+        offlineDownloadInProgress = YES;
+        StubManager *manager = [[StubManager alloc] initWithNewContext];
+        NSArray *pendingDownload = [manager getStubsPendingOfflineDownloadWithLimit:50];
+        
+        NSString *tmpDir = NSTemporaryDirectory();
+        
+        if (self.offlineCacheDir != nil)
+        {
+            for (Stub *stub in pendingDownload)
+            {
+                NSString *offlineURI = [stub OfflineArchive];
+                if ([offlineURI length] > 0)
+                {
+                    NSURL *url = [NSURL URLWithString:offlineURI];
+                    NSData *contents = [NSData dataWithContentsOfURL:url];
+                    if (contents != nil)
+                    {
+                        NSString *writeDir = [NSString stringWithFormat:@"%@/%@.zip", tmpDir, [stub ServerKey]];
+                        if ([contents writeToFile:writeDir atomically:NO])
+                        {
+                            
+                        }
+                    }
+                }
+            }
+        }
+        
+        offlineDownloadInProgress = NO;
+    }
 }
 
 -(NSData *)getDataFromServer:(NSString *) path

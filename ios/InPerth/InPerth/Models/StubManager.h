@@ -35,4 +35,5 @@
 -(NSArray *)getStubsForClassifier:(NSString *)classifier sinceDate:(NSDate *)date;
 -(NSArray *)getStubsWithLimit:(int)limit;
 -(NSArray *)getStubsWithLimit:(int)limit olderThanDate:(NSDate *)date;
+-(NSArray *)getStubsPendingOfflineDownloadWithLimit:(int)limit;
 @end

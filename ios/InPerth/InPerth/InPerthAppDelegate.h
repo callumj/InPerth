@@ -27,10 +27,13 @@
     NSManagedObjectContext *managedObjectContext;
     UINavigationController *navigationController;
     BOOL fetchInProgress;
+    
+    BOOL offlineDownloadInProgress;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *metaData;
 @property (nonatomic, retain) NSString *documentsPath;
+@property (nonatomic, retain) NSString *offlineCacheDir;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
@@ -43,6 +46,7 @@
 -(void)getLatestPlaceDataFromServer;
 -(void)getLatestWeatherDataFromServer;
 -(NSData *)getDataFromServer:(NSString *) path;
+-(void)processOfflineArchives;
 
 #pragma mark Core Data
 -(NSManagedObjectContext *)managedObjectContext;

@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString * Tags;
 @property (nonatomic, retain) NSString * Classifier;
 @property (nonatomic, retain) NSDate * Date;
+@property (nonatomic, retain) NSString * OfflineArchive;
+@property (nonatomic, retain) NSNumber * OfflineDownloaded;
 @property (nonatomic, retain) Provider * ContentProvider;
 @property (nonatomic, retain) Place * Place;
 
