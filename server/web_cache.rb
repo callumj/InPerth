@@ -108,6 +108,8 @@ stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit
 WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
 container = WAZ::Blobs::Container.find('offline-cache')
 
+container.public_access = true
+
 stubs_waiting.each do |stub|
   puts "#{stub.title}"
   begin
