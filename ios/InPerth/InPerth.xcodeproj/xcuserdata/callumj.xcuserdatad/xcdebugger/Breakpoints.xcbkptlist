@@ -4,16 +4,30 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "InPerth/InPerthAppDelegate.m"
-         timestampString = "333520169.977583"
+         timestampString = "333547222.044312"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "332"
-         endingLineNumber = "332"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
+         landmarkName = "-processOfflineArchives"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/InPerthAppDelegate.m"
+         timestampString = "333550921.811323"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
          landmarkName = "-processOfflineArchives"
          landmarkType = "5">
       </FileBreakpoint>
@@ -22,13 +36,41 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "InPerth/InPerthAppDelegate.m"
-         timestampString = "333520233.422416"
+         filePath = "InPerth/LatestViewController.m"
+         timestampString = "333548553.394413"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "320"
-         endingLineNumber = "320"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/InPerthAppDelegate.m"
+         timestampString = "333549264.551851"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "352"
+         endingLineNumber = "352"
          landmarkName = "-processOfflineArchives"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/WebViewController.m"
+         timestampString = "333553700.680435"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "-webView:didFailLoadWithError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

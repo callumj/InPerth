@@ -168,6 +168,10 @@
         {
             [webController setDetailTitle:[NSString stringWithFormat:@"at %@ - %@", [related Title], [related Suburb]]];
         }
+        if ([stub OfflineArchive] != nil)
+        {
+            [webController setAlternativeURL:[NSString stringWithFormat:@"%@/%@/%@", delegate.offlineCacheDir, [stub ServerKey], [stub OfflineArchive]]];
+        }
         [delegate.navigationController pushViewController:webController animated:YES];
         [webController release];
         UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];

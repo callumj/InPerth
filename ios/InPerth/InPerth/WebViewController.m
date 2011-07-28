@@ -17,6 +17,7 @@
 @synthesize subLabel;
 @synthesize infoButton;
 @synthesize detailTitle;
+@synthesize alternativeURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +50,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    didTryCache = NO;
     [self.titleLabel setText:self.toolbarTitle];
     if (self.detailTitle != nil && [self.detailTitle length] > 0)
     {
@@ -113,5 +115,20 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    //load cache copy
+    if (!didTryCache)
+    {
+        if (alternativeURL != nil)
+        {
+            NSURL *urlObj = [NSURL URLWithString:self.alternativeURL];
+            NSURLRequest *urlReq = [NSURLRequest requestWithURL:urlObj];
+            [webView loadRequest:urlReq];
+        }
+        didTryCache = YES;
+    }
 }
 @end

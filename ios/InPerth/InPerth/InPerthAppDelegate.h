@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "JSONKit.h"
+#import "ZipArchive.h"
 
 #import "StubManager.h"
 #import "PlaceManager.h"

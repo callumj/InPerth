@@ -16,9 +16,12 @@
     UILabel *titleLabel;
     UILabel *subLabel;
     UIButton *infoButton;
+    
+    BOOL didTryCache;
 }
 @property (nonatomic, retain) IBOutlet UIWebView *webViewOutlet;
 @property (nonatomic, retain) NSString *urlToNavigateTo;
+@property (nonatomic, retain) NSString *alternativeURL;
 @property (nonatomic, retain) NSString *toolbarTitle;
 @property (nonatomic, retain) NSString *detailTitle;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;

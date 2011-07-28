@@ -309,8 +309,12 @@
 
 -(void)processOfflineArchives
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     if (!offlineDownloadInProgress)
     {
+        ZipArchive *archiveHelper = [[ZipArchive alloc] init];
+        NSFileManager *fileHelper = [NSFileManager defaultManager];
+        
         offlineDownloadInProgress = YES;
         StubManager *manager = [[StubManager alloc] initWithNewContext];
         NSArray *pendingDownload = [manager getStubsPendingOfflineDownloadWithLimit:50];
@@ -328,18 +332,37 @@
                     NSData *contents = [NSData dataWithContentsOfURL:url];
                     if (contents != nil)
                     {
-                        NSString *writeDir = [NSString stringWithFormat:@"%@/%@.zip", tmpDir, [stub ServerKey]];
-                        if ([contents writeToFile:writeDir atomically:NO])
+                        NSString *tmpPath = [NSString stringWithFormat:@"%@/%@.zip", tmpDir, [stub ServerKey]];
+                        if ([contents writeToFile:tmpPath atomically:NO])
                         {
-                            
+                            if ([archiveHelper UnzipOpenFile:tmpPath])
+                            {
+                                NSString *cache_path = [NSString stringWithFormat:@"%@/%@", self.offlineCacheDir, [stub ServerKey]];
+                                if ([archiveHelper UnzipFileTo:cache_path overWrite:YES])
+                                {
+                                    NSError *error = nil;
+                                    NSArray *allFiles = [fileHelper contentsOfDirectoryAtPath:cache_path error:&error];
+                                    NSString *webPage = nil;
+                                    for (NSString *file in allFiles)
+                                    {
+                                        if ([[file pathExtension] isEqualToString:@"html"])
+                                            webPage = file;
+                                    }
+                                    
+                                    [stub setOfflineArchive:webPage];
+                                    [stub setOfflineDownloaded:[NSNumber numberWithBool:YES]];
+                                    [manager saveStub:stub];
+                                    [fileHelper removeItemAtPath:tmpPath error:&error];
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-        
         offlineDownloadInProgress = NO;
     }
+    [pool release];
 }
 
 -(NSData *)getDataFromServer:(NSString *) path
