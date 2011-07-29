@@ -17,6 +17,7 @@
 @dynamic Tags;
 @dynamic Classifier;
 @dynamic Date;
+@dynamic LastUpdated;
 @dynamic OfflineArchive;
 @dynamic OfflineDownloaded;
 @dynamic ContentProvider;

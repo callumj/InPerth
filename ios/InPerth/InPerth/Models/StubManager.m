@@ -49,11 +49,9 @@
 -(Stub *)createStubWithTitle:(NSString *)title serverKey:(NSString *)key uri:(NSString *)uri description:(NSString *)description tags:(NSString *)tags classifier:(NSString *)classifier date:(NSDate *)date contentProvider:(Provider *)provider
 {
     //perform a sanity check
-    Stub *existingStub = [self getStubForKey:key];
-    if (existingStub != nil)
-        return existingStub;
-    
-    Stub *newStub = (Stub *)[NSEntityDescription insertNewObjectForEntityForName:@"Stub" inManagedObjectContext:dataContext];
+    Stub *newStub = [self getStubForKey:key];
+    if (newStub == nil)
+        newStub = (Stub *)[NSEntityDescription insertNewObjectForEntityForName:@"Stub" inManagedObjectContext:dataContext];
     
     [newStub setTitle:title];
     [newStub setServerKey:key];
@@ -61,7 +59,8 @@
     [newStub setDescription:description];
     [newStub setTags:tags];
     [newStub setClassifier:classifier];
-    [newStub setDate:date];
+    if ([newStub Date] == nil)
+        [newStub setDate:date];
     [newStub setContentProvider:provider];
     
     return newStub;
@@ -111,7 +110,18 @@
     Stub *obj = [self createStubWithTitle:[jsonData objectForKey:@"title"] serverKey:[jsonData objectForKey:@"key"] uri:[jsonData objectForKey:@"uri"] description:[jsonData objectForKey:@"desc"] tags:tag_join classifier:classifier date:date contentProvider:prov];
     
     if (![[jsonData objectForKey:@"offline_archive"] isKindOfClass:[NSNull class]])
+    {
+        [obj setOfflineDownloaded:[NSNumber numberWithBool:NO]];
         [obj setOfflineArchive:[jsonData objectForKey:@"offline_archive"]];
+    }
+    
+    if (![[jsonData objectForKey:@"updated_at"] isKindOfClass:[NSNull class]])
+    {
+        NSString *updateString = [jsonData objectForKey:@"updated_at"];
+        NSDate *updateDate = [dateFormatter dateFromString:updateString];
+        [obj setLastUpdated:updateDate];
+    }
+        
     
     [self saveStub:obj];
 }

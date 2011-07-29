@@ -134,7 +134,11 @@
         path = @"/stub/all.json";
     else
     {
-        NSTimeInterval time = [[mostRecent Date] timeIntervalSince1970];
+        NSTimeInterval time;
+        if ([mostRecent LastUpdated] != nil)
+           time = [[mostRecent LastUpdated] timeIntervalSince1970];
+        else
+           time = [[mostRecent Date] timeIntervalSince1970];
         time -= [[NSTimeZone localTimeZone] secondsFromGMT];
         NSNumber *objNumber = [NSNumber numberWithDouble:time];
         path = [NSString stringWithFormat:@"/stub/all.json?since=%@", objNumber];
@@ -312,6 +316,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     if (!offlineDownloadInProgress)
     {
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         ZipArchive *archiveHelper = [[ZipArchive alloc] init];
         NSFileManager *fileHelper = [NSFileManager defaultManager];
         
@@ -360,6 +365,7 @@
                 }
             }
         }
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         offlineDownloadInProgress = NO;
     }
     [pool release];

@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "InPerth/InPerthAppDelegate.m"
-         timestampString = "333547222.044312"
+         timestampString = "333633246.193402"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "338"
-         endingLineNumber = "338"
+         startingLineNumber = "343"
+         endingLineNumber = "343"
          landmarkName = "-processOfflineArchives"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,16 +23,16 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "InPerth/InPerthAppDelegate.m"
-         timestampString = "333550921.811323"
+         timestampString = "333633246.193402"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "363"
-         endingLineNumber = "363"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
          landmarkName = "-processOfflineArchives"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "InPerth/InPerthAppDelegate.m"
-         timestampString = "333549264.551851"
+         timestampString = "333633246.193402"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
+         startingLineNumber = "357"
+         endingLineNumber = "357"
          landmarkName = "-processOfflineArchives"
          landmarkType = "5">
       </FileBreakpoint>
@@ -71,6 +71,62 @@
          startingLineNumber = "123"
          endingLineNumber = "123"
          landmarkName = "-webView:didFailLoadWithError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/Models/StubManager.m"
+         timestampString = "333633246.193402"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
+         landmarkName = "-commitStubFromDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/InPerthAppDelegate.m"
+         timestampString = "333633455.252982"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "329"
+         endingLineNumber = "329"
+         landmarkName = "-processOfflineArchives"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/InPerthAppDelegate.m"
+         timestampString = "333633497.486063"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "345"
+         endingLineNumber = "345"
+         landmarkName = "-processOfflineArchives"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "InPerth/InPerthAppDelegate.m"
+         timestampString = "333633507.881738"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
+         landmarkName = "-processOfflineArchives"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSDate * Date;
 @property (nonatomic, retain) NSString * OfflineArchive;
 @property (nonatomic, retain) NSNumber * OfflineDownloaded;
+@property (nonatomic, retain) NSDate * LastUpdated;
 @property (nonatomic, retain) Provider * ContentProvider;
 @property (nonatomic, retain) Place * Place;
 
