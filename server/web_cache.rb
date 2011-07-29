@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'digest/sha1'
 require 'fileutils'
 require 'waz-blobs'
+require 'waz-storage'
 
 load "#{File.dirname(__FILE__)}/init.rb"
 
@@ -25,12 +26,13 @@ def extract_modify_page(args = {})
     res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
     if (res.header["location"] != nil)
       find_url = res.header["location"]
+      find_url = "http://#{url_obj.host}:#{url_obj.port}/#{find_url}" unless (find_url.start_with?("http://"))
     else
       body = res.body
       break
     end
     
-    redirect_count
+    redirect_count = redirect_count + 1
   end
   doc = Nokogiri::HTML(body)
   
@@ -59,6 +61,8 @@ end
 def archive_mobile_page(args={})
   return nil unless args[:url] != nil
   
+  args[:user_agent] = "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"
+  
   args[:tmp_dir] = "/tmp" if args[:tmp_dir] == nil
   
   data = extract_modify_page(:url => args[:url])
@@ -74,18 +78,33 @@ def archive_mobile_page(args={})
       url = data[:files][key]
       url.strip!
       real_url = url
-      if (page_url != nil && !(url.start_with?("http")))
-        real_url = page_url + url 
+      real_url = page_url + url if (page_url != nil && !(url.start_with?("http")))
+      body = nil
+      redirect_count = 0
+      until (redirect_count > MAX_REDIRECTION || body != nil)
+        url_obj = URI.parse(real_url)
+        addr = url_obj.path
+        addr = url_obj.request_uri if url_obj.respond_to?(:request_uri)
+        req = Net::HTTP::Get.new(addr, {"User-Agent" => args[:user_agent]})
+        res = Net::HTTP.start(url_obj.host, url_obj.port) {|http| http.request(req) }
+        if (res.header["location"] != nil && res.header["location"].length > 0)
+          real_url = res.header["location"]
+          real_url = "http://#{url_obj.host}:#{url_obj.port}/#{real_url}" unless (real_url.start_with?("http://"))
+        else
+          body = res.body
+          break
+        end
+
+        redirect_count = redirect_count + 1
       end
-      Net::HTTP.start(real_url.host) { |http|
-        req = Net::HTTP::Get.new(real_url.request_uri, {"User-Agent" => "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"})
-        res = Net::HTTP.start(real_url.host, real_url.port) {|http| http.request(req) }
+      
+      if (body != nil)
         open("#{dir_loc}/#{key}", "wb") { |file|
-          file.write(res.body)
+          file.write(body)
          }
-      }
-    rescue
-      puts "\tCannot fetch resources"
+      end
+    rescue Exception => e 
+      puts "\tError fetching resource"
     end
   end
 
@@ -108,8 +127,6 @@ stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit
 WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
 container = WAZ::Blobs::Container.find('offline-cache')
 
-container.public_access = true
-
 stubs_waiting.each do |stub|
   puts "#{stub.title}"
   begin
@@ -127,6 +144,8 @@ stubs_waiting.each do |stub|
     stub.offline_archive = blob.url
     stub.save
   rescue Exception => e  
-    puts e.message  
+    puts e.message
+    puts e.backtrace
+    ARGF.gets
   end
 end
