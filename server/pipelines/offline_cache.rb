@@ -1,7 +1,7 @@
 require 'cgi'
 require 'net/http'
 
-MAX_REDIRECTION = 10
+MAX_REDIRECTION ||= 10
 
 #meths
 def extract_modify_page(args = {})

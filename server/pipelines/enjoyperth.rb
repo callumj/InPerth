@@ -1,7 +1,7 @@
 require 'cgi'
 require 'net/http'
 
-MAX_REDIRECTION = 10
+MAX_REDIRECTION ||= 10
 
 pipeline "enjoyperth", 1 do
   #we can skip the RSS content as the RSS body is very limited
