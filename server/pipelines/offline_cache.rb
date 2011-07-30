@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'digest/sha1'
 require 'fileutils'
 require 'waz-blobs'
+require 'waz-storage'
 
 MAX_REDIRECTION ||= 10
 
