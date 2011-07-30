@@ -2,8 +2,8 @@ require 'net/http'
 require 'nokogiri'
 require 'digest/sha1'
 require 'fileutils'
-require 'waz-blobs'
 require 'waz-storage'
+require 'waz-blobs'
 
 MAX_REDIRECTION ||= 10
 
