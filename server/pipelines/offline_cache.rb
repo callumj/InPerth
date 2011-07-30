@@ -1,5 +1,8 @@
-require 'cgi'
 require 'net/http'
+require 'nokogiri'
+require 'digest/sha1'
+require 'fileutils'
+require 'waz-blobs'
 
 MAX_REDIRECTION ||= 10
 
