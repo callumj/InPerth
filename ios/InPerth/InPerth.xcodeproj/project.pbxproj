@@ -465,6 +465,7 @@
 		B0060BEF13C1BBCE002669E0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = mullac.org;
 			};
 			buildConfigurationList = B0060BF213C1BBCE002669E0 /* Build configuration list for PBXProject "InPerth" */;

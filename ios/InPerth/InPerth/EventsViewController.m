@@ -149,9 +149,10 @@
     {
         [webController setDetailTitle:[NSString stringWithFormat:@"at %@ - %@", [related Title], [related Suburb]]];
     }
-    if ([stub OfflineArchive] != nil)
+    NSString *offlinePath = [StubManager getOfflineLocationForStub:[stub ServerKey]];
+    if (offlinePath != nil)
     {
-        [webController setAlternativeURL:[NSString stringWithFormat:@"%@/%@/%@", delegate.offlineCacheDir, [stub ServerKey], [stub OfflineArchive]]];
+        [webController setAlternativeURL:offlinePath];
     }
     [delegate.navigationController pushViewController:webController animated:YES];
     [webController release];

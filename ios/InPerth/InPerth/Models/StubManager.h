@@ -36,4 +36,6 @@
 -(NSArray *)getStubsWithLimit:(int)limit;
 -(NSArray *)getStubsWithLimit:(int)limit olderThanDate:(NSDate *)date;
 -(NSArray *)getStubsPendingOfflineDownloadWithLimit:(int)limit;
+
++(NSString *)getOfflineLocationForStub:(NSString *)stubServerKey;
 @end

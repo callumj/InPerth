@@ -354,6 +354,11 @@
                                             webPage = file;
                                     }
                                     
+                                    if (webPage == nil)
+                                    {
+                                        NSLog(@"Could not locate page");
+                                    }
+                                    
                                     [stub setOfflineArchive:webPage];
                                     [stub setOfflineDownloaded:[NSNumber numberWithBool:YES]];
                                     [manager saveStub:stub];

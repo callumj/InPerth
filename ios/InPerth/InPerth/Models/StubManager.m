@@ -114,6 +114,10 @@
         [obj setOfflineDownloaded:[NSNumber numberWithBool:NO]];
         [obj setOfflineArchive:[jsonData objectForKey:@"offline_archive"]];
     }
+    else
+    {
+        NSLog(@"Server did not provide archive link");
+    }
     
     if (![[jsonData objectForKey:@"updated_at"] isKindOfClass:[NSNull class]])
     {
@@ -301,6 +305,26 @@
     [request release];
     
     return [results autorelease];   
+}
+
+
++(NSString *)getOfflineLocationForStub:(NSString *)stubServerKey
+{
+    StubManager *thisManager = [[StubManager alloc] initWithNewContext];
+    Stub *stub = [thisManager getStubForKey:stubServerKey];
+    
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (stub != nil && [[stub OfflineDownloaded] isEqualToNumber:[NSNumber numberWithBool:YES]])
+    {
+        NSString *url = [NSString stringWithFormat:@"%@/%@/%@", delegate.offlineCacheDir, [stub ServerKey], [stub OfflineArchive]];
+        [thisManager release];
+        return url;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 -(void)dealloc
