@@ -10,3 +10,5 @@ gem 'sinatra'
 
 gem 'tzinfo'
 gem 'activesupport'
+
+gem 'waz-storage'
