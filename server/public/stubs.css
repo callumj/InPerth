@@ -54,6 +54,7 @@
 	font-size: 7pt;
 	color: #8a959d;
 	display: inline;
+	padding-left: 1px;
 }
 
 .stub p.important {
