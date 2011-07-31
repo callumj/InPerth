@@ -34,6 +34,11 @@ body {
 	margin-top: 12px;
 }
 
+#header .links a:link, #header .links a:hover, #header .links a:visited {
+	color: white;
+	text-decoration: none;
+}
+
 #header .links ul {
 	text-decoration: none;
 	padding: 0;

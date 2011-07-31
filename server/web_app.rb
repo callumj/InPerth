@@ -68,7 +68,28 @@ get '/index.html' do
   @css_files << "/stubs.css"
   @js_files << "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
   @js_files << "/js/stubs.js"
+  @js_files << "/js/latest.js"
   @stubs = Stub.sort(:created_at.desc).limit(30).all
+  
+  erb :index
+end
+
+get '/food.html' do
+  @css_files << "/stubs.css"
+  @js_files << "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+  @js_files << "/js/stubs.js"
+  @js_files << "/js/food.js"
+  @stubs = Stub.where(:classifiers => "food").sort(:created_at.desc).limit(30).all
+  
+  erb :index
+end
+
+get '/events.html' do
+  @css_files << "/stubs.css"
+  @js_files << "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+  @js_files << "/js/stubs.js"
+  @js_files << "/js/events.js"
+  @stubs = Stub.where(:classifiers => "event").sort(:created_at.desc).limit(30).all
   
   erb :index
 end
