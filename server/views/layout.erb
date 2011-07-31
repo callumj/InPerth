@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>InPerth</title>
+		<link rel="stylesheet" href="/default.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<% @css_files.each do |css| %>
+		<link rel="stylesheet" href="<%= css %>" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<% end %>
+		<% @js_files.each do |js| %>
+		<script src="<%= js %>" type="text/javascript" charset="utf-8"></script>
+		<% end %>
+		<meta name="Generator" content="FrontPage 4.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" /> 
+	</head>
+	<body>
+		<div id="header">
+			<div class="title">
+				<h1>InPerth</h1>
+				<h3>what's happening in the city of Perth</h3>
+			</div>
+			
+			<div class="links">
+				<ul>
+					<li>all</li>
+					<li>food reviews</li>
+					<li>events</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="content">
+			<%= yield %>
+		</div>
+		
+		<div id="footer">
+		</div>
+	</body>
+</html>

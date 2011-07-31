@@ -3,6 +3,11 @@ require "sinatra"
 
 load "#{File.dirname(__FILE__)}/init.rb"
 
+before do
+  @css_files = []
+  @js_files = []
+end
+
 get '/stub/:tag.:format' do
   classifier = params[:tag]
   
@@ -57,4 +62,13 @@ get '/meta/:name.:format' do
   else
     "ERROR"
   end
+end
+
+get '/index.html' do
+  @css_files << "/stubs.css"
+  @js_files << "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+  @js_files << "/js/stubs.js"
+  @stubs = Stub.sort(:created_at.desc).limit(30).all
+  
+  erb :index
 end

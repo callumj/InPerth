@@ -52,7 +52,7 @@ def extract_modify_page(args = {})
     file_stor[track] = addr
   end
   
-  #sum stoopid scripts want you enable javascript if it can't find the js, just remove all js
+  #some stoopid scripts want you enable javascript if it can't find the js, just remove all js
   doc.xpath("//script").remove
   
   return {:doc => doc, :files => file_stor, :final_url => find_url}
@@ -99,9 +99,7 @@ def archive_mobile_page(args={})
       end
       
       if (body != nil)
-        open("#{dir_loc}/#{key}", "wb") { |file|
-          file.write(body)
-         }
+        open("#{dir_loc}/#{key}", "wb") { |file| file.write(body) }
       end
     rescue Exception => e 
       puts "\tError fetching resource"
@@ -109,9 +107,7 @@ def archive_mobile_page(args={})
   end
 
   #write the actual page
-  open("#{dir_loc}/#{Digest::SHA1.hexdigest(data[:final_url])}.html", "wb") { |file|
-    file.write(data[:doc].to_s)
-   }
+  open("#{dir_loc}/#{Digest::SHA1.hexdigest(data[:final_url])}.html", "wb") { |file| file.write(data[:doc].to_s) }
  
   #perform compression
   final = system("zip -r #{args[:tmp_dir]}/#{Digest::SHA1.hexdigest(data[:final_url])}.zip #{dir_loc}")
@@ -141,5 +137,4 @@ pipeline "offlinecache", 10, do
     bin[:stub].save
     
   end
-  
 end

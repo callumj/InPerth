@@ -1,0 +1,17 @@
+<script type="text/javascript">
+var since_time = <%= @stubs.length > 0 ? @stubs[0].updated_at.in_time_zone.to_i : 0 %>;
+</script>
+<div id="stubs">
+	<% @stubs.each do |stub| %>
+		<div id="stub_<%= stub.id %>" class="stub <%= "#{stub.provider.classifiers[0]}-stub" %>">
+			<h1><a href="<%= stub.uri %>"><%= stub.title %></a></h1>
+			<p class="description"><%= stub.description %></p>
+			<p class="details"><%= stub.created_at.in_time_zone.to_s %></p>
+			<p class="details"><%= stub.provider.title %></p>
+			<% if stub.place != nil %>
+			<p class="details important">@ <%= stub.place.title %></p>
+			<% end %>
+		</div>
+	
+	<% end %>
+</div>
