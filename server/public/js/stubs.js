@@ -11,8 +11,10 @@ function get_stubs_since(time, category) {
 		{
 			//check it already exists
 			stub = contents.data[i];
-			find = $("#stub_" + stub.key);
-			if (!(find.length))
+			if (document.since_time < stub.updated_at_time)
+				document.since_time = stub.updated_at_time;
+			find = document.getElementById("#stub_" + stub.key);
+			if (find == null)
 			{
 				new_div = $("<div>");
 				new_div.attr("id", "#stub_" + new String(stub.key));
