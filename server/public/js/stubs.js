@@ -11,8 +11,8 @@ function get_stubs_since(time, category) {
 		{
 			//check it already exists
 			stub = contents.data[i];
-			if (document.since_time < stub.updated_at_time)
-				document.since_time = stub.updated_at_time;
+			if (since_time < stub.updated_at_time)
+				since_time = stub.updated_at_time;
 			find = document.getElementById("#stub_" + stub.key);
 			if (find == null)
 			{
