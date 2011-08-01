@@ -48,7 +48,7 @@ pipeline "googlemaps", 10, do
                   #overwrite place details
                   place_obj = bin[:stub].place
                   place_obj.title = detail_json["result"]["name"]
-                  place_obj.phone = detail_json["result"]["formatted_phone_number"]
+                  place_obj.phone = detail_json["result"]["formatted_phone_number"] if detail_json["result"]["formatted_phone_number"] != nil
                   place_obj.google_uri = detail_json["result"]["url"]
                   place_obj.tags = [] if place_obj.tags == nil
                   if (detail_json["result"]["types"] != nil && detail_json["result"]["types"].length > 0)
@@ -59,9 +59,10 @@ pipeline "googlemaps", 10, do
                   detail_json["result"]["address_components"].each do |part|
                     address = "#{part["long_name"]} #{address}" if part["types"].include?("street_number")
                     address = "#{address} #{part["long_name"]}" if part["types"].include?("route")
-                    place_obj.suburb = part["long_name"] if part["types"].include?("locality")
+                    place_obj.suburb = part["long_name"] if part["types"].include?("locality") && part["long_name"] != nil
                   end
-                  place_obj.address = address.gsub(/\s+/," ")
+                  address = address.gsub(/\s+/," ")
+                  place_obj.address = address if address.length > 0
                   puts "Writing update for #{place_obj.title}"
                   place_obj.save
                 end
