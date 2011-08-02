@@ -20,6 +20,13 @@
 		B0060C1C13C1BBCE002669E0 /* FoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0060C1A13C1BBCE002669E0 /* FoodView.xib */; };
 		B010FA1613C819B000E50741 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B010FA1513C819B000E50741 /* WebView.xib */; };
 		B010FA1A13C81A4E00E50741 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B010FA1913C81A4E00E50741 /* WebViewController.m */; };
+		B021BDD413E8485B00A0BC57 /* PlaceInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B021BDD313E8485B00A0BC57 /* PlaceInfoView.xib */; };
+		B021BDD813E84BF600A0BC57 /* PlaceHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = B021BDD613E84BF600A0BC57 /* PlaceHeader.png */; };
+		B021BDD913E84BF600A0BC57 /* PlaceHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B021BDD713E84BF600A0BC57 /* PlaceHeader@2x.png */; };
+		B021BDDC13E84E5000A0BC57 /* PlaceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B021BDDB13E84E5000A0BC57 /* PlaceInfoViewController.m */; };
+		B021BDDE13E84EBC00A0BC57 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021BDDD13E84EBC00A0BC57 /* MapKit.framework */; };
+		B021BDE113E8549700A0BC57 /* PlaceFooter.png in Resources */ = {isa = PBXBuildFile; fileRef = B021BDDF13E8549700A0BC57 /* PlaceFooter.png */; };
+		B021BDE213E8549700A0BC57 /* PlaceFooter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B021BDE013E8549700A0BC57 /* PlaceFooter@2x.png */; };
 		B027166C13D47DA30046686A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B027166A13D47DA30046686A /* Icon.png */; };
 		B027166D13D47DA30046686A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B027166B13D47DA30046686A /* Icon@2x.png */; };
 		B027167013D47DB80046686A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B027166F13D47DB80046686A /* Icon@2x.png */; };
@@ -100,6 +107,14 @@
 		B010FA1513C819B000E50741 /* WebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
 		B010FA1813C81A4E00E50741 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		B010FA1913C81A4E00E50741 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		B021BDD313E8485B00A0BC57 /* PlaceInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceInfoView.xib; sourceTree = "<group>"; };
+		B021BDD613E84BF600A0BC57 /* PlaceHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHeader.png; sourceTree = "<group>"; };
+		B021BDD713E84BF600A0BC57 /* PlaceHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceHeader@2x.png"; sourceTree = "<group>"; };
+		B021BDDA13E84E5000A0BC57 /* PlaceInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceInfoViewController.h; sourceTree = "<group>"; };
+		B021BDDB13E84E5000A0BC57 /* PlaceInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceInfoViewController.m; sourceTree = "<group>"; };
+		B021BDDD13E84EBC00A0BC57 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B021BDDF13E8549700A0BC57 /* PlaceFooter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceFooter.png; sourceTree = "<group>"; };
+		B021BDE013E8549700A0BC57 /* PlaceFooter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceFooter@2x.png"; sourceTree = "<group>"; };
 		B027166A13D47DA30046686A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		B027166B13D47DA30046686A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		B027166F13D47DB80046686A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -185,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B021BDDE13E84EBC00A0BC57 /* MapKit.framework in Frameworks */,
 				B0E6593313E118D00010435B /* libz.1.2.3.dylib in Frameworks */,
 				B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */,
 				B0060BFD13C1BBCE002669E0 /* UIKit.framework in Frameworks */,
@@ -200,6 +216,7 @@
 		B0060BED13C1BBCE002669E0 = {
 			isa = PBXGroup;
 			children = (
+				B021BDDD13E84EBC00A0BC57 /* MapKit.framework */,
 				B0E6593213E118D00010435B /* libz.1.2.3.dylib */,
 				B027167113D47DC00046686A /* Icon.png */,
 				B027166F13D47DB80046686A /* Icon@2x.png */,
@@ -271,6 +288,7 @@
 				B0060C1A13C1BBCE002669E0 /* FoodView.xib */,
 				B06610CF13C753CF0062B512 /* StubCell.xib */,
 				B010FA1513C819B000E50741 /* WebView.xib */,
+				B021BDD313E8485B00A0BC57 /* PlaceInfoView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -303,6 +321,10 @@
 		B046065E13C764B800132794 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B021BDDF13E8549700A0BC57 /* PlaceFooter.png */,
+				B021BDE013E8549700A0BC57 /* PlaceFooter@2x.png */,
+				B021BDD613E84BF600A0BC57 /* PlaceHeader.png */,
+				B021BDD713E84BF600A0BC57 /* PlaceHeader@2x.png */,
 				B05BBA4613D5C318009FD032 /* Info.png */,
 				B05BBA4713D5C318009FD032 /* Info@2x.png */,
 				B027166A13D47DA30046686A /* Icon.png */,
@@ -341,6 +363,8 @@
 				B010FA1913C81A4E00E50741 /* WebViewController.m */,
 				B0C5FE3E13C9A4B2009590DB /* WeatherViewController.h */,
 				B0C5FE3F13C9A4B2009590DB /* WeatherViewController.m */,
+				B021BDDA13E84E5000A0BC57 /* PlaceInfoViewController.h */,
+				B021BDDB13E84E5000A0BC57 /* PlaceInfoViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -531,6 +555,11 @@
 				B05BBA4813D5C318009FD032 /* Info.png in Resources */,
 				B05BBA4913D5C318009FD032 /* Info@2x.png in Resources */,
 				B0E6369613E0734C00F09B41 /* Entitlements.entitlements in Resources */,
+				B021BDD413E8485B00A0BC57 /* PlaceInfoView.xib in Resources */,
+				B021BDD813E84BF600A0BC57 /* PlaceHeader.png in Resources */,
+				B021BDD913E84BF600A0BC57 /* PlaceHeader@2x.png in Resources */,
+				B021BDE113E8549700A0BC57 /* PlaceFooter.png in Resources */,
+				B021BDE213E8549700A0BC57 /* PlaceFooter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +609,7 @@
 				B0E6592F13E118A90010435B /* unzip.c in Sources */,
 				B0E6593013E118A90010435B /* zip.c in Sources */,
 				B0E6593113E118A90010435B /* ZipArchive.mm in Sources */,
+				B021BDDC13E84E5000A0BC57 /* PlaceInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "WebViewController.h"
 #import "InPerthAppDelegate.h"
+#import "PlaceInfoViewController.h"
 
 @implementation WebViewController
 @synthesize webViewOutlet;
@@ -51,6 +52,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     didTryCache = NO;
+}
+
+-(void)viewDidLoad
+{
     [self.titleLabel setText:self.toolbarTitle];
     if (self.detailTitle != nil && [self.detailTitle length] > 0)
     {
@@ -129,6 +134,16 @@
             [webView loadRequest:urlReq];
         }
         didTryCache = YES;
+    }
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        PlaceInfoViewController *placeInfo = [[PlaceInfoViewController alloc] init];
+        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [delegate.navigationController pushViewController:placeInfo animated:YES];
     }
 }
 @end

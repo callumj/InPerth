@@ -378,7 +378,7 @@
 
 -(NSData *)getDataFromServer:(NSString *) path
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://sinatra-test.cloudapp.net:8080/%@", path]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://perth-proxy.mullac.org/%@", path]];
     NSLog(@"Making request to %@", [url absoluteString]);
     NSData *data = [NSData dataWithContentsOfURL:url];
     
