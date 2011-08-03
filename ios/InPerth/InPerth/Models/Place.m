@@ -28,4 +28,12 @@
 @dynamic Tags;
 @dynamic Stubs;
 
+-(PlaceAnnotation *)generatePlaceData
+{
+    PlaceAnnotation *anno = [PlaceAnnotation buildFromLatitude:[self.Latitude doubleValue] withLongitude:[self.Longitude doubleValue]];
+    [anno setPlaceTitle:[self Title]];
+    [anno setPlaceSubtitle:[self Address]];
+    return anno;
+}
+
 @end

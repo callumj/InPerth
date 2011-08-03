@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Stub.h"
 
 @interface WebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
     
@@ -18,12 +18,15 @@
     UIButton *infoButton;
     
     BOOL didTryCache;
+    
+    Stub *relatedStub;
 }
 @property (nonatomic, retain) IBOutlet UIWebView *webViewOutlet;
 @property (nonatomic, retain) NSString *urlToNavigateTo;
 @property (nonatomic, retain) NSString *alternativeURL;
 @property (nonatomic, retain) NSString *toolbarTitle;
 @property (nonatomic, retain) NSString *detailTitle;
+@property (nonatomic, retain) NSString *relatedStubKey;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *subLabel;
 @property (nonatomic, retain) IBOutlet UIButton *infoButton;

@@ -49,6 +49,8 @@
 		B077D20113CAFC1A0047E3A2 /* weather_cloudy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B077D1FD13CAFC1A0047E3A2 /* weather_cloudy@2x.png */; };
 		B077D20213CAFC1A0047E3A2 /* weather_sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B077D1FE13CAFC1A0047E3A2 /* weather_sun.png */; };
 		B077D20313CAFC1A0047E3A2 /* weather_sun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B077D1FF13CAFC1A0047E3A2 /* weather_sun@2x.png */; };
+		B08EBC2113E9757600AA7C6A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08EBC2013E9757600AA7C6A /* CoreLocation.framework */; };
+		B08EBC2513E97C3E00AA7C6A /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EBC2413E97C3E00AA7C6A /* PlaceAnnotation.m */; };
 		B09A2F0D13C83EF6005922A4 /* Latest.png in Resources */ = {isa = PBXBuildFile; fileRef = B09A2F0C13C83EF6005922A4 /* Latest.png */; };
 		B09A2F1013C840E5005922A4 /* food.png in Resources */ = {isa = PBXBuildFile; fileRef = B09A2F0F13C840E5005922A4 /* food.png */; };
 		B09A2F1213C84433005922A4 /* food@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B09A2F1113C84433005922A4 /* food@2x.png */; };
@@ -140,6 +142,9 @@
 		B077D1FD13CAFC1A0047E3A2 /* weather_cloudy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_cloudy@2x.png"; sourceTree = "<group>"; };
 		B077D1FE13CAFC1A0047E3A2 /* weather_sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather_sun.png; sourceTree = "<group>"; };
 		B077D1FF13CAFC1A0047E3A2 /* weather_sun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather_sun@2x.png"; sourceTree = "<group>"; };
+		B08EBC2013E9757600AA7C6A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B08EBC2313E97C3E00AA7C6A /* PlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceAnnotation.h; path = InPerth/PlaceAnnotation.h; sourceTree = "<group>"; };
+		B08EBC2413E97C3E00AA7C6A /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceAnnotation.m; path = InPerth/PlaceAnnotation.m; sourceTree = "<group>"; };
 		B09A2F0C13C83EF6005922A4 /* Latest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Latest.png; sourceTree = "<group>"; };
 		B09A2F0F13C840E5005922A4 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
 		B09A2F1113C84433005922A4 /* food@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "food@2x.png"; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08EBC2113E9757600AA7C6A /* CoreLocation.framework in Frameworks */,
 				B021BDDE13E84EBC00A0BC57 /* MapKit.framework in Frameworks */,
 				B0E6593313E118D00010435B /* libz.1.2.3.dylib in Frameworks */,
 				B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */,
@@ -216,6 +222,7 @@
 		B0060BED13C1BBCE002669E0 = {
 			isa = PBXGroup;
 			children = (
+				B08EBC2013E9757600AA7C6A /* CoreLocation.framework */,
 				B021BDDD13E84EBC00A0BC57 /* MapKit.framework */,
 				B0E6593213E118D00010435B /* libz.1.2.3.dylib */,
 				B027167113D47DC00046686A /* Icon.png */,
@@ -313,6 +320,8 @@
 				B0D5925F13D15EA300F33C17 /* BaseManager.m */,
 				B0D5926713D1800100F33C17 /* PlaceManager.h */,
 				B0D5926813D1800200F33C17 /* PlaceManager.m */,
+				B08EBC2313E97C3E00AA7C6A /* PlaceAnnotation.h */,
+				B08EBC2413E97C3E00AA7C6A /* PlaceAnnotation.m */,
 			);
 			name = Models;
 			path = ..;
@@ -610,6 +619,7 @@
 				B0E6593013E118A90010435B /* zip.c in Sources */,
 				B0E6593113E118A90010435B /* ZipArchive.mm in Sources */,
 				B021BDDC13E84E5000A0BC57 /* PlaceInfoViewController.m in Sources */,
+				B08EBC2513E97C3E00AA7C6A /* PlaceAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

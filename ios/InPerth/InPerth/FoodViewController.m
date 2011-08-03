@@ -139,19 +139,8 @@
     
     InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
     WebViewController *webController = [[WebViewController alloc] init];
-    [webController setUrlToNavigateTo:[stub URI]];
-    [webController setToolbarTitle:[stub Title]];
-    PlaceManager *pManager = [[PlaceManager alloc] initWithNewContext];
-    Place *related = [pManager getPlaceForStubKey:[stub ServerKey]];
-    if (related != nil)
-    {
-        [webController setDetailTitle:[NSString stringWithFormat:@"at %@ - %@", [related Title], [related Suburb]]];
-    }
-    NSString *offlinePath = [StubManager getOfflineLocationForStub:[stub ServerKey]];
-    if (offlinePath != nil)
-    {
-        [webController setAlternativeURL:offlinePath];
-    }
+    [webController setRelatedStubKey:[stub ServerKey]];
+    
     [delegate.navigationController pushViewController:webController animated:YES];
     [webController release];
     UITableViewCell *cell = [tableViewOutlet cellForRowAtIndexPath:indexPath];

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PlaceAnnotation.h"
 
 @interface Place : NSManagedObject {
 @private
@@ -30,4 +31,5 @@
 @property (nonatomic, retain) NSString * Tags;
 @property (nonatomic, retain) NSSet* Stubs;
 
+-(PlaceAnnotation *)generatePlaceData;
 @end

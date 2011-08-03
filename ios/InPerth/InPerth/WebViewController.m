@@ -19,6 +19,7 @@
 @synthesize infoButton;
 @synthesize detailTitle;
 @synthesize alternativeURL;
+@synthesize relatedStubKey;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,12 +57,39 @@
 
 -(void)viewDidLoad
 {
-    [self.titleLabel setText:self.toolbarTitle];
-    if (self.detailTitle != nil && [self.detailTitle length] > 0)
+    if (self.relatedStubKey != nil)
     {
-        [self.subLabel setText:self.detailTitle];
+        StubManager *man = [[StubManager alloc] init];
+        PlaceManager *pManager = [[PlaceManager alloc] init];
+        relatedStub = [man getStubForKey:self.relatedStubKey];
+        [self.titleLabel setText:[relatedStub Title]];
+        
+        if (relatedStub.Place != nil)
+        {
+            Place *related = [pManager getPlaceForStubKey:[relatedStub ServerKey]];
+            if (related != nil)
+            {
+                [self setDetailTitle:[NSString stringWithFormat:@"at %@ - %@", [related Title], [related Suburb]]];
+            }
+        }
+        
+        [self setUrlToNavigateTo:[relatedStub URI]];
+        
+        NSString *offlinePath = [StubManager getOfflineLocationForStub:[relatedStub ServerKey]];
+        if (offlinePath != nil)
+        {
+            [self setAlternativeURL:offlinePath];
+        }
     }
-    else
+    
+    if (self.toolbarTitle != nil)
+        [self.titleLabel setText:self.toolbarTitle];
+    
+    if (self.detailTitle != nil && [self.detailTitle length] > 0)
+        [self.subLabel setText:self.detailTitle];
+    
+    
+    if (self.detailTitle == nil)
     {
         CGRect curFrame = [self.titleLabel frame];
         curFrame.origin.y += 5;
@@ -102,8 +130,16 @@
 }
 
 - (IBAction)infoButtonTouched:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Place info", @"Email", @"Tweet", nil];
+    UIActionSheet *actionSheet = nil;
     
+    PlaceManager *pManager = [[PlaceManager alloc] init];
+    Place *related = [pManager getPlaceForStubKey:[relatedStub ServerKey]];
+    if (related != nil)
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Place info", @"Email", @"Tweet", nil];
+    else
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Email", @"Tweet", nil];
+    
+    [pManager release];
     [actionSheet showInView:self.view];
 }
 
@@ -141,9 +177,15 @@
 {
     if (buttonIndex == 0)
     {
-        PlaceInfoViewController *placeInfo = [[PlaceInfoViewController alloc] init];
-        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
-        [delegate.navigationController pushViewController:placeInfo animated:YES];
+        PlaceManager *pManager = [[PlaceManager alloc] init];
+        Place *related = [pManager getPlaceForStubKey:[relatedStub ServerKey]];
+        if (related != nil)
+        {
+            PlaceInfoViewController *placeInfo = [[PlaceInfoViewController alloc] init];
+            [placeInfo setPlaceKey:[related ServerKey]];
+            InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [delegate.navigationController pushViewController:placeInfo animated:YES];
+        }
     }
 }
 @end

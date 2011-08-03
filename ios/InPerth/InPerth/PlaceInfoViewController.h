@@ -10,12 +10,17 @@
 #import "InPerthAppDelegate.h"
 
 
-@interface PlaceInfoViewController : UIViewController {
+@interface PlaceInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
     UILabel *placeTitle;
     MKMapView *mapView;
+    UITableView *infoTable;
+    
+    Place *relatedPlace;
 }
 @property (nonatomic, retain) IBOutlet UILabel *placeTitle;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UITableView *infoTable;
+@property (nonatomic, retain) NSString *placeKey;
 
 - (IBAction)backTouch:(id)sender;
 
