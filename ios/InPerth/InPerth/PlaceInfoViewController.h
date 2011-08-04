@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "InPerthAppDelegate.h"
-
+#import "PlaceInfoActionsCell.h"
 
 @interface PlaceInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
     UILabel *placeTitle;

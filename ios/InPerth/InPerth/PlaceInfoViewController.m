@@ -107,7 +107,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int totalCount = 3;
+    int totalCount = 4;
     if (relatedPlace.SiteURI != nil)
         totalCount++;
     
@@ -153,7 +153,26 @@
                 [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
                 [cell.textLabel setText:[relatedPlace SiteURI]];
             }
-                
+            else
+            {
+                cell = [PlaceInfoActionsCell loadFromBundle];
+                [[(PlaceInfoActionsCell *)cell saveLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+                [[(PlaceInfoActionsCell *)cell shareLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            }
+            break;   
+        }
+            
+        case 4:
+        {
+            if (relatedPlace.SiteURI != nil)
+            {
+                cell = [PlaceInfoActionsCell loadFromBundle];
+                [[(PlaceInfoActionsCell *)cell saveLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+                [[(PlaceInfoActionsCell *)cell shareLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            }
+            break;
         }
             
         default:
@@ -169,6 +188,41 @@
 {
     UITableViewCell *selected = [tableView cellForRowAtIndexPath:indexPath];
     [selected setSelected:NO];
+    
+    switch (indexPath.row) {
+        case 1:
+        {
+            //dial number
+            NSString *phoneNo = [NSString stringWithFormat:@"tel:%@", [[relatedPlace Phone] stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
+            NSURL *url = [[NSURL alloc] initWithString:phoneNo];
+            [[UIApplication sharedApplication] openURL:url];
+            break;
+        }
+            
+        case 2:
+        {
+            //show real Maps
+            NSString *mapAddr = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
+            NSURL *url = [[NSURL alloc] initWithString:[mapAddr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [[UIApplication sharedApplication] openURL:url];
+            break;
+        }
+            
+        case 3:
+        {
+            if (relatedPlace.SiteURI != nil)
+            {
+                NSURL *url = [[NSURL alloc] initWithString:[[relatedPlace SiteURI] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            
+            break;
+        }
+            
+            
+        default:
+            break;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
