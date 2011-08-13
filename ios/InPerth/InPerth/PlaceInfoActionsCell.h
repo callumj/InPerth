@@ -21,4 +21,6 @@
 @property (nonatomic, retain) IBOutlet UIImageView *shareIcon;
 
 +(PlaceInfoActionsCell *)loadFromBundle;
+
+-(void)cellWasTappedInLocation:(UITapGestureRecognizer *)gesture;
 @end

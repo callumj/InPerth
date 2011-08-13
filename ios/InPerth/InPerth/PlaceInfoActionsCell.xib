@@ -98,7 +98,7 @@
 							<object class="IBUIImageView" id="405143254">
 								<reference key="NSNextResponder" ref="748557970"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{111, 1}, {39, 41}}</string>
+								<string key="NSFrame">{{111, 1}, {41, 41}}</string>
 								<reference key="NSSuperview" ref="748557970"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="749354073"/>
@@ -132,7 +132,7 @@
 							<object class="IBUIImageView" id="878458136">
 								<reference key="NSNextResponder" ref="748557970"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{245, -2}, {55, 41}}</string>
+								<string key="NSFrame">{{245, -1}, {55, 41}}</string>
 								<reference key="NSSuperview" ref="748557970"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -394,8 +394,8 @@
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{5, 41}</string>
-				<string>{55, 41}</string>
-				<string>{39, 41}</string>
+				<string>{41, 41}</string>
+				<string>{41, 41}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">534</string>

@@ -30,6 +30,24 @@
     // Configure the view for the selected state
 }
 
+-(void)willMoveToSuperview:(UIView *)newSuperview
+{
+    UITapGestureRecognizer *tapDetection = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellWasTappedInLocation:)];
+    [tapDetection setNumberOfTouchesRequired:1];
+    [tapDetection setEnabled:YES];
+    [self addGestureRecognizer:tapDetection];
+}
+                                                                                                      
+-(void)cellWasTappedInLocation:(UITapGestureRecognizer *)gesture
+{
+    CGPoint location = [gesture locationInView:self];
+    
+    BOOL shareTapped = NO;
+    if (location.y >= shareIcon.frame.origin.y)
+        shareTapped = YES;
+}
+                                                                                                
+
 +(PlaceInfoActionsCell *)loadFromBundle
 {
     NSArray *objectsInBundle = [[NSBundle mainBundle] loadNibNamed:@"PlaceInfoActionsCell" owner:nil options:nil];
