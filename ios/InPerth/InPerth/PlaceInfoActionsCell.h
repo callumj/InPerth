@@ -6,6 +6,10 @@
 //  Copyright 2011 mullac.org. All rights reserved.
 //
 
+#define kActionsCellWasSelected @"ActionsCellWasSelected"
+#define kActionsCellShareAction @"ActionsCellShareAction"
+#define kActionsCellSaveAction  @"ActionsCellSaveAction"
+
 #import <UIKit/UIKit.h>
 
 @interface PlaceInfoActionsCell : UITableViewCell {

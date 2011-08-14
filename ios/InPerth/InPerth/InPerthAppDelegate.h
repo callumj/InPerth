@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "JSONKit.h"
 #import "ZipArchive.h"
 
@@ -21,7 +24,7 @@
 
 #define kServerUpdateTimer 5 * 60
 
-@interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface InPerthAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, MFMailComposeViewControllerDelegate> {
 
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSString *persistentStorePath;
@@ -53,4 +56,7 @@
 -(NSManagedObjectContext *)managedObjectContext;
 -(NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 -(NSString *)persistentStorePath;
+
+#pragma mark Helper methods
+-(void)presentMailControlWithSubject:(NSString *)subject andMessageBody:(NSString *)body;
 @end

@@ -85,6 +85,13 @@
         [mapView setRegion:region animated:YES];
         [mapView addAnnotation:anno];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(actionCellWasSelectedAsNotification:) name:kActionsCellWasSelected object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kActionsCellWasSelected object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -235,6 +242,81 @@
         default:
             return 44.0;
             break;
+    }
+}
+
+-(void)actionCellWasSelectedAsNotification:(NSNotification *)note
+{
+    NSDictionary *userInfo = [note userInfo];
+    NSString *action = [userInfo objectForKey:@"action"];
+    if (action != nil)
+    {
+        if ([action isEqualToString:kActionsCellShareAction])
+        {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Email", @"Tweet", nil];
+            [actionSheet setDelegate:self];
+            [actionSheet showInView:self.view];
+        }
+        else
+        {
+            
+        }
+    }
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //show mail
+        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSMutableString *messageBody = [[NSMutableString alloc] init];
+        
+        if (relatedPlace.Phone != nil)
+            [messageBody appendFormat:@"%@\r\n", relatedPlace.Phone];
+        
+        if (relatedPlace.Address != nil)
+            [messageBody appendFormat:@"%@\r\n", relatedPlace.Address];
+        
+        if (relatedPlace.Suburb != nil)
+            [messageBody appendFormat:@"%@\r\n", relatedPlace.Suburb];
+        
+        if (relatedPlace.GoogleURI != nil)
+            [messageBody appendFormat:@"%@\r\n", relatedPlace.GoogleURI];
+        else
+        {
+            NSString *mapAddr = nil;
+            if ([relatedPlace Address] != nil && [relatedPlace Suburb] != nil)
+                mapAddr = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
+            else if ([relatedPlace Latitude] != nil && [relatedPlace Longitude] != nil)
+                mapAddr = [NSString stringWithFormat:@"http://maps.google.com/maps?ll=%@,%@", [[relatedPlace Latitude] stringValue], [[relatedPlace Longitude] stringValue]];
+            
+            if (mapAddr != nil)
+                [messageBody appendFormat:@"\r\n%@\r\n", [mapAddr stringByAddingPercentEscapesUsingEncoding:
+                                                  NSASCIIStringEncoding]];
+        }
+        
+        if (relatedPlace.UrbanspoonURI != nil)
+            [messageBody appendFormat:@"%@\r\n", relatedPlace.UrbanspoonURI];
+            
+        
+        [delegate presentMailControlWithSubject:relatedPlace.Title andMessageBody:messageBody];
+    }
+    else if (buttonIndex == 1)
+    {
+        NSString *url = relatedPlace.UrbanspoonURI;
+        if (url == nil)
+            url = relatedPlace.GoogleURI;
+        
+        if (url == nil && [relatedPlace Address] != nil && [relatedPlace Suburb] != nil)
+            url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
+            
+        
+        ShareViewController *shareController = [[ShareViewController alloc] init];
+        [shareController setMessageText:[NSString stringWithFormat:relatedPlace.Title]];
+        [shareController setLocationURI:url];
+        
+        [self presentModalViewController:shareController animated:YES];
     }
 }
 @end

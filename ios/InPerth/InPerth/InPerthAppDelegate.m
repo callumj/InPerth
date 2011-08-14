@@ -392,4 +392,24 @@
     return data;
 }
 
+-(void)presentMailControlWithSubject:(NSString *)subject andMessageBody:(NSString *)body
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        
+        MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+        mailViewController.mailComposeDelegate = self;
+        [mailViewController setSubject:subject];
+        [mailViewController setMessageBody:body isHTML:NO];
+        
+        [self.navigationController presentModalViewController:mailViewController animated:YES];
+        [mailViewController release];
+        
+    }
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
 @end

@@ -73,6 +73,15 @@
 		B09F705813CC6A9200A9A3EF /* Ani_Sun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B09F705013CC6A9200A9A3EF /* Ani_Sun@2x.png */; };
 		B09F705913CC6A9200A9A3EF /* WeatherBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B09F705113CC6A9200A9A3EF /* WeatherBar.png */; };
 		B09F705A13CC6A9200A9A3EF /* WeatherBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B09F705213CC6A9200A9A3EF /* WeatherBar@2x.png */; };
+		B0A7704113F7C149005D2DDF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A7704013F7C149005D2DDF /* MessageUI.framework */; };
+		B0A7704413F7D944005D2DDF /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704313F7D944005D2DDF /* ShareView.xib */; };
+		B0A7704713F7DB70005D2DDF /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A7704613F7DB70005D2DDF /* ShareViewController.m */; };
+		B0A7704913F7DD08005D2DDF /* CancelButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704813F7DD08005D2DDF /* CancelButtonView.xib */; };
+		B0A7704C13F7E5EE005D2DDF /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704A13F7E5EE005D2DDF /* CancelButton.png */; };
+		B0A7704D13F7E5EE005D2DDF /* CancelBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704B13F7E5EE005D2DDF /* CancelBackground.png */; };
+		B0A7705013F7E69B005D2DDF /* CancelBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704E13F7E69B005D2DDF /* CancelBackground@2x.png */; };
+		B0A7705113F7E69B005D2DDF /* CancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A7704F13F7E69B005D2DDF /* CancelButton@2x.png */; };
+		B0A7705413F7E6BE005D2DDF /* CancelButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A7705313F7E6BE005D2DDF /* CancelButtonViewController.m */; };
 		B0C5FE4113C9A4B3009590DB /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C5FE3F13C9A4B2009590DB /* WeatherViewController.m */; };
 		B0C5FE4213C9A4B3009590DB /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C5FE4013C9A4B3009590DB /* WeatherView.xib */; };
 		B0C5FE4613C9A4F9009590DB /* weather_rain.png in Resources */ = {isa = PBXBuildFile; fileRef = B0C5FE4413C9A4F9009590DB /* weather_rain.png */; };
@@ -176,6 +185,17 @@
 		B09F705013CC6A9200A9A3EF /* Ani_Sun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ani_Sun@2x.png"; sourceTree = "<group>"; };
 		B09F705113CC6A9200A9A3EF /* WeatherBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeatherBar.png; sourceTree = "<group>"; };
 		B09F705213CC6A9200A9A3EF /* WeatherBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeatherBar@2x.png"; sourceTree = "<group>"; };
+		B0A7704013F7C149005D2DDF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B0A7704313F7D944005D2DDF /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		B0A7704513F7DB70005D2DDF /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		B0A7704613F7DB70005D2DDF /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		B0A7704813F7DD08005D2DDF /* CancelButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CancelButtonView.xib; sourceTree = "<group>"; };
+		B0A7704A13F7E5EE005D2DDF /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CancelButton.png; sourceTree = "<group>"; };
+		B0A7704B13F7E5EE005D2DDF /* CancelBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CancelBackground.png; sourceTree = "<group>"; };
+		B0A7704E13F7E69B005D2DDF /* CancelBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CancelBackground@2x.png"; sourceTree = "<group>"; };
+		B0A7704F13F7E69B005D2DDF /* CancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CancelButton@2x.png"; sourceTree = "<group>"; };
+		B0A7705213F7E6BE005D2DDF /* CancelButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelButtonViewController.h; sourceTree = "<group>"; };
+		B0A7705313F7E6BE005D2DDF /* CancelButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelButtonViewController.m; sourceTree = "<group>"; };
 		B0C5FE3E13C9A4B2009590DB /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
 		B0C5FE3F13C9A4B2009590DB /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		B0C5FE4013C9A4B3009590DB /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
@@ -222,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A7704113F7C149005D2DDF /* MessageUI.framework in Frameworks */,
 				B08EBC2113E9757600AA7C6A /* CoreLocation.framework in Frameworks */,
 				B021BDDE13E84EBC00A0BC57 /* MapKit.framework in Frameworks */,
 				B0E6593313E118D00010435B /* libz.1.2.3.dylib in Frameworks */,
@@ -239,6 +260,7 @@
 		B0060BED13C1BBCE002669E0 = {
 			isa = PBXGroup;
 			children = (
+				B0A7704013F7C149005D2DDF /* MessageUI.framework */,
 				B08EBC2013E9757600AA7C6A /* CoreLocation.framework */,
 				B021BDDD13E84EBC00A0BC57 /* MapKit.framework */,
 				B0E6593213E118D00010435B /* libz.1.2.3.dylib */,
@@ -314,6 +336,8 @@
 				B06610CF13C753CF0062B512 /* StubCell.xib */,
 				B010FA1513C819B000E50741 /* WebView.xib */,
 				B021BDD313E8485B00A0BC57 /* PlaceInfoView.xib */,
+				B0A7704313F7D944005D2DDF /* ShareView.xib */,
+				B0A7704813F7DD08005D2DDF /* CancelButtonView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -348,6 +372,10 @@
 		B046065E13C764B800132794 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B0A7704E13F7E69B005D2DDF /* CancelBackground@2x.png */,
+				B0A7704F13F7E69B005D2DDF /* CancelButton@2x.png */,
+				B0A7704A13F7E5EE005D2DDF /* CancelButton.png */,
+				B0A7704B13F7E5EE005D2DDF /* CancelBackground.png */,
 				B078F4F313EABC94008C9F69 /* Share@2x.png */,
 				B078F4F413EABC94008C9F69 /* Share.png */,
 				B078F4EF13EAA9DC008C9F69 /* CellDivider.png */,
@@ -398,6 +426,8 @@
 				B0C5FE3F13C9A4B2009590DB /* WeatherViewController.m */,
 				B021BDDA13E84E5000A0BC57 /* PlaceInfoViewController.h */,
 				B021BDDB13E84E5000A0BC57 /* PlaceInfoViewController.m */,
+				B0A7704513F7DB70005D2DDF /* ShareViewController.h */,
+				B0A7704613F7DB70005D2DDF /* ShareViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -409,6 +439,8 @@
 				B06610CD13C751900062B512 /* StubCell.m */,
 				B078F4F713EABD37008C9F69 /* PlaceInfoActionsCell.h */,
 				B078F4F813EABD37008C9F69 /* PlaceInfoActionsCell.m */,
+				B0A7705213F7E6BE005D2DDF /* CancelButtonViewController.h */,
+				B0A7705313F7E6BE005D2DDF /* CancelButtonViewController.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -610,6 +642,12 @@
 				B078F4F213EAA9DC008C9F69 /* CellDivider@2x.png in Resources */,
 				B078F4F513EABC94008C9F69 /* Share@2x.png in Resources */,
 				B078F4F613EABC94008C9F69 /* Share.png in Resources */,
+				B0A7704413F7D944005D2DDF /* ShareView.xib in Resources */,
+				B0A7704913F7DD08005D2DDF /* CancelButtonView.xib in Resources */,
+				B0A7704C13F7E5EE005D2DDF /* CancelButton.png in Resources */,
+				B0A7704D13F7E5EE005D2DDF /* CancelBackground.png in Resources */,
+				B0A7705013F7E69B005D2DDF /* CancelBackground@2x.png in Resources */,
+				B0A7705113F7E69B005D2DDF /* CancelButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +700,8 @@
 				B021BDDC13E84E5000A0BC57 /* PlaceInfoViewController.m in Sources */,
 				B08EBC2513E97C3E00AA7C6A /* PlaceAnnotation.m in Sources */,
 				B078F4F913EABD37008C9F69 /* PlaceInfoActionsCell.m in Sources */,
+				B0A7704713F7DB70005D2DDF /* ShareViewController.m in Sources */,
+				B0A7705413F7E6BE005D2DDF /* CancelButtonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

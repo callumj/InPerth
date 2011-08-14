@@ -9,8 +9,9 @@
 #import <MapKit/MapKit.h>
 #import "InPerthAppDelegate.h"
 #import "PlaceInfoActionsCell.h"
+#import "ShareViewController.h"
 
-@interface PlaceInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+@interface PlaceInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     UILabel *placeTitle;
     MKMapView *mapView;
     UITableView *infoTable;
@@ -23,5 +24,6 @@
 @property (nonatomic, retain) NSString *placeKey;
 
 - (IBAction)backTouch:(id)sender;
+- (void)actionCellWasSelectedAsNotification:(NSNotification *)note;
 
 @end
