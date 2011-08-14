@@ -407,6 +407,15 @@
     }
 }
 
+- (void)presentTweetControlerWithText:(NSString *)text andURL:(NSString *)url
+{
+    TweetViewController *shareController = [[TweetViewController alloc] init];
+    [shareController setMessageText:[NSString stringWithFormat:text]];
+    [shareController setLocationURI:url];
+    
+    [self.navigationController presentModalViewController:shareController animated:YES];
+}
+
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [controller dismissModalViewControllerAnimated:YES];

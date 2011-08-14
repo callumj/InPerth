@@ -9,7 +9,7 @@
 #import <MapKit/MapKit.h>
 #import "InPerthAppDelegate.h"
 #import "PlaceInfoActionsCell.h"
-#import "ShareViewController.h"
+#import "TweetViewController.h"
 
 @interface PlaceInfoViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     UILabel *placeTitle;

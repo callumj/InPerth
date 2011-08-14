@@ -175,17 +175,55 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    enum modalOperationType selectedType; 
+    
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    PlaceManager *pManager = [[PlaceManager alloc] init];
+    Place *related = [pManager getPlaceForStubKey:[relatedStub ServerKey]];
+    
     if (buttonIndex == 0)
     {
-        PlaceManager *pManager = [[PlaceManager alloc] init];
-        Place *related = [pManager getPlaceForStubKey:[relatedStub ServerKey]];
         if (related != nil)
-        {
-            PlaceInfoViewController *placeInfo = [[PlaceInfoViewController alloc] init];
-            [placeInfo setPlaceKey:[related ServerKey]];
-            InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [delegate.navigationController pushViewController:placeInfo animated:YES];
-        }
+            selectedType = kPlace;
+        else
+            selectedType = kEmail;
+    }
+    else if (buttonIndex == 1)
+    {
+        if (related != nil)
+            selectedType = kEmail;
+        else
+            selectedType = kTweet;
+    }
+    else if (buttonIndex == 2)
+    {
+        selectedType = kTweet;
+    }
+    
+    switch (selectedType) {
+        case kPlace:
+            {
+                PlaceInfoViewController *placeInfo = [[PlaceInfoViewController alloc] init];
+                [placeInfo setPlaceKey:[related ServerKey]];
+                InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
+                [delegate.navigationController pushViewController:placeInfo animated:YES];
+            }
+            break;
+            
+        case kEmail:
+            {
+                [delegate presentMailControlWithSubject:[relatedStub Title] andMessageBody:[relatedStub.URI stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+            break;
+        
+        case kTweet:
+            {
+                [delegate presentTweetControlerWithText:[relatedStub Title] andURL:[relatedStub URI]];
+            }
+            break;
+        default:
+            break;
     }
 }
 @end

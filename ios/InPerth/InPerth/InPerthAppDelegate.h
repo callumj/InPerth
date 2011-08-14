@@ -17,6 +17,7 @@
 
 #import "StubManager.h"
 #import "PlaceManager.h"
+#import "TweetViewController.h"
 
 #define kStubDataRefreshCompleteNotification @"StubDataRefreshCompleteNotification"
 #define kWeatherDataRefreshCompleteNotification @"WeatherDataRefreshCompleteNotification"
@@ -59,4 +60,5 @@
 
 #pragma mark Helper methods
 -(void)presentMailControlWithSubject:(NSString *)subject andMessageBody:(NSString *)body;
+-(void)presentTweetControlerWithText:(NSString *)text andURL:(NSString *)url;
 @end

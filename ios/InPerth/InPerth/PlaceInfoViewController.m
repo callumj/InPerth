@@ -266,10 +266,10 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
     if (buttonIndex == 0)
     {
         //show mail
-        InPerthAppDelegate *delegate = (InPerthAppDelegate *)[[UIApplication sharedApplication] delegate];
         NSMutableString *messageBody = [[NSMutableString alloc] init];
         
         if (relatedPlace.Phone != nil)
@@ -304,19 +304,17 @@
     }
     else if (buttonIndex == 1)
     {
-        NSString *url = relatedPlace.UrbanspoonURI;
+        NSString *url = relatedPlace.SiteURI;
+        if (url == nil)
+            url = relatedPlace.UrbanspoonURI;
+        
         if (url == nil)
             url = relatedPlace.GoogleURI;
         
         if (url == nil && [relatedPlace Address] != nil && [relatedPlace Suburb] != nil)
             url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
             
-        
-        ShareViewController *shareController = [[ShareViewController alloc] init];
-        [shareController setMessageText:[NSString stringWithFormat:relatedPlace.Title]];
-        [shareController setLocationURI:url];
-        
-        [self presentModalViewController:shareController animated:YES];
+        [delegate presentTweetControlerWithText:relatedPlace.Title andURL:url];
     }
 }
 @end

@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Stub.h"
 
+enum modalOperationType
+{
+    kPlace,
+    kEmail,
+    kTweet
+};
+
 @interface WebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
     
     UIWebView *webViewOutlet;
