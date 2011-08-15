@@ -20,6 +20,7 @@
 -(Place *)getPlaceForKey:(NSString *)key;
 -(Place *)getPlaceForStubKey:(NSString *)serverKey;
 -(Place *)getMostRecentUpdatedPlace;
+-(NSArray *)getStubsForPlace:(NSString *)key;
 -(void)commitStubFromDictionary:(NSDictionary *)jsonData;
 
 @end

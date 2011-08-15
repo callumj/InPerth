@@ -205,4 +205,26 @@
     
     return returnObj; 
 }
+
+-(NSArray *)getStubsForPlace:(NSString *)key
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Stub" inManagedObjectContext:dataContext]; 
+    
+    NSSortDescriptor *dateSort = [[NSSortDescriptor alloc] initWithKey:@"Date" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Place.ServerKey == %@", key];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:entity];
+    [request setSortDescriptors:[NSArray arrayWithObject:dateSort]];
+    [request setPredicate:predicate];
+    
+    
+    NSError *error;
+    NSArray *results = [[dataContext executeFetchRequest:request error:&error] copy]; 
+    
+    [dateSort release];
+    [request release];
+    
+    return [results autorelease]; 
+}
 @end

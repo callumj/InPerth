@@ -46,6 +46,8 @@
 {
     PlaceManager *pManager = [[PlaceManager alloc] init];
     relatedPlace = [pManager getPlaceForKey:self.placeKey];
+    relatedStubs = [[pManager getStubsForPlace:self.placeKey] retain];
+    [self buildCellList];
     [self.placeTitle setText:[relatedPlace Title]];
     [self.placeTitle setAdjustsFontSizeToFitWidth:YES];
     self.placeTitle.numberOfLines = 1;
@@ -58,7 +60,6 @@
     [self.infoTable setBackgroundView:backImageView];
     [self.infoTable setSeparatorColor:[UIColor clearColor]];
     [self.infoTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
     
     [super viewDidLoad];
 }
@@ -100,6 +101,28 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)buildCellList
+{
+    if (assignedCellList == nil)
+        assignedCellList = [[[NSMutableArray alloc] init] retain];
+    
+    [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoBlankCell]];
+    
+    if (relatedPlace.Phone != nil)
+        [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoPhoneCell]];
+    
+    if (relatedPlace.Address != nil)
+        [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoAddressCell]];
+    
+    if (relatedPlace.SiteURI != nil)
+        [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoWebAddressCell]];
+    
+    if (relatedPlace.UrbanspoonURI != nil)
+        [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoUrbanspoonAddressCell]];
+    
+    [assignedCellList addObject:[NSNumber numberWithInt:kPlaceInfoActionsCell]];
+}
+
 - (void)dealloc {
     [placeTitle release];
     [mapView release];
@@ -114,76 +137,94 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int totalCount = 4;
-    if (relatedPlace.SiteURI != nil)
-        totalCount++;
+    if (section == 0)
+        return [assignedCellList count];
     
-    return totalCount;
+    if (section == 1)
+        return [relatedStubs count];
+    
+    return 0;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2; //place data + place posts
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    switch (indexPath.row) {
-        case 0:
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"addressCell"];
-            [cell setHidden:YES];
-            break;
-        }
+    enum kPlaceInfoCellType type = [self cellTypeForIndexPath:indexPath];
+    
+    if ([indexPath section] == 0)
+    {
+        switch (type) {
+            case kPlaceInfoBlankCell:
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"addressCell"];
+                [cell setHidden:YES];
+                break;
+            }
+                
+            case kPlaceInfoPhoneCell:
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"phoneCell"];
+                [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(3.0/100.0) brightness:(97.0/100.0) alpha:1.0]];
+                [cell.textLabel setText:[relatedPlace Phone]];
+                
+                break;
+            }
             
-        case 1:
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"phoneCell"];
-            [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(3.0/100.0) brightness:(97.0/100.0) alpha:1.0]];
-            [cell.textLabel setText:[relatedPlace Phone]];
-            
-            break;
-        }
-        
-        case 2:
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"addressCell"];
-            [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(4.0/100.0) brightness:(93.0/100.0) alpha:1.0]];
-            [cell.textLabel setText:[relatedPlace Address]];
-            [cell.detailTextLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(8.0/100.0) brightness:(77.0/100.0) alpha:1.0]];
-            [cell.detailTextLabel setText:[relatedPlace Suburb]];
-            
-            break;
-        }
-            
-        case 3:
-        {
-            if (relatedPlace.SiteURI != nil)
+            case kPlaceInfoAddressCell:
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"addressCell"];
+                [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(4.0/100.0) brightness:(93.0/100.0) alpha:1.0]];
+                [cell.textLabel setText:[relatedPlace Address]];
+                [cell.detailTextLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(8.0/100.0) brightness:(77.0/100.0) alpha:1.0]];
+                [cell.detailTextLabel setText:[relatedPlace Suburb]];
+                
+                break;
+            }
+                
+            case kPlaceInfoWebAddressCell:
             {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"webAddressCell"];
+                [[cell textLabel] setFont:[UIFont systemFontOfSize:18.0]];
                 [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
                 [cell.textLabel setText:[relatedPlace SiteURI]];
+                break;   
             }
-            else
+                
+            case kPlaceInfoActionsCell:
             {
                 cell = [PlaceInfoActionsCell loadFromBundle];
                 [[(PlaceInfoActionsCell *)cell saveLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
                 [[(PlaceInfoActionsCell *)cell shareLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                break;
             }
-            break;   
-        }
-            
-        case 4:
-        {
-            if (relatedPlace.SiteURI != nil)
+                
+            case kPlaceInfoUrbanspoonAddressCell:
             {
-                cell = [PlaceInfoActionsCell loadFromBundle];
-                [[(PlaceInfoActionsCell *)cell saveLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
-                [[(PlaceInfoActionsCell *)cell shareLabel] setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"urbanspoonCell"];
+                [[cell textLabel] setFont:[UIFont systemFontOfSize:18.0]];
+                [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(5.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+                [cell.textLabel setText:[NSString stringWithFormat:@"%@ on Urbanspoon", [relatedPlace Title]]];
+                break;
             }
-            break;
+                
+            default:
+                break;
         }
-            
-        default:
-            break;
+    }
+    else if ([indexPath section] == 1)
+    {
+        Stub *stub = [relatedStubs objectAtIndex:[indexPath row]];
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"detailCell"];
+        [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
+        [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(10.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+        [cell.textLabel setText:[stub Title]]; 
     }
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
@@ -191,58 +232,98 @@
     return cell;
 }
 
+- (enum kPlaceInfoCellType)cellTypeForIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] != 0)
+        return kPlaceInfoBlankCell;
+    
+    if ([assignedCellList count] > [indexPath row])
+    {
+        NSNumber *typeObj = [assignedCellList objectAtIndex:[indexPath row]];
+        return [typeObj intValue];
+    }
+    return kPlaceInfoBlankCell;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *selected = [tableView cellForRowAtIndexPath:indexPath];
     [selected setSelected:NO];
     
-    switch (indexPath.row) {
-        case 1:
-        {
-            //dial number
-            NSString *phoneNo = [NSString stringWithFormat:@"tel:%@", [[relatedPlace Phone] stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
-            NSURL *url = [[NSURL alloc] initWithString:phoneNo];
-            [[UIApplication sharedApplication] openURL:url];
-            break;
-        }
-            
-        case 2:
-        {
-            //show real Maps
-            NSString *mapAddr = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
-            NSURL *url = [[NSURL alloc] initWithString:[mapAddr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            [[UIApplication sharedApplication] openURL:url];
-            break;
-        }
-            
-        case 3:
-        {
-            if (relatedPlace.SiteURI != nil)
+    if ([indexPath section] == 0)
+    {
+        enum kPlaceInfoCellType type = [self cellTypeForIndexPath:indexPath];
+        
+        switch (type) {
+            case kPlaceInfoPhoneCell:
+            {
+                //dial number
+                NSString *phoneNo = [NSString stringWithFormat:@"tel:%@", [[relatedPlace Phone] stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
+                NSURL *url = [[NSURL alloc] initWithString:phoneNo];
+                [[UIApplication sharedApplication] openURL:url];
+                break;
+            }
+                
+            case kPlaceInfoAddressCell:
+            {
+                //show real Maps
+                NSString *mapAddr = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", [relatedPlace Address], [relatedPlace Suburb]];
+                NSURL *url = [[NSURL alloc] initWithString:[mapAddr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [[UIApplication sharedApplication] openURL:url];
+                break;
+            }
+                
+            case kPlaceInfoWebAddressCell:
             {
                 NSURL *url = [[NSURL alloc] initWithString:[[relatedPlace SiteURI] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 [[UIApplication sharedApplication] openURL:url];
+                break;
             }
-            
-            break;
+                
+            case kPlaceInfoUrbanspoonAddressCell:
+            {
+                NSURL *url = [[NSURL alloc] initWithString:[[relatedPlace UrbanspoonURI] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [[UIApplication sharedApplication] openURL:url];
+                break;
+            }
+                
+                
+            default:
+                break;
         }
-            
-            
-        default:
-            break;
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case 0:
-            return 10.0;
-            break;
+    enum kPlaceInfoCellType type = [self cellTypeForIndexPath:indexPath];
+    
+    if ([indexPath section] == 0)
+    {
+        switch (type) {
+            case kPlaceInfoBlankCell:
+                return 5.0;
+                break;
             
-        default:
-            return 44.0;
-            break;
+            case kPlaceInfoWebAddressCell:
+                return 30.0;
+                break;
+                
+            case kPlaceInfoUrbanspoonAddressCell:
+                return 30.0;
+                break;
+            
+            default:
+                return 44.0;
+                break;
+        }
     }
+    else if ([indexPath section] == 1)
+    {
+        return 33.0;
+    }
+    
+    return 44.0;
 }
 
 -(void)actionCellWasSelectedAsNotification:(NSNotification *)note
