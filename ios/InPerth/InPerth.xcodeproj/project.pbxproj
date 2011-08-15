@@ -35,6 +35,10 @@
 		B030C90013C1C57D00E8AB65 /* Stub.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C8FF13C1C57D00E8AB65 /* Stub.m */; };
 		B030C90313C1C57D00E8AB65 /* Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = B030C90213C1C57D00E8AB65 /* Provider.m */; };
 		B030C90513C1C5C600E8AB65 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B030C90413C1C5C600E8AB65 /* CoreData.framework */; };
+		B0366CAA13F964EA00EDAC38 /* HorizontalDividerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0366CA913F964EA00EDAC38 /* HorizontalDividerCell.xib */; };
+		B0366CAE13F9650B00EDAC38 /* CellHorizontalDivider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0366CAC13F9650B00EDAC38 /* CellHorizontalDivider@2x.png */; };
+		B0366CAF13F9650B00EDAC38 /* CellHorizontalDivider.png in Resources */ = {isa = PBXBuildFile; fileRef = B0366CAD13F9650B00EDAC38 /* CellHorizontalDivider.png */; };
+		B0366CB213F965CF00EDAC38 /* HorizontalDividerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0366CB113F965CF00EDAC38 /* HorizontalDividerCell.m */; };
 		B046066213C764D500132794 /* Stub@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B046066013C764D500132794 /* Stub@2x.png */; };
 		B046066313C764D500132794 /* Stub.png in Resources */ = {isa = PBXBuildFile; fileRef = B046066113C764D500132794 /* Stub.png */; };
 		B04701D713D1B29500E76A96 /* WebViewDetail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B04701D513D1B29500E76A96 /* WebViewDetail@2x.png */; };
@@ -144,6 +148,11 @@
 		B030C90113C1C57D00E8AB65 /* Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Provider.h; path = InPerth/Models/Provider.h; sourceTree = "<group>"; };
 		B030C90213C1C57D00E8AB65 /* Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Provider.m; path = InPerth/Models/Provider.m; sourceTree = "<group>"; };
 		B030C90413C1C5C600E8AB65 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B0366CA913F964EA00EDAC38 /* HorizontalDividerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HorizontalDividerCell.xib; sourceTree = "<group>"; };
+		B0366CAC13F9650B00EDAC38 /* CellHorizontalDivider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellHorizontalDivider@2x.png"; sourceTree = "<group>"; };
+		B0366CAD13F9650B00EDAC38 /* CellHorizontalDivider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellHorizontalDivider.png; sourceTree = "<group>"; };
+		B0366CB013F965CF00EDAC38 /* HorizontalDividerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalDividerCell.h; sourceTree = "<group>"; };
+		B0366CB113F965CF00EDAC38 /* HorizontalDividerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalDividerCell.m; sourceTree = "<group>"; };
 		B046066013C764D500132794 /* Stub@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stub@2x.png"; sourceTree = "<group>"; };
 		B046066113C764D500132794 /* Stub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stub.png; sourceTree = "<group>"; };
 		B04701D513D1B29500E76A96 /* WebViewDetail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WebViewDetail@2x.png"; sourceTree = "<group>"; };
@@ -338,6 +347,7 @@
 				B021BDD313E8485B00A0BC57 /* PlaceInfoView.xib */,
 				B0A7704313F7D944005D2DDF /* TweetView.xib */,
 				B0A7704813F7DD08005D2DDF /* CancelButtonView.xib */,
+				B0366CA913F964EA00EDAC38 /* HorizontalDividerCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -372,6 +382,8 @@
 		B046065E13C764B800132794 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B0366CAC13F9650B00EDAC38 /* CellHorizontalDivider@2x.png */,
+				B0366CAD13F9650B00EDAC38 /* CellHorizontalDivider.png */,
 				B0A7704E13F7E69B005D2DDF /* CancelBackground@2x.png */,
 				B0A7704F13F7E69B005D2DDF /* CancelButton@2x.png */,
 				B0A7704A13F7E5EE005D2DDF /* CancelButton.png */,
@@ -441,6 +453,8 @@
 				B078F4F813EABD37008C9F69 /* PlaceInfoActionsCell.m */,
 				B0A7705213F7E6BE005D2DDF /* CancelButtonViewController.h */,
 				B0A7705313F7E6BE005D2DDF /* CancelButtonViewController.m */,
+				B0366CB013F965CF00EDAC38 /* HorizontalDividerCell.h */,
+				B0366CB113F965CF00EDAC38 /* HorizontalDividerCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -648,6 +662,9 @@
 				B0A7704D13F7E5EE005D2DDF /* CancelBackground.png in Resources */,
 				B0A7705013F7E69B005D2DDF /* CancelBackground@2x.png in Resources */,
 				B0A7705113F7E69B005D2DDF /* CancelButton@2x.png in Resources */,
+				B0366CAA13F964EA00EDAC38 /* HorizontalDividerCell.xib in Resources */,
+				B0366CAE13F9650B00EDAC38 /* CellHorizontalDivider@2x.png in Resources */,
+				B0366CAF13F9650B00EDAC38 /* CellHorizontalDivider.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +719,7 @@
 				B078F4F913EABD37008C9F69 /* PlaceInfoActionsCell.m in Sources */,
 				B0A7704713F7DB70005D2DDF /* TweetViewController.m in Sources */,
 				B0A7705413F7E6BE005D2DDF /* CancelButtonViewController.m in Sources */,
+				B0366CB213F965CF00EDAC38 /* HorizontalDividerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

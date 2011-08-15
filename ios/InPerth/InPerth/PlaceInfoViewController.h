@@ -10,6 +10,7 @@
 #import "InPerthAppDelegate.h"
 #import "PlaceInfoActionsCell.h"
 #import "TweetViewController.h"
+#import "HorizontalDividerCell.h"
 
 enum kPlaceInfoCellType {
     kPlaceInfoBlankCell = 1,

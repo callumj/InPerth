@@ -141,7 +141,12 @@
         return [assignedCellList count];
     
     if (section == 1)
-        return [relatedStubs count];
+    {
+        int size = [relatedStubs count];
+        
+        if (size > 0)
+            return size + 1;
+    }
     
     return 0;
 }
@@ -219,12 +224,20 @@
     }
     else if ([indexPath section] == 1)
     {
-        Stub *stub = [relatedStubs objectAtIndex:[indexPath row]];
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"detailCell"];
-        [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
-        [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(10.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
-        [cell.textLabel setText:[stub Title]]; 
+        if ([indexPath row] == 0)
+        {
+            cell = [HorizontalDividerCell loadFromBundle];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        }
+        else
+        {
+            Stub *stub = [relatedStubs objectAtIndex:([indexPath row] - 1)];
+            
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"detailCell"];
+            [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
+            [cell.textLabel setTextColor:[UIColor colorWithHue:(203.0/359.0) saturation:(10.0/100.0) brightness:(91.0/100.0) alpha:1.0]];
+            [cell.textLabel setText:[stub Title]]; 
+        }
     }
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"default"];
@@ -320,6 +333,9 @@
     }
     else if ([indexPath section] == 1)
     {
+        if ([indexPath row] == 0)
+            return 10.0;
+        
         return 33.0;
     }
     
