@@ -125,7 +125,7 @@ end
 
 stubs_waiting = Stub.where(:offline_archive => nil).sort(:created_at.desc).limit(50).all
 
-WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
+WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "NO_LONGER_USED")
 container = WAZ::Blobs::Container.find('offline-cache')
 
 stubs_waiting.each do |stub|
