@@ -120,7 +120,7 @@ end
 
 pipeline "offlinecache", 10, do
   if (bin[:stub] != nil && (bin[:stub].offline_archive == nil || bin[:stub].offline_archive.empty?))
-    WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "AsI7F8Z8s1XS0S03PnQPTstj7wSi7aOUoxAmpCXi1Ke8XQaU+w7pz1IZwyoPkLAJrCpa1ak0QSMVJHa2tFhNiw==")
+    WAZ::Storage::Base.establish_connection!(:account_name => "inperth", :access_key => "NO_LONGER_USED")
     container = WAZ::Blobs::Container.find('offline-cache')
     
     arch = archive_mobile_page(:url => bin[:stub].uri)
